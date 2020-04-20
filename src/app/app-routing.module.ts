@@ -1,16 +1,35 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { OrderDetailComponent } from './order-detail/order-detail.component';
-import { OrderListComponent } from './order-list/order-list.component';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import {
+  OKTA_CONFIG,
+  OktaAuthGuard,
+  OktaCallbackComponent
+} from "@okta/okta-angular";
+
+import config from "./app.config";
+import { OrderDetailComponent } from "./order-detail/order-detail.component";
+import { OrderListComponent } from "./order-list/order-list.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/order-list', pathMatch: 'full' },
-  { path: 'order-list', component: OrderListComponent },
-  { path: 'order-detail/:id', component: OrderDetailComponent }
+  {
+    path: "implicit/callback",
+    component: OktaCallbackComponent
+  },
+  {
+    path: "order-list",
+    component: OrderListComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
+    path: "order-detail/:id",
+    component: OrderDetailComponent,
+    canActivate: [OktaAuthGuard]
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [{ provide: OKTA_CONFIG, useValue: config.oidc }]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
