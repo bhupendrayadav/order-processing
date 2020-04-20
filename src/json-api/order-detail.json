@@ -1,0 +1,33 @@
+{
+  "OrderNumber": "10098519",
+  "OrderCreationDate": "14/04/2020",
+  "OrderCompletionDate": "15/04/2020",
+  "LoanNumber": "3654",
+  "Lender": "USAA Bulk Parent",
+  "Borrower": "Cassidy",
+  "Address": "144 Pitssburg",
+  "Country": "US",
+  "State": "California",
+  "LoanPurpose": "Refinance",
+  "LoanType": "Other",
+  "FHACase": "NA",
+  "Product": {
+    "Status": "InitialUW",
+    "MarketValue": "300",
+    "AVMStatus": "No Hit",
+    "Product": "FNMA",
+    "Vendor": "xyz",
+    "QCScore": "0",
+    "Commennts": "1",
+    "PriorHistory": "1",
+    "TimesRejected": "0"
+  },
+  "Rules": {
+    "TotalRulesFailure": "25",
+    "PendingDecision": "14",
+    "UsersRejected": "0",
+    "UsersPassed": "0",
+    "CoversheetRules": "0",
+    "SeverityScore": "60"
+  }
+}

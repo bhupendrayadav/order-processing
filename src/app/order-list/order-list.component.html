@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="col-md-12">
+        <app-order-search></app-order-search>
+    </div>
+    <div class="col-md-12 mt-2">
+          <div class="card">
+              <div class="card-header bg-primary text-white">
+                  Order Search Result
+              </div>
+              <div class="card-body">
+                  <div class="table-responsive">
+                  <table class="table table-striped">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th scope="col">Order#</th>
+                          <th scope="col">Work Order</th>
+                          <th scope="col">WO Status</th>
+                          <th scope="col">Borrower</th>
+                          <th scope="col">Address</th>
+                          <th scope="col">State</th>
+                          <th scope="col">Country</th>
+                          <th scope="col">Loan#</th>
+                          <th scope="col">Last Task</th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let order of searchResult">
+                          <td scope="col" class="text-success text-bold"><a [routerLink]="['/order-detail/', order.orderNumber]">{{order.orderNumber}}</a></td>
+                          <td scope="col">{{order.workOrder}}</td>
+                          <td scope="col">{{order.workOrderStatus}}</td>
+                          <td scope="col">{{order.borrower}}</td>
+                          <td scope="col">{{order.address}}</td>
+                          <td scope="col">{{order.state}}</td>
+                          <td scope="col">{{order.country}}</td>
+                          <td scope="col">{{order.loanNumber}}</td>
+                          <td scope="col">{{order.lastTask}}</td>
+                          <td scope="col"><button type="button" class="btn-sm btn btn-secondary">Assign</button></td>
+                        </tr>
+                      </tbody>
+                    </table>        
+                  </div>              
+              </div>
+          </div>
+    </div>
+</div>
