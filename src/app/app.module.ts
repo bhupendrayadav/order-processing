@@ -14,6 +14,7 @@ import { OrderListComponent } from "./order-list/order-list.component";
 import { OrderSearchComponent } from "./order-search/order-search.component";
 import { HeaderComponent } from "./header/header.component";
 import { LoginLogoutButtonComponent } from "./login-logout-button.component";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { LoginLogoutButtonComponent } from "./login-logout-button.component";
     OktaAuthModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
