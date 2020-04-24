@@ -15,10 +15,15 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header/header.component";
 import { LoginLogoutButtonComponent } from "./login-logout-button.component";
-//import { reducers, metaReducers } from "./reducers";
+import { BingMapComponent } from "./bing-map/bing-map.component";
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, LoginLogoutButtonComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    LoginLogoutButtonComponent,
+    BingMapComponent
+  ],
   imports: [
     BrowserModule,
     OktaAuthModule,
@@ -29,11 +34,11 @@ import { LoginLogoutButtonComponent } from "./login-logout-button.component";
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
-    OrderProcessingModule,
+    OrderProcessingModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

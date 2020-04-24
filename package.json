@@ -25,6 +25,7 @@
     "@ngrx/router-store": "^8.6.0",
     "@ngrx/store": "^8.6.0",
     "@okta/okta-angular": "^2.0.0",
+    "bingmaps": "^2.0.3",
     "bootstrap": "^4.4.1",
     "font-awesome": "^4.7.0",
     "rxjs": "~6.4.0",
