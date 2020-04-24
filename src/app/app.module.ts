@@ -4,38 +4,36 @@ import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { OktaAuthModule } from "@okta/okta-angular";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
+import { StoreRouterConnectingModule } from "@ngrx/router-store";
 
+import { OrderProcessingModule } from "./order-processing/order-processing.module";
 import { AuthInterceptor } from "./auth.interceptor";
-
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { OrderDetailComponent } from "./order-detail/order-detail.component";
-import { OrderListComponent } from "./order-list/order-list.component";
-import { OrderSearchComponent } from "./order-search/order-search.component";
 import { HeaderComponent } from "./header/header.component";
 import { LoginLogoutButtonComponent } from "./login-logout-button.component";
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+//import { reducers, metaReducers } from "./reducers";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    OrderDetailComponent,
-    OrderListComponent,
-    OrderSearchComponent,
-    HeaderComponent,
-    LoginLogoutButtonComponent
-  ],
+  declarations: [AppComponent, HeaderComponent, LoginLogoutButtonComponent],
   imports: [
     BrowserModule,
     OktaAuthModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot(),
+    OrderProcessingModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
