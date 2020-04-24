@@ -128,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "serviceLink-ui"
+  "defaultProject": "serviceLink-ui",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
