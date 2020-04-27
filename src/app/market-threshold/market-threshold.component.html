@@ -39,7 +39,8 @@
 
                 <div class="col-md-12 d-flex justify-content-between mb-3 mr-0 p-0">
                     <a>Market Value Threshold</a>
-                    <button type="button" class="btn-sm btn btn-primary">Add New</button>
+                    <button type="button" class="btn-sm btn btn-primary" (click)="addNewRecord(content)">Add
+                        New</button>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped">
@@ -53,7 +54,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let variance of variances">
+                            <tr *ngFor="let _value of marketValueThreshold; let inx = index">
+                                <td scope="col">$ {{ _value.MKT_VAL_FROM }}</td>
+                                <td scope="col">$ {{ _value.MKT_VAL_TO}}</td>
+                                <td scope="col">{{ _value.VAR_THRESHOLD }} %</td>
+                                <td scope="col"><button type="button" (click)="onEdit(content, inx)"
+                                        class="btn-sm btn btn-secondary">Edit</button>
+                                </td>
+                                <td scope="col"><button type="button" (click)="onDelete(inx)"
+                                        class="btn-sm btn btn-secondary">Delete</button>
+                                </td>
+                            </tr>
+
+                            <!-- <tr *ngFor="let variance of variances">
                                 <td scope="col">{{variance.from}}</td>
                                 <td scope="col">{{variance.to}}</td>
                                 <td scope="col">{{variance.threshold}}</td>
@@ -61,11 +74,106 @@
                                 </td>
                                 <td scope="col"><button type="button" class="btn-sm btn btn-secondary">Delete</button>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
+
+                    <div class="d-flex p-2 pagination">
+                        <ngb-pagination [collectionSize]="mvtData.length" [maxSize]="5" [ellipses]="false"
+                            [rotate]="true" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true">
+                        </ngb-pagination>
+
+                        <select class="custom-select" style="width: auto;margin-left: 10px;" [(ngModel)]="pageSize">
+                            <option [ngValue]="3">3</option>
+                            <option [ngValue]="5">5</option>
+                            <option [ngValue]="10">10</option>
+                        </select>
+
+                        <div class="table-refresh">
+                            <i class="fa fa-refresh" aria-hidden="true" (click)="onRefresh()"></i>
+                            <span>Total Records: {{mvtData.length}}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form (ngSubmit)="onSubmit()" [formGroup]="mvtForm" novalidate>
+            <div class="form-group row mb-2">
+                <label class="col-md-4 col-form-label" for="MKT_VAL_FROMId">From</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="MKT_VAL_FROMId" type="text" placeholder="From"
+                        formControlName="MKT_VAL_FROM"
+                        [ngClass]="{'is-invalid': isFormSubmitted && !mvtForm.get('MKT_VAL_FROM').valid }" />
+                    <span class="invalid-feedback"
+                        *ngIf="isFormSubmitted && mvtForm.get('MKT_VAL_FROM').errors?.required">
+                        Please Enter From Value
+                    </span>
+                    <span class="invalid-feedback"
+                        *ngIf="isFormSubmitted && mvtForm.get('MKT_VAL_FROM').errors?.pattern">
+                        Please Enter Numbers only
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-4 col-form-label" for="MKT_VAL_TOId">To</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="MKT_VAL_TOId" type="text" placeholder="To"
+                        formControlName="MKT_VAL_TO"
+                        [ngClass]="{'is-invalid': isFormSubmitted && !mvtForm.get('MKT_VAL_TO').valid }" />
+                    <span class="invalid-feedback"
+                        *ngIf="isFormSubmitted && mvtForm.get('MKT_VAL_TO').errors?.required">
+                        Please Enter To Value
+                    </span>
+                    <span class="invalid-feedback" *ngIf="isFormSubmitted && mvtForm.get('MKT_VAL_TO').errors?.pattern">
+                        Please Enter Numbers only
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-4 col-form-label" for="VAR_THRESHOLDId">Variance Threshold</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="VAR_THRESHOLDId" type="text" placeholder="Variance Threshold"
+                        formControlName="VAR_THRESHOLD"
+                        [ngClass]="{'is-invalid': isFormSubmitted && !mvtForm.get('VAR_THRESHOLD').valid }" />
+                    <span class="invalid-feedback"
+                        *ngIf="isFormSubmitted && mvtForm.get('VAR_THRESHOLD').errors?.required">
+                        Please Enter Variance Threshold
+                    </span>
+                    <span class="invalid-feedback"
+                        *ngIf="isFormSubmitted && mvtForm.get('VAR_THRESHOLD').errors?.pattern">
+                        Please Enter Numbers only
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <div class="offset-md-2 col-md-4">
+                    <button class="btn btn-primary mr-3" style="width:80px;" type="submit">
+                        Save
+                    </button>
+
+                    <button class="btn btn-outline-secondary mr-3" style="width:80px;" (click)="closeModal()"
+                        type="button">
+                        Close
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</ng-template>
