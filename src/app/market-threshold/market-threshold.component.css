@@ -1,3 +1,33 @@
-.table-refresh{
-    
+.fa:hover {
+    cursor: pointer;
+    color: #007bff !important;
 }
+a{
+    color:purple;
+
+}
+
+::ng-deep ul {
+    margin: 0 !important;
+}
+*
+{
+    font-size: 12px;
+}
+.card-header{
+    background-color:rgba(0,123,255);
+    color:white;
+}
+th{
+    color:white;
+}
+.modal-header{
+    background-color:rgba(0,123,255);
+}
+.modal-title
+{
+    color:white;
+}
+.modal-backdrop {
+    background-color: transparent !important;
+  }

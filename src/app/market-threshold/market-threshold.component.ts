@@ -30,6 +30,7 @@ export class MarketThresholdComponent implements OnInit {
   mvtForm: FormGroup;
   selectedRecord: ThresholdValue;
   selectedRecordIndex: number;
+  submitButtonLabel: string = 'Add';
 
   constructor(private marketThresholdService: MarketThresholdService,
     private modalService: NgbModal,
@@ -60,12 +61,15 @@ export class MarketThresholdComponent implements OnInit {
   }
 
   addNewRecord(content, data?: ThresholdValue) {
+    this.isFormSubmitted = false;
+    this.submitButtonLabel = 'Add';
     this.mvtForm = this.fb.group({
       MKT_VAL_FROM: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
       MKT_VAL_TO: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
       VAR_THRESHOLD: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
     });
     if (data) {
+      this.submitButtonLabel = 'Update';
       this.mvtForm.patchValue(data);
     } else {
       this.selectedRecordIndex = null;
@@ -100,8 +104,9 @@ export class MarketThresholdComponent implements OnInit {
   }
 
   onEdit(content, index) {
-    this.selectedRecordIndex = index;
-    this.selectedRecord = this.mvtData[index];
+    this.selectedRecordIndex = ((this.page - 1) * this.pageSize) + (index);
+    this.selectedRecord = this.mvtData[this.selectedRecordIndex];
+    // this.selectedRecord = _value;
     this.addNewRecord(content, this.selectedRecord);
   }
 
