@@ -10,6 +10,9 @@ export class MarketThresholdService {
   constructor(private _http: AppHttpService) { }
 
   addThreshold(data: any) {
+    data['created_By'] = 'Test';
+    data['repdel_Incl'] = true;
+    data['client'] = 'Test';
     return this._http.post('api/marketthresholdvalues', data);
   }
 
@@ -17,7 +20,7 @@ export class MarketThresholdService {
     data['mkt_Val_Threshold_Id'] = threshold.mkt_Val_Threshold_Id;
     data['updated_By'] = 'Test';
     data['created_By'] = threshold.created_By;
-    data['repdel_Incl'] = threshold.repdel_Incl;
+    data['repdel_Incl'] = true;
     data['client'] = threshold.client;
 
     return this._http.put('api/marketthresholdvalues', data);
