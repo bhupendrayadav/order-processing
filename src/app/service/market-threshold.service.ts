@@ -1,14 +1,17 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { AppHttpService } from '../utils/app-http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MarketThresholdService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private _http: AppHttpService) { }
 
   getMarketThreshold() {
     //https://jsonplaceholder.typicode.com/todos
@@ -30,5 +33,24 @@ export class MarketThresholdService {
 
     console.error(errorMessgae);
     return throwError(errorMessgae);
+  }
+
+  /**
+   * @description Service to get Market Threshold List
+   * @author Krunal
+   * @date 2020-04-28
+   * @param {*} payload
+   * @memberof MarketThresholdService
+   */
+  /* getMarketThresholdList(payload) {
+    return this._http.get('api/marketthresholdvalues').pipe(map(result => {
+      return result;
+    }));
+  } */
+
+  getMarketThresholdList() {
+    return this._http.get('../../json-api/market-threshold.json').pipe(map(result => {
+      return result;
+    }));
   }
 }
