@@ -58,9 +58,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let _value of marketValueThreshold; let inx = index">
-                                    <td scope="col">$ {{ _value.mkt_Val_From }}</td>
-                                    <td scope="col">$ {{ _value.mkt_Val_To}}</td>
+                                <tr *ngFor="let _value of mvtData; let inx = index">
+                                    <td scope="col">{{ _value.mkt_Val_From | currency:'USD' }}</td>
+                                    <td scope="col">{{ _value.mkt_Val_To | currency:'USD'}}</td>
                                     <td scope="col">{{ _value.var_Threshold }} %</td>
                                     <td scope="col">
                                         <i class="fa fa-edit" aria-hidden="true" (click)="onEdit(content, inx)"></i>
@@ -69,37 +69,37 @@
                                         <i class="fa fa-trash" aria-hidden="true" (click)="onDelete(inx)"></i>
                                     </td>
                                 </tr>
-
-                                <!-- <tr *ngFor="let variance of variances">
-                                <td scope="col">{{variance.from}}</td>
-                                <td scope="col">{{variance.to}}</td>
-                                <td scope="col">{{variance.threshold}}</td>
-                                <td scope="col"><button type="button" class="btn-sm btn btn-secondary">Edit</button>
-                                </td>
-                                <td scope="col"><button type="button" class="btn-sm btn btn-secondary">Delete</button>
-                                </td>
-                            </tr> -->
+                                <tr *ngIf="!isLoading && totalRecords===0">
+                                    <td colspan="5" class="no-record">No records found</td>
+                                </tr>
+                                <tr *ngIf="isLoading">
+                                    <td colspan="5" class="no-record">Loading . . .</td>
+                                </tr>
                             </tbody>
                         </table>
 
                         <div class="d-flex p-2 pagination justify-content-between">
                             <div class="d-flex">
-                                <ngb-pagination [collectionSize]="mvtData.length" [maxSize]="5" [ellipses]="false"
-                                    [rotate]="true" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true">
+                                <ngb-pagination [collectionSize]="totalRecords" [maxSize]="5" [ellipses]="false"
+                                    (pageChange)="onPageChange($event)" [rotate]="true" [(page)]="page"
+                                    [pageSize]="pageSize" [boundaryLinks]="true">
                                 </ngb-pagination>
 
                                 <div class="d-flex align-items-center ml-3">
-                                    <select class="custom-select" style="width: auto;" [(ngModel)]="pageSize">
+                                    <select class="custom-select" (change)="onNoOfListRecordsChange(pageSize)"
+                                        style="width: auto;" [(ngModel)]="pageSize">
                                         <option [ngValue]="3">3</option>
                                         <option [ngValue]="5">5</option>
                                         <option [ngValue]="10">10</option>
+                                        <option [ngValue]="20">20</option>
+                                        <option [ngValue]="50">50</option>
                                     </select>
                                     <div class="ml-2">items per page</div>
                                 </div>
                             </div>
 
                             <div class="table-refresh d-flex align-items-center">
-                                <span>Total Records: {{mvtData.length}}</span>
+                                <span>Total Records: {{totalRecords}}</span>
                                 <i class="fa fa-refresh ml-4" aria-hidden="true" (click)="onRefresh()"></i>
                             </div>
                         </div>

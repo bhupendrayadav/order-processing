@@ -2,32 +2,39 @@
     cursor: pointer;
     color: #007bff !important;
 }
-a{
-    color:purple;
-
+a {
+    color: purple;
 }
 
 ::ng-deep ul {
     margin: 0 !important;
 }
-*
-{
+* {
     font-size: 12px;
 }
-.card-header{
-    background-color:rgba(0,123,255);
-    color:white;
+.card-header {
+    background-color: rgba(0, 123, 255);
+    color: white;
 }
-th{
-    color:white;
+th {
+    color: white;
 }
-.modal-header{
-    background-color:rgba(0,123,255);
+.modal-header {
+    background-color: rgba(0, 123, 255);
 }
-.modal-title
-{
-    color:white;
+.modal-title {
+    color: white;
 }
 .modal-backdrop {
     background-color: transparent !important;
-  }
+}
+
+.no-record {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #575b5f;
+    position: relative;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}

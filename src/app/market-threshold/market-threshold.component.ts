@@ -21,11 +21,14 @@ interface ThresholdValue {
   styleUrls: ['./market-threshold.component.css']
 })
 export class MarketThresholdComponent implements OnInit {
+  client: string = '';
   page = 1;
-  pageSize = 3;
+  pageSize = 5;
+  totalRecords: number;
   mvtData: Array<ThresholdValue> = [];
   modalReference: NgbModalRef;
 
+  isLoading = false;
   isFormSubmitted = false;
   mvtForm: FormGroup;
   selectedRecord: ThresholdValue;
@@ -40,29 +43,44 @@ export class MarketThresholdComponent implements OnInit {
     this.getMarketThresholds();
   }
 
-  get marketValueThreshold(): ThresholdValue[] {
+  /* get marketValueThreshold(): ThresholdValue[] {
     if (this.mvtData && this.mvtData.length) {
       return this.mvtData
         .map((country, i) => ({ id: i + 1, ...country }))
         .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
     }
-  }
+  } */
 
+  /**
+   * @description Method to get Market Threshold List
+   * @author Krunal
+   * @date 2020-04-28
+   * @memberof MarketThresholdComponent
+   */
   getMarketThresholds() {
     // this.marketThresholdService.getMarketThreshold().subscribe(res => {
     //   this.mvtData = res;
     // });
-
-    this.marketThresholdService.getMarketThresholdList().subscribe(res => {
+    this.mvtData = [];
+    this.isLoading = true;
+    const payload = `client=${this.client}&page=${this.page}&pageSize=${this.pageSize}`;
+    this.marketThresholdService.getMarketThresholdList(payload).subscribe(res => {
       if (res && res.items) {
         this.mvtData = res.items;
+        this.totalRecords = res.totalrows;
+        this.isLoading = false;
       }
     });
   }
-
+  /**
+   * @description Method to reset List 
+   * @author Krunal
+   * @date 2020-04-28
+   * @memberof MarketThresholdComponent
+   */
   onRefresh() {
     this.page = 1;
-    this.pageSize = 3;
+    this.pageSize = 5;
     this.getMarketThresholds();
   }
 
@@ -93,12 +111,12 @@ export class MarketThresholdComponent implements OnInit {
     if (this.mvtForm.valid) {
       if (this.selectedRecordIndex !== null) {
         this.mvtData[this.selectedRecordIndex] = this.mvtForm.value;
-        this.marketValueThreshold[this.selectedRecordIndex] = this.mvtForm.value;
+        // this.marketValueThreshold[this.selectedRecordIndex] = this.mvtForm.value;
         this.selectedRecordIndex = null;
         this.selectedRecord = null;
       } else {
         this.mvtData.push(this.mvtForm.value);
-        this.marketValueThreshold.push(this.mvtForm.value);
+        // this.marketValueThreshold.push(this.mvtForm.value);
       }
       this.closeModal();
     }
@@ -106,7 +124,7 @@ export class MarketThresholdComponent implements OnInit {
 
   onDelete(index) {
     this.mvtData.splice(index, 1);
-    this.marketValueThreshold.splice(index, 1);
+    // this.marketValueThreshold.splice(index, 1);
   }
 
   onEdit(content, index) {
@@ -116,4 +134,27 @@ export class MarketThresholdComponent implements OnInit {
     this.addNewRecord(content, this.selectedRecord);
   }
 
+  /**
+   * @description Method will get called on pagination change
+   * @author Krunal
+   * @date 2020-04-28
+   * @param {*} event
+   * @memberof MarketThresholdComponent
+   */
+  onPageChange(event) {
+    this.page = event;
+    this.getMarketThresholds();
+  }
+
+  /**
+   * @description  Method will get called on change of No Of List Records
+   * @author Krunal
+   * @date 2020-04-28
+   * @param {*} event
+   * @memberof MarketThresholdComponent
+   */
+  onNoOfListRecordsChange(event) {
+    this.pageSize = event;
+    this.getMarketThresholds();
+  }
 }

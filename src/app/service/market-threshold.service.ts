@@ -48,8 +48,8 @@ export class MarketThresholdService {
     }));
   } */
 
-  getMarketThresholdList() {
-    return this._http.get('api/marketthresholdvalues').pipe(map(result => {
+  getMarketThresholdList(payload) {
+    return this._http.get('api/marketthresholdvalues?' + payload).pipe(map(result => {
       return result;
     }));
     /*  return this._http.get('../../json-api/market-threshold.json').pipe(map(result => {
