@@ -108,6 +108,9 @@ export class MarketThresholdComponent implements OnInit {
 
   closeModal() {
     this.modalReference.close();
+    this.selectedRecordIndex = null;
+    this.selectedRecord = null;
+    this.mvtForm.reset();
   }
 
   onSubmit() {
@@ -119,7 +122,7 @@ export class MarketThresholdComponent implements OnInit {
         this.selectedRecordIndex = null;
         this.selectedRecord = null;
 
-        this.marketThresholdService.editThreshold(this.mvtForm.value).subscribe(res => {
+        this.marketThresholdService.editThreshold(this.mvtForm.value, this.editableData).subscribe(res => {
           console.log('success');
           this.getMarketThresholds();
         });
@@ -145,7 +148,7 @@ export class MarketThresholdComponent implements OnInit {
     console.log(threshold);
 
     this.selectedRecordIndex = ((this.page - 1) * this.pageSize) + (index);
-    this.selectedRecord = this.mvtData[this.selectedRecordIndex];
+    this.selectedRecord = threshold;
     this.editableData = threshold;
     // this.selectedRecord = _value;
     this.addNewRecord(content, this.selectedRecord);

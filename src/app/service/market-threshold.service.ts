@@ -13,8 +13,12 @@ export class MarketThresholdService {
     return this._http.post('api/marketthresholdvalues', data);
   }
 
-  editThreshold(data: any) {
+  editThreshold(data: any, threshold: any) {
+    data['mkt_Val_Threshold_Id'] = threshold.mkt_Val_Threshold_Id;
     data['updated_By'] = 'Test';
+    data['created_By'] = threshold.created_By;
+    data['repdel_Incl'] = threshold.repdel_Incl;
+    data['client'] = threshold.client;
 
     return this._http.put('api/marketthresholdvalues', data);
   }
@@ -38,7 +42,7 @@ export class MarketThresholdService {
 
   getMarketThresholdList(payload) {
     return this._http.get('api/marketthresholdvalues?' + payload).pipe(map(result => {
-      return result;
+      return result.data;
     }));
     /*  return this._http.get('../../json-api/market-threshold.json').pipe(map(result => {
        return result;
