@@ -52,8 +52,11 @@ export class MarketThresholdComponent implements OnInit {
     // this.marketThresholdService.getMarketThreshold().subscribe(res => {
     //   this.mvtData = res;
     // });
-    this.marketThresholdService.getMarketThreshold().subscribe(res => {
-      this.mvtData = res;
+
+    this.marketThresholdService.getMarketThresholdList().subscribe(res => {
+      if (res && res.items) {
+        this.mvtData = res.items;
+      }
     });
   }
 

@@ -59,9 +59,9 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let _value of marketValueThreshold; let inx = index">
-                                    <td scope="col">$ {{ _value.MKT_VAL_FROM }}</td>
-                                    <td scope="col">$ {{ _value.MKT_VAL_TO}}</td>
-                                    <td scope="col">{{ _value.VAR_THRESHOLD }} %</td>
+                                    <td scope="col">$ {{ _value.mkt_Val_From }}</td>
+                                    <td scope="col">$ {{ _value.mkt_Val_To}}</td>
+                                    <td scope="col">{{ _value.var_Threshold }} %</td>
                                     <td scope="col">
                                         <i class="fa fa-edit" aria-hidden="true" (click)="onEdit(content, inx)"></i>
                                     </td>
