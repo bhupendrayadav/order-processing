@@ -89,12 +89,9 @@ export class MarketThresholdComponent implements OnInit {
     this.isFormSubmitted = false;
     this.submitButtonLabel = 'Add';
     this.mvtForm = this.fb.group({
-      mkt_Val_From: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
-      mkt_Val_To: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
-      var_Threshold: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
-      client: 'Test',
-      repdel_Incl: 1,
-      created_By: 'Test'
+      mkt_Val_From: [null, [Validators.required, Validators.pattern(/^[0-9]*$/)]],
+      mkt_Val_To: [null, [Validators.required, Validators.pattern(/^[0-9]*$/)]],
+      var_Threshold: [null, [Validators.required, Validators.pattern(/^[0-9]*$/)]],
     });
     if (data) {
       this.submitButtonLabel = 'Update';
@@ -114,6 +111,11 @@ export class MarketThresholdComponent implements OnInit {
   }
 
   onSubmit() {
+    this.mvtForm.value.mkt_Val_From = parseInt(this.mvtForm.value.mkt_Val_From);
+    this.mvtForm.value.mkt_Val_To = parseInt(this.mvtForm.value.mkt_Val_To);
+    this.mvtForm.value.var_Threshold = parseInt(this.mvtForm.value.var_Threshold);
+
+    console.log(this.mvtForm.value);
     this.isFormSubmitted = true;
     if (this.mvtForm.valid) {
       if (this.selectedRecordIndex !== null) {
@@ -145,8 +147,6 @@ export class MarketThresholdComponent implements OnInit {
   }
 
   onEdit(threshold: any, content, index) {
-    console.log(threshold);
-
     this.selectedRecordIndex = ((this.page - 1) * this.pageSize) + (index);
     this.selectedRecord = threshold;
     this.editableData = threshold;
