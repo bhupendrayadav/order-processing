@@ -13,8 +13,10 @@ export class MarketThresholdService {
     return this._http.post('api/marketthresholdvalues', data);
   }
 
-  editThreshold(id: number, data: any) {
-    return this._http.put('api/marketthresholdvalues/' + id, data);
+  editThreshold(data: any) {
+    data['updated_By'] = 'Test';
+
+    return this._http.put('api/marketthresholdvalues', data);
   }
 
   deleteThresholdByID(id: number) {

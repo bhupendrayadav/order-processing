@@ -93,7 +93,7 @@ export class MarketThresholdComponent implements OnInit {
       mkt_Val_To: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
       var_Threshold: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
       client: 'Test',
-      repdel_Incl: 0,
+      repdel_Incl: 1,
       created_By: 'Test'
     });
     if (data) {
@@ -119,7 +119,7 @@ export class MarketThresholdComponent implements OnInit {
         this.selectedRecordIndex = null;
         this.selectedRecord = null;
 
-        this.marketThresholdService.editThreshold(this.editableData.mkt_Val_Threshold_Id, this.mvtForm.value).subscribe(res => {
+        this.marketThresholdService.editThreshold(this.mvtForm.value).subscribe(res => {
           console.log('success');
           this.getMarketThresholds();
         });
@@ -142,7 +142,7 @@ export class MarketThresholdComponent implements OnInit {
   }
 
   onEdit(threshold: any, content, index) {
-    console.log(content);
+    console.log(threshold);
 
     this.selectedRecordIndex = ((this.page - 1) * this.pageSize) + (index);
     this.selectedRecord = this.mvtData[this.selectedRecordIndex];
