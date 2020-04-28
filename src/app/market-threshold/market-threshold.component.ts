@@ -27,6 +27,7 @@ export class MarketThresholdComponent implements OnInit {
   totalRecords: number;
   mvtData: Array<ThresholdValue> = [];
   modalReference: NgbModalRef;
+  deleteModalReference: NgbModalRef;
 
   isLoading = false;
   isFormSubmitted = false;
@@ -119,31 +120,44 @@ export class MarketThresholdComponent implements OnInit {
     this.isFormSubmitted = true;
     if (this.mvtForm.valid) {
       if (this.selectedRecordIndex !== null) {
-        this.mvtData[this.selectedRecordIndex] = this.mvtForm.value;
+        // this.mvtData[this.selectedRecordIndex] = this.mvtForm.value;
         // this.marketValueThreshold[this.selectedRecordIndex] = this.mvtForm.value;
-        this.selectedRecordIndex = null;
-        this.selectedRecord = null;
 
         this.marketThresholdService.editThreshold(this.mvtForm.value, this.editableData).subscribe(res => {
-          console.log('success');
+          this.closeModal();
           this.getMarketThresholds();
+          this.selectedRecordIndex = null;
+          this.selectedRecord = null;
         });
       } else {
         this.marketThresholdService.addThreshold(this.mvtForm.value).subscribe(res => {
-          console.log('success');
+          this.closeModal();
           this.getMarketThresholds();
         });
-        this.mvtData.push(this.mvtForm.value);
+        // this.mvtData.push(this.mvtForm.value);
         // this.marketValueThreshold.push(this.mvtForm.value);
       }
-      this.closeModal();
+
     }
   }
 
-  onDelete(threshold: any) {
-    this.marketThresholdService.deleteThresholdByID(threshold.mkt_Val_Threshold_Id).subscribe(res => {
+  openDeleteModal(deleteModal, row) {
+    this.selectedRecord = row;
+    this.deleteModalReference = this.modalService.open(deleteModal, { ariaLabelledBy: 'modal-basic-title' });
+  }
+
+  onDelete() {
+    console.log('this.selectedRecord', this.selectedRecord);
+    this.marketThresholdService.deleteThresholdByID(this.selectedRecord['mkt_Val_Threshold_Id']).subscribe(res => {
+      this.closeDeleteModal();
       this.getMarketThresholds();
     });
+  }
+
+  closeDeleteModal() {
+    this.deleteModalReference.close();
+    this.selectedRecordIndex = null;
+    this.selectedRecord = null;
   }
 
   onEdit(threshold: any, content, index) {
