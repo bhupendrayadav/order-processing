@@ -1,8 +1,5 @@
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 import { AppHttpService } from '../utils/app-http.service';
 
 @Injectable({
@@ -10,29 +7,18 @@ import { AppHttpService } from '../utils/app-http.service';
 })
 export class MarketThresholdService {
 
-  constructor(private http: HttpClient,
-    private _http: AppHttpService) { }
+  constructor(private _http: AppHttpService) { }
 
-  getMarketThreshold() {
-    //https://jsonplaceholder.typicode.com/todos
-    return this.http
-      .get<any>("../../json-api/market-threshold.json")
-      .pipe(catchError(this.handleError));
+  addThreshold(data: any) {
+    return this._http.post('api/marketthresholdvalues', data);
   }
 
+  editThreshold(id: number, data: any) {
+    return this._http.put('api/marketthresholdvalues/' + id, data);
+  }
 
-  private handleError(err: HttpErrorResponse) {
-    let errorMessgae = "";
-    if (err.error instanceof ErrorEvent) {
-      //A client-side or network error occured
-      errorMessgae = `An error occured: ${err.error.message}`;
-    } else {
-      //The backend return an unsuccessful response code.
-      errorMessgae = `Server returned code: ${err.status}, error message is ${err.message}`;
-    }
-
-    console.error(errorMessgae);
-    return throwError(errorMessgae);
+  deleteThresholdByID(id: number) {
+    return this._http.delete('api/marketthresholdvalues/' + id);
   }
 
   /**

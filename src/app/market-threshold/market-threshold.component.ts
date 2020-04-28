@@ -34,6 +34,7 @@ export class MarketThresholdComponent implements OnInit {
   selectedRecord: ThresholdValue;
   selectedRecordIndex: number;
   submitButtonLabel: string = 'Add';
+  editableData: any;
 
   constructor(private marketThresholdService: MarketThresholdService,
     private modalService: NgbModal,
@@ -65,9 +66,9 @@ export class MarketThresholdComponent implements OnInit {
     this.isLoading = true;
     const payload = `client=${this.client}&page=${this.page}&pageSize=${this.pageSize}`;
     this.marketThresholdService.getMarketThresholdList(payload).subscribe(res => {
-      if (res && res.items) {
-        this.mvtData = res.items;
-        this.totalRecords = res.totalrows;
+      if (res && res['items']) {
+        this.mvtData = res['items'];
+        this.totalRecords = res['totalrows'];
         this.isLoading = false;
       }
     });
@@ -88,9 +89,12 @@ export class MarketThresholdComponent implements OnInit {
     this.isFormSubmitted = false;
     this.submitButtonLabel = 'Add';
     this.mvtForm = this.fb.group({
-      MKT_VAL_FROM: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
-      MKT_VAL_TO: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
-      VAR_THRESHOLD: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
+      mkt_Val_From: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
+      mkt_Val_To: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
+      var_Threshold: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
+      client: 'Test',
+      repdel_Incl: 0,
+      created_By: 'Test'
     });
     if (data) {
       this.submitButtonLabel = 'Update';
@@ -114,7 +118,16 @@ export class MarketThresholdComponent implements OnInit {
         // this.marketValueThreshold[this.selectedRecordIndex] = this.mvtForm.value;
         this.selectedRecordIndex = null;
         this.selectedRecord = null;
+
+        this.marketThresholdService.editThreshold(this.editableData.mkt_Val_Threshold_Id, this.mvtForm.value).subscribe(res => {
+          console.log('success');
+          this.getMarketThresholds();
+        });
       } else {
+        this.marketThresholdService.addThreshold(this.mvtForm.value).subscribe(res => {
+          console.log('success');
+          this.getMarketThresholds();
+        });
         this.mvtData.push(this.mvtForm.value);
         // this.marketValueThreshold.push(this.mvtForm.value);
       }
@@ -122,14 +135,18 @@ export class MarketThresholdComponent implements OnInit {
     }
   }
 
-  onDelete(index) {
-    this.mvtData.splice(index, 1);
-    // this.marketValueThreshold.splice(index, 1);
+  onDelete(threshold: any) {
+    this.marketThresholdService.deleteThresholdByID(threshold.mkt_Val_Threshold_Id).subscribe(res => {
+      this.getMarketThresholds();
+    });
   }
 
-  onEdit(content, index) {
+  onEdit(threshold: any, content, index) {
+    console.log(content);
+
     this.selectedRecordIndex = ((this.page - 1) * this.pageSize) + (index);
     this.selectedRecord = this.mvtData[this.selectedRecordIndex];
+    this.editableData = threshold;
     // this.selectedRecord = _value;
     this.addNewRecord(content, this.selectedRecord);
   }
@@ -154,6 +171,7 @@ export class MarketThresholdComponent implements OnInit {
    * @memberof MarketThresholdComponent
    */
   onNoOfListRecordsChange(event) {
+    this.page = 1;
     this.pageSize = event;
     this.getMarketThresholds();
   }

@@ -63,10 +63,10 @@
                                     <td scope="col">{{ _value.mkt_Val_To | currency:'USD'}}</td>
                                     <td scope="col">{{ _value.var_Threshold }} %</td>
                                     <td scope="col">
-                                        <i class="fa fa-edit" aria-hidden="true" (click)="onEdit(content, inx)"></i>
+                                        <i class="fa fa-edit" aria-hidden="true" (click)="onEdit(_value, content, inx)"></i>
                                     </td>
                                     <td scope="col">
-                                        <i class="fa fa-trash" aria-hidden="true" (click)="onDelete(inx)"></i>
+                                        <i class="fa fa-trash" aria-hidden="true" (click)="onDelete(_value)"></i>
                                     </td>
                                 </tr>
                                 <tr *ngIf="!isLoading && totalRecords===0">
@@ -120,51 +120,51 @@
         <div class="modal-body">
             <form (ngSubmit)="onSubmit()" [formGroup]="mvtForm" novalidate>
                 <div class="form-group row mb-2">
-                    <label class="col-md-4 col-form-label" for="MKT_VAL_FROMId">From</label>
+                    <label class="col-md-4 col-form-label" for="mkt_Val_FromId">From</label>
                     <div class="col-md-8">
-                        <input class="form-control" id="MKT_VAL_FROMId" type="text" placeholder="From"
-                            formControlName="MKT_VAL_FROM"
-                            [ngClass]="{'is-invalid': isFormSubmitted && !mvtForm.get('MKT_VAL_FROM').valid }" />
+                        <input class="form-control" id="mkt_Val_FromId" type="text" placeholder="From"
+                            formControlName="mkt_Val_From"
+                            [ngClass]="{'is-invalid': isFormSubmitted && !mvtForm.get('mkt_Val_From').valid }" />
                         <span class="invalid-feedback"
-                            *ngIf="isFormSubmitted && mvtForm.get('MKT_VAL_FROM').errors?.required">
+                            *ngIf="isFormSubmitted && mvtForm.get('mkt_Val_From').errors?.required">
                             Please Enter From Value
                         </span>
                         <span class="invalid-feedback"
-                            *ngIf="isFormSubmitted && mvtForm.get('MKT_VAL_FROM').errors?.pattern">
+                            *ngIf="isFormSubmitted && mvtForm.get('mkt_Val_From').errors?.pattern">
                             Please Enter Numbers only
                         </span>
                     </div>
                 </div>
 
                 <div class="form-group row mb-2">
-                    <label class="col-md-4 col-form-label" for="MKT_VAL_TOId">To</label>
+                    <label class="col-md-4 col-form-label" for="mkt_Val_ToId">To</label>
                     <div class="col-md-8">
-                        <input class="form-control" id="MKT_VAL_TOId" type="text" placeholder="To"
-                            formControlName="MKT_VAL_TO"
-                            [ngClass]="{'is-invalid': isFormSubmitted && !mvtForm.get('MKT_VAL_TO').valid }" />
+                        <input class="form-control" id="mkt_Val_ToId" type="text" placeholder="To"
+                            formControlName="mkt_Val_To"
+                            [ngClass]="{'is-invalid': isFormSubmitted && !mvtForm.get('mkt_Val_To').valid }" />
                         <span class="invalid-feedback"
-                            *ngIf="isFormSubmitted && mvtForm.get('MKT_VAL_TO').errors?.required">
+                            *ngIf="isFormSubmitted && mvtForm.get('mkt_Val_To').errors?.required">
                             Please Enter To Value
                         </span>
                         <span class="invalid-feedback"
-                            *ngIf="isFormSubmitted && mvtForm.get('MKT_VAL_TO').errors?.pattern">
+                            *ngIf="isFormSubmitted && mvtForm.get('mkt_Val_To').errors?.pattern">
                             Please Enter Numbers only
                         </span>
                     </div>
                 </div>
 
                 <div class="form-group row mb-2">
-                    <label class="col-md-4 col-form-label" for="VAR_THRESHOLDId">Variance Threshold</label>
+                    <label class="col-md-4 col-form-label" for="var_ThresholdId">Variance Threshold</label>
                     <div class="col-md-8">
-                        <input class="form-control" id="VAR_THRESHOLDId" type="text" placeholder="Variance Threshold"
-                            formControlName="VAR_THRESHOLD"
-                            [ngClass]="{'is-invalid': isFormSubmitted && !mvtForm.get('VAR_THRESHOLD').valid }" />
+                        <input class="form-control" id="var_ThresholdId" type="text" placeholder="Variance Threshold"
+                            formControlName="var_Threshold"
+                            [ngClass]="{'is-invalid': isFormSubmitted && !mvtForm.get('var_Threshold').valid }" />
                         <span class="invalid-feedback"
-                            *ngIf="isFormSubmitted && mvtForm.get('VAR_THRESHOLD').errors?.required">
+                            *ngIf="isFormSubmitted && mvtForm.get('var_Threshold').errors?.required">
                             Please Enter Variance Threshold
                         </span>
                         <span class="invalid-feedback"
-                            *ngIf="isFormSubmitted && mvtForm.get('VAR_THRESHOLD').errors?.pattern">
+                            *ngIf="isFormSubmitted && mvtForm.get('var_Threshold').errors?.pattern">
                             Please Enter Numbers only
                         </span>
                     </div>
