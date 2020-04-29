@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="col-md-12 mt-2">
+    <div class="card">
+      <div class="card-header bg-primary text-white">COVERSHEET</div>
+      <div class="card-body">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            INCLUDE COVER SHEET
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead class="bg-primary text-white">
+                  <tr>
+                    <th scope="col">Client Name</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Report Type</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td scope="col">Wells Fargo Bank, N.A. - 138029</td>
+                    <td scope="col">Prdyct name</td>
+                    <td scope="col">type</td>
+                    <td scope="col">
+                      <a
+                        [routerLink]="['/cover-sheet/edit/', '62684dae-5ec4-499a-8187-6b8edf639f99']"
+                        ><i class="fa fa-edit" aria-hidden="true"></i
+                      ></a>
+                    </td>
+                    <td scope="col">
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="float-right">
+              <a class="btn btn-primary" [routerLink]="['/cover-sheet/add']"
+                >Add Coversheet</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
