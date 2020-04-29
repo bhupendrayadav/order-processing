@@ -36,6 +36,7 @@ export class MarketThresholdComponent implements OnInit {
   selectedRecordIndex: number;
   submitButtonLabel: string = 'Add';
   editableData: any;
+  isIncludeRepdel: boolean = false;
 
   constructor(private marketThresholdService: MarketThresholdService,
     private modalService: NgbModal,
@@ -84,6 +85,10 @@ export class MarketThresholdComponent implements OnInit {
     this.page = 1;
     this.pageSize = 5;
     this.getMarketThresholds();
+  }
+
+  onCheckboxClick(event: any) {
+    this.isIncludeRepdel = event.target.checked;
   }
 
   addNewRecord(content, data?: ThresholdValue) {

@@ -23,7 +23,8 @@
                         </div>
                         <div class="form-check ml-5">
                             <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" value="">Include Variance Addendum
+                                <input type="checkbox" class="form-check-input"
+                                    (click)='onCheckboxClick($event)'>Include Variance Addendum
                                 w/report
                                 delivery
                             </label>
@@ -53,6 +54,7 @@
                                     <th scope="col">From</th>
                                     <th scope="col">To</th>
                                     <th scope="col">Variance Threshold</th>
+                                    <th scope="col" *ngIf='isIncludeRepdel'>REPDEL_INCL</th>
                                     <th scope="col">Edit</th>
                                     <th scope="col">Delete</th>
                                 </tr>
@@ -63,12 +65,14 @@
                                         <td scope="col">{{ _value.mkt_Val_From | currency:'USD' }}</td>
                                         <td scope="col">{{ _value.mkt_Val_To | currency:'USD'}}</td>
                                         <td scope="col">{{ _value.var_Threshold }} %</td>
+                                        <td scope="col" *ngIf='isIncludeRepdel'>X</td>
                                         <td scope="col">
                                             <i class="fa fa-edit" aria-hidden="true"
                                                 (click)="onEdit(_value, content, inx)"></i>
                                         </td>
                                         <td scope="col">
-                                            <i class="fa fa-trash" aria-hidden="true" (click)="openDeleteModal(deleteModal,_value)"></i>
+                                            <i class="fa fa-trash" aria-hidden="true"
+                                                (click)="openDeleteModal(deleteModal,_value)"></i>
                                         </td>
                                     </tr>
                                 </ng-container>
@@ -200,7 +204,8 @@
                     Submit
                 </button>
 
-                <button class="btn btn-outline-secondary" style="width:80px;" (click)="closeDeleteModal()" type="button">
+                <button class="btn btn-outline-secondary" style="width:80px;" (click)="closeDeleteModal()"
+                    type="button">
                     Cancel
                 </button>
             </div>
