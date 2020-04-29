@@ -10,6 +10,7 @@ import config from "./app.config";
 import { OrderDetailComponent } from "./order-processing/order-detail/order-detail.component";
 import { OrderListComponent } from "./order-processing/order-list/order-list.component";
 import { BingMapComponent } from "./bing-map/bing-map.component";
+import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'configurations',
     loadChildren: () => import('./market-threshold/market-threshold.module').then(m => m.MarketThresholdModule)
+  },
+  {
+    path: 'user',
+    loadChildren: () => import('./user-dashboard/user-dashboard.module').then(m => m.UserDashboardModule)
   }
 ];
 
