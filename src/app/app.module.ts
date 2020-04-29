@@ -16,6 +16,7 @@ import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header/header.component";
 import { LoginLogoutButtonComponent } from "./login-logout-button.component";
 import { BingMapComponent } from "./bing-map/bing-map.component";
+import { HttpInterceptorService } from './utils/http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -37,8 +38,9 @@ import { BingMapComponent } from "./bing-map/bing-map.component";
     OrderProcessingModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -6,6 +6,7 @@ export default {
     issuer: `https://dev-277049.okta.com/oauth2/default`,
     redirectUri: "http://localhost:4200/implicit/callback",
     scopes: ["openid", "profile", "email"],
-    pkce: true
+    pkce: true,
+    baseApiUrl: 'https://servicelink-marketthresholdvalueservice.azurewebsites.net/'
   }
 };
