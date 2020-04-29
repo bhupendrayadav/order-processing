@@ -25,10 +25,12 @@
     "@ngrx/router-store": "^8.6.0",
     "@ngrx/store": "^8.6.0",
     "@okta/okta-angular": "^2.0.0",
+    "angular-highcharts": "^9.0.9",
     "bingmaps": "^2.0.3",
     "bootstrap": "^4.4.1",
     "d3": "^5.16.0",
     "font-awesome": "^4.7.0",
+    "highcharts": "^8.0.4",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
