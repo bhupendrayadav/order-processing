@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MarketThresholdService } from '../service/market-threshold.service';
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 interface ThresholdValue {
   MKT_VAL_FROM: number;
@@ -56,7 +57,7 @@ export class MarketThresholdComponent implements OnInit {
 
   constructor(private marketThresholdService: MarketThresholdService,
     private modalService: NgbModal,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.getMarketThresholds();
@@ -149,11 +150,13 @@ export class MarketThresholdComponent implements OnInit {
           this.getMarketThresholds();
           this.selectedRecordIndex = null;
           this.selectedRecord = null;
+          this.toastr.success('Threshold Updated Successfully.');
         });
       } else {
         this.marketThresholdService.addThreshold(this.mvtForm.value).subscribe(res => {
           this.closeModal();
           this.getMarketThresholds();
+          this.toastr.success('Threshold Added Successfully.');
         });
       }
     }
@@ -169,6 +172,7 @@ export class MarketThresholdComponent implements OnInit {
     this.marketThresholdService.deleteThresholdByID(this.selectedRecord['mkt_Val_Threshold_Id']).subscribe(res => {
       this.closeDeleteModal();
       this.getMarketThresholds();
+      this.toastr.success('Threshold Deleted Successfully.');
     });
   }
 

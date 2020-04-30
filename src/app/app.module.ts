@@ -17,6 +17,8 @@ import { HeaderComponent } from "./header/header.component";
 import { LoginLogoutButtonComponent } from "./login-logout-button.component";
 import { BingMapComponent } from "./bing-map/bing-map.component";
 import { HttpInterceptorService } from './utils/http-interceptor.service';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { HttpInterceptorService } from './utils/http-interceptor.service';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     OktaAuthModule,
     AppRoutingModule,
     FormsModule,
@@ -35,7 +38,12 @@ import { HttpInterceptorService } from './utils/http-interceptor.service';
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
-    OrderProcessingModule
+    OrderProcessingModule,
+    ToastrModule.forRoot({
+      timeOut: 4000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -30,7 +30,8 @@
               "node_modules/font-awesome/css/font-awesome.css",
               {
                 "input": "./node_modules/bootstrap/dist/css/bootstrap.css"
-              }
+              },
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },
