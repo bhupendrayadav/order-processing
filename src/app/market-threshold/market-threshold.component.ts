@@ -22,9 +22,10 @@ function rangeValidation(from, to): ValidatorFn {
     let _toValue = form.get(to);
 
     if (Number(_fromValue.value) < Number(_toValue.value)) {
+      _toValue.setErrors(null);
       return null;
     }
-    if (parseInt(_toValue.value)) {
+    if (Number(_toValue.value)) {
       _toValue.setErrors({ validateRange: true });
     }
     return { validateRange: true };
@@ -115,9 +116,9 @@ export class MarketThresholdComponent implements OnInit {
     this.isFormSubmitted = false;
     this.submitButtonLabel = 'Save';
     this.mvtForm = this.fb.group({
-      mkt_Val_From: [null, [Validators.required, Validators.pattern(/^[0-9]*$/)]],
-      mkt_Val_To: [null, [Validators.required, Validators.pattern(/^[0-9]*$/)]],
-      var_Threshold: [null, [Validators.required, Validators.pattern(/^[0-9]*$/)]],
+      mkt_Val_From: [null, [Validators.required, Validators.min(1), Validators.pattern(/^[0-9]*$/)]],
+      mkt_Val_To: [null, [Validators.required, Validators.min(1), Validators.pattern(/^[0-9]*$/)]],
+      var_Threshold: [null, [Validators.required, Validators.min(1), Validators.pattern(/^[0-9]*$/)]],
     },
       { validator: rangeValidation('mkt_Val_From', 'mkt_Val_To') });
     if (data) {
