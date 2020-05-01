@@ -1,29 +1,6 @@
-import { Component, OnInit } from "@angular/core";
-
-type listType = {
-  id: number;
-  label: string;
-  selected?: boolean;
-};
-
-const data: listType[] = [
-  {
-    id: 1,
-    label: "Item 1"
-  },
-  {
-    id: 2,
-    label: "Item 2"
-  },
-  {
-    id: 3,
-    label: "Item 3"
-  },
-  {
-    id: 4,
-    label: "Item 4"
-  }
-];
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Component({
   selector: "app-pick-list",
@@ -31,52 +8,73 @@ const data: listType[] = [
   styleUrls: ["./pick-list.component.css"]
 })
 export class PickListComponent implements OnInit {
-  private rightList: listType[];
+  selectedSource: any[] = [];
+  selectedTarget: any[] = [];
 
-  private leftList: listType[];
-  private data: listType[] = data;
-  private leftSelectedValues: string[] | null;
-  private rightSelectedValues: string[] | null;
-  constructor() {}
+  @Input() sourceLabel: string;
+  @Input() targetLabel: string;
+
+  target: any[] = [];
+  @Output() selectedValues = new EventEmitter<any[]>();
+
+  private _source = new BehaviorSubject<any[]>([]);
+  private updatedSource: any[] = [];
+
+  @Input()
+  set source(value) {
+    this._source.next(value);
+  }
+
+  get source() {
+    return this._source.getValue();
+  }
 
   add() {
-    this.data = this.data.map(item => {
-      return this.leftSelectedValues.includes(item.label)
-        ? { ...item, selected: true }
-        : item;
-    });
-    this.leftSelectedValues = null;
-    this.updateList();
+    if (this.selectedSource.length) {
+      this.selectedSource.forEach(record => {
+        this.target.push(this.source.find(item => record === item.id));
+      });
+      this.updatedSource = this.source.filter(itemFromSource => {
+        return !this.target.find(itemfromTarget => {
+          return itemFromSource.id === itemfromTarget.id;
+        });
+      });
+      this.selectedSource = [];
+      this.selectedValues.emit(this.target);
+    }
   }
 
   addAll() {
-    this.data = this.data.map(item => {
-      return { ...item, selected: true };
-    });
-    this.updateList();
-  }
-
-  remove() {
-    this.data = this.data.map(item => {
-      return this.rightSelectedValues.includes(item.label)
-        ? { ...item, selected: false }
-        : item;
-    });
-    this.rightSelectedValues = null;
-    this.updateList();
+    if (this.updatedSource.length) {
+      this.target = this.source;
+      this.updatedSource = [];
+      this.selectedValues.emit(this.target);
+    }
   }
 
   removeAll() {
-    this.data = this.data.map(item => {
-      return { ...item, selected: false };
-    });
-    this.updateList();
+    if (this.target.length) {
+      this.target = [];
+      this.updatedSource = this.source;
+      this.selectedValues.emit(this.target);
+    }
   }
-  updateList() {
-    this.rightList = this.data.filter(item => item.selected);
-    this.leftList = this.data.filter(item => !item.selected);
+
+  remove() {
+    if (this.selectedTarget.length) {
+      this.selectedTarget.forEach(ids => {
+        this.updatedSource.push(this.source.find(item => ids === item.id));
+      });
+
+      this.target = this.target.filter(
+        item => !this.selectedTarget.includes(item.id)
+      );
+      this.selectedTarget = [];
+      this.selectedValues.emit(this.target);
+    }
   }
+
   ngOnInit() {
-    this.updateList();
+    this._source.subscribe(value => (this.updatedSource = value));
   }
 }

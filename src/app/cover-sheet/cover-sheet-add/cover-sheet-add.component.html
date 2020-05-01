@@ -16,7 +16,12 @@
             </select>
           </div>
         </div>
-        <app-pick-list></app-pick-list>
+        <app-pick-list
+          [sourceLabel]="'Availale Client(s)'"
+          [targetLabel]="'Selected Client(s)'"
+          [source]="clients"
+          (selectedValues)="selectedClients($event)"
+        ></app-pick-list>
       </div>
       <div class="card-footer">
         <div class="float-right">

@@ -20,13 +20,13 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td scope="col">Wells Fargo Bank, N.A. - 138029</td>
-                    <td scope="col">Prdyct name</td>
-                    <td scope="col">type</td>
+                  <tr *ngFor="let item of records">
+                    <td scope="col">{{item.clientName}}</td>
+                    <td scope="col">{{item.productName}}</td>
+                    <td scope="col">{{item.reportType}}</td>
                     <td scope="col">
                       <a
-                        [routerLink]="['/cover-sheet/edit/', '62684dae-5ec4-499a-8187-6b8edf639f99']"
+                        [routerLink]="['/cover-sheet/edit/', item.coversheetID]"
                         ><i class="fa fa-edit" aria-hidden="true"></i
                       ></a>
                     </td>

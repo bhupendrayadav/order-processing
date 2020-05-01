@@ -40,12 +40,12 @@ import { CoverSheetModule } from "./cover-sheet/cover-sheet.module";
     CoverSheetModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpInterceptorService,
-      multi: true
-    }
+    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: HttpInterceptorService,
+    //   multi: true
+    // }
   ],
   bootstrap: [AppComponent]
 })

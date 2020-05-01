@@ -1,59 +1,64 @@
 <div class="row">
   <div class="col-md-4">
-    <p>Available Client(s)</p>
-    <select
-      class="custom-select"
-      multiple
-      size="8"
-      [(ngModel)]="leftSelectedValues"
-    >
-      <option *ngFor="let item of leftList">{{item.label}}</option>
-    </select>
+    <div class="form-group">
+      <label for="pick-list-source">{{sourceLabel}}</label>
+      <select
+        id="pick-list-source"
+        class="custom-select"
+        multiple
+        size="8"
+        [(ngModel)]="selectedSource"
+      >
+        <option *ngFor="let item of updatedSource" [ngValue]="item?.id"
+          >{{item.label}}</option
+        >
+      </select>
+    </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4 my-auto">
     <button
       type="button"
-      class="btn btn-primary btn-lg btn-block"
+      class="btn btn-primary btn-lg btn-block btn-sm"
       (click)="add()"
-      [disabled]="!leftSelectedValues || !leftList.length"
     >
       >
     </button>
     <button
       type="button"
-      class="btn btn-primary btn-lg btn-block"
+      class="btn btn-primary btn-lg btn-block btn-sm"
       (click)="addAll()"
-      [disabled]="!leftList.length"
     >
       >>
     </button>
     <button
       type="button"
-      class="btn btn-primary btn-lg btn-block"
+      class="btn btn-primary btn-lg btn-block btn-sm"
       (click)="removeAll()"
-      [disabled]="!rightList.length"
     >
       <<
     </button>
     <button
       type="button"
-      class="btn btn-primary btn-lg btn-block"
+      class="btn btn-primary btn-lg btn-block btn-sm"
       (click)="remove()"
-      [disabled]="!leftSelectedValues || !rightList.length"
-      [disabled]="!rightSelectedValues"
     >
       <
     </button>
   </div>
   <div class="col-md-4">
-    <p>Available Client(s)</p>
-    <select
-      class="custom-select"
-      multiple
-      size="8"
-      [(ngModel)]="rightSelectedValues"
-    >
-      <option *ngFor="let item of rightList">{{item.label}}</option>
-    </select>
+    <div class="form-group">
+      <label for="pick-list-target">{{targetLabel}}</label>
+      <select
+        id="pick-list-target"
+        class="custom-select"
+        multiple
+        size="8"
+        [(ngModel)]="selectedTarget"
+      >
+        <option *ngFor="let item of target" [ngValue]="item?.id"
+          >{{item.label}}</option
+        >
+      </select>
+    </div>
   </div>
 </div>
