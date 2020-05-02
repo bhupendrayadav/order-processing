@@ -74,13 +74,16 @@ export class MarketThresholdComponent implements OnInit {
     this.mvtData = [];
     this.isLoading = true;
     const payload = `client=${this.client}&page=${this.page}&pageSize=${this.pageSize}`;
-    this.marketThresholdService.getMarketThresholdList(payload).subscribe(res => {
-      if (res && res['items']) {
-        this.mvtData = res['items'];
-        this.totalRecords = res['totalrows'];
-        this.getTableTotalRecords();
-        this.isLoading = false;
-      }
+    this.marketThresholdService.getMarketThresholdList(payload).subscribe({
+      next: res => {
+        if (res && res['items']) {
+          this.mvtData = res['items'];
+          this.totalRecords = res['totalrows'];
+          this.getTableTotalRecords();
+          this.isLoading = false;
+        }
+      },
+      error: error => this.toastr.error('Server Error', 'Error')
     });
   }
 
@@ -97,7 +100,7 @@ export class MarketThresholdComponent implements OnInit {
   }
 
   /**
-   * @description Method to reset List 
+   * @description Method to reset List
    * @author Krunal
    * @date 2020-04-28
    * @memberof MarketThresholdComponent
@@ -146,18 +149,24 @@ export class MarketThresholdComponent implements OnInit {
 
     if (this.mvtForm.valid) {
       if (this.selectedRecordIndex !== null) {
-        this.marketThresholdService.editThreshold(this.mvtForm.value, this.editableData).subscribe(res => {
-          this.closeModal();
-          this.getMarketThresholds();
-          this.selectedRecordIndex = null;
-          this.selectedRecord = null;
-          this.toastr.success('Threshold Updated Successfully.');
+        this.marketThresholdService.editThreshold(this.mvtForm.value, this.editableData).subscribe({
+          next: res => {
+            this.closeModal();
+            this.getMarketThresholds();
+            this.selectedRecordIndex = null;
+            this.selectedRecord = null;
+            this.toastr.success('Threshold Updated Successfully.', 'Success');
+          },
+          error: error => this.toastr.error('Server Error', 'Error')
         });
       } else {
-        this.marketThresholdService.addThreshold(this.mvtForm.value).subscribe(res => {
-          this.closeModal();
-          this.getMarketThresholds();
-          this.toastr.success('Threshold Added Successfully.');
+        this.marketThresholdService.addThreshold(this.mvtForm.value).subscribe({
+          next: res => {
+            this.closeModal();
+            this.getMarketThresholds();
+            this.toastr.success('Threshold Added Successfully.', 'Success');
+          },
+          error: error => this.toastr.error('Server Error', 'Error')
         });
       }
     }
@@ -170,10 +179,13 @@ export class MarketThresholdComponent implements OnInit {
 
   onDelete() {
     console.log('this.selectedRecord', this.selectedRecord);
-    this.marketThresholdService.deleteThresholdByID(this.selectedRecord['mkt_Val_Threshold_Id']).subscribe(res => {
-      this.closeDeleteModal();
-      this.getMarketThresholds();
-      this.toastr.success('Threshold Deleted Successfully.');
+    this.marketThresholdService.deleteThresholdByID(this.selectedRecord['mkt_Val_Threshold_Id']).subscribe({
+      next: res => {
+        this.closeDeleteModal();
+        this.getMarketThresholds();
+        this.toastr.success('Threshold Deleted Successfully.', 'Success');
+      },
+      error: error => this.toastr.error('Server Error', 'Error')
     });
   }
 
