@@ -145,7 +145,7 @@ export class HighchartsComponent implements OnInit {
         gridLineWidth: 0,
         labels: {
           formatter: function () {
-            console.log(this.value);
+            // console.log(this.value);
             return this.value + ' km';
           }
         }
