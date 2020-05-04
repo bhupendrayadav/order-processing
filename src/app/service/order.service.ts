@@ -34,7 +34,11 @@ export class OrderService {
     ]
   ];
 
-  constructor(private http: HttpClient, private oktaAuth: OktaAuthService) {}
+  constructor(
+    // private https: HttpsClient,
+    private http: HttpClient,
+    private oktaAuth: OktaAuthService
+  ) {}
 
   sendOrderNumber(orderSearch: any) {
     this.subject.next(orderSearch);

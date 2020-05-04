@@ -31,8 +31,11 @@ const routes: Routes = [
     component: BingMapComponent
   },
   {
-    path: 'configurations',
-    loadChildren: () => import('./market-threshold/market-threshold.module').then(m => m.MarketThresholdModule)
+    path: "configurations",
+    loadChildren: () =>
+      import("./market-threshold/market-threshold.module").then(
+        m => m.MarketThresholdModule
+      )
   }
 ];
 
@@ -41,4 +44,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [{ provide: OKTA_CONFIG, useValue: config.oidc }]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

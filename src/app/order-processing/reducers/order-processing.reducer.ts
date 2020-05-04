@@ -8,10 +8,10 @@ export interface IOrderProcessingState {
 }
 
 export const initialState: IOrderProcessingState = {
-  orders: [],
+  orders: []
 };
 
-export const reducer = createReducer(
+const orderProcessingReducers = createReducer(
   initialState,
   on(OrderProcessingActions.fetchOrders, (state) => state),
   on(OrderProcessingActions.fetchOrdersSuccess, (state, action) => {
@@ -22,3 +22,7 @@ export const reducer = createReducer(
   }),
   on(OrderProcessingActions.fetchOrdersFailure, (state, action) => state)
 );
+
+export function reducer(state: IOrderProcessingState | undefined, action: Action) {
+  return orderProcessingReducers(state, action);
+}
