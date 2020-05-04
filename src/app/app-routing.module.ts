@@ -36,9 +36,8 @@ const routes: Routes = [
     loadChildren: () => import('./market-threshold/market-threshold.module').then(m => m.MarketThresholdModule)
   },
   {
-    path: "configurations",
-    loadChildren: () => import("./market-threshold/market-threshold.module").then(m => m.MarketThresholdModule
-    )
+    path: 'user',
+    loadChildren: () => import('./user-dashboard/user-dashboard.module').then(m => m.UserDashboardModule)
   }
 ];
 
@@ -47,4 +46,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [{ provide: OKTA_CONFIG, useValue: config.oidc }]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
