@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="col-md-12 mt-2">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        ADD COVER SHEET
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-3">
+            <label for="reportTypeDropDown">Report type</label>
+            <select class="custom-select" id="reportTypeDropDown">
+              <option value="0">OC Coversheet CU</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+        <app-pick-list
+          [sourceLabel]="'Available Client(s)'"
+          [targetLabel]="'Selected Client(s)'"
+          [source]="clients"
+          (selectedValues)="selectedClients($event)"
+        ></app-pick-list>
+        <app-pick-list
+          [sourceLabel]="'Available Products(s)'"
+          [targetLabel]="'Selected Products(s)'"
+          [source]="products"
+          (selectedValues)="selectedProducts($event)"
+        ></app-pick-list>
+      </div>
+      <div class="card-footer">
+        <div class="float-right">
+          <a class="btn btn-secondary mr-1" [routerLink]="['/cover-sheet']">
+            Cancel</a
+          >
+          <button class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

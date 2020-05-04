@@ -16,9 +16,10 @@ import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header/header.component";
 import { LoginLogoutButtonComponent } from "./login-logout-button.component";
 import { BingMapComponent } from "./bing-map/bing-map.component";
-import { HttpInterceptorService } from './utils/http-interceptor.service';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpInterceptorService } from "./utils/http-interceptor.service";
+import { CoverSheetModule } from "./cover-sheet/cover-sheet.module";
 
 @NgModule({
   declarations: [
@@ -43,12 +44,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       timeOut: 4000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true
-    })
+    }),
+    CoverSheetModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }
+    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: HttpInterceptorService,
+    //   multi: true
+    // }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

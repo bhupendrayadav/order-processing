@@ -36,8 +36,9 @@ const routes: Routes = [
     loadChildren: () => import('./market-threshold/market-threshold.module').then(m => m.MarketThresholdModule)
   },
   {
-    path: 'user',
-    loadChildren: () => import('./user-dashboard/user-dashboard.module').then(m => m.UserDashboardModule)
+    path: "configurations",
+    loadChildren: () => import("./market-threshold/market-threshold.module").then(m => m.MarketThresholdModule
+    )
   }
 ];
 
