@@ -1,0 +1,107 @@
+{
+  "page": 1,
+  "pages": 1002,
+  "limit": 10,
+  "items": [
+    {
+      "productGroupId": 10001,
+      "groupName": "1004 Single Family Interior Group10000",
+      "productGroupTypeId": 1,
+      "productGroupBusinessCategoryId": 1,
+      "defaultPrice": 1,
+      "appointmentDuration": "2020-04-23T09:54:47.133",
+      "groupType": "loan",
+      "groupBusinessCategory": "homeloan"
+    },
+    {
+      "productGroupId": 10002,
+      "groupName": "1004 Single Family Interior Group10002",
+      "productGroupTypeId": 1,
+      "productGroupBusinessCategoryId": 1,
+      "defaultPrice": 1,
+      "appointmentDuration": "2020-04-23T09:56:46.857",
+      "groupType": "loan",
+      "groupBusinessCategory": "homeloan"
+    },
+    {
+      "productGroupId": 10003,
+      "groupName": "1004 Single Family Interior Group10003",
+      "productGroupTypeId": 1,
+      "productGroupBusinessCategoryId": 1,
+      "defaultPrice": 1,
+      "appointmentDuration": "2020-04-23T09:56:46.87",
+      "groupType": "loan",
+      "groupBusinessCategory": "homeloan"
+    },
+    {
+      "productGroupId": 10004,
+      "groupName": "1004 Single Family Interior Group10004",
+      "productGroupTypeId": 1,
+      "productGroupBusinessCategoryId": 1,
+      "defaultPrice": 1,
+      "appointmentDuration": "2020-04-23T09:56:46.877",
+      "groupType": "loan",
+      "groupBusinessCategory": "homeloan"
+    },
+    {
+      "productGroupId": 10005,
+      "groupName": "1004 Single Family Interior Group10005",
+      "productGroupTypeId": 1,
+      "productGroupBusinessCategoryId": 1,
+      "defaultPrice": 1,
+      "appointmentDuration": "2020-04-23T09:56:46.883",
+      "groupType": "loan",
+      "groupBusinessCategory": "homeloan"
+    },
+    {
+      "productGroupId": 10006,
+      "groupName": "1004 Single Family Interior Group10006",
+      "productGroupTypeId": 1,
+      "productGroupBusinessCategoryId": 1,
+      "defaultPrice": 1,
+      "appointmentDuration": "2020-04-23T09:56:46.887",
+      "groupType": "loan",
+      "groupBusinessCategory": "homeloan"
+    },
+    {
+      "productGroupId": 10007,
+      "groupName": "1004 Single Family Interior Group10007",
+      "productGroupTypeId": 1,
+      "productGroupBusinessCategoryId": 1,
+      "defaultPrice": 1,
+      "appointmentDuration": "2020-04-23T09:56:46.893",
+      "groupType": "loan",
+      "groupBusinessCategory": "homeloan"
+    },
+    {
+      "productGroupId": 10008,
+      "groupName": "1004 Single Family Interior Group10008",
+      "productGroupTypeId": 1,
+      "productGroupBusinessCategoryId": 1,
+      "defaultPrice": 1,
+      "appointmentDuration": "2020-04-23T09:56:46.9",
+      "groupType": "loan",
+      "groupBusinessCategory": "homeloan"
+    },
+    {
+      "productGroupId": 10009,
+      "groupName": "1004 Single Family Interior Group10009",
+      "productGroupTypeId": 1,
+      "productGroupBusinessCategoryId": 1,
+      "defaultPrice": 1,
+      "appointmentDuration": "2020-04-23T09:56:46.91",
+      "groupType": "loan",
+      "groupBusinessCategory": "homeloan"
+    },
+    {
+      "productGroupId": 10010,
+      "groupName": "1004 Single Family Interior Group10010",
+      "productGroupTypeId": 1,
+      "productGroupBusinessCategoryId": 1,
+      "defaultPrice": 1,
+      "appointmentDuration": "2020-04-23T09:56:46.917",
+      "groupType": "loan",
+      "groupBusinessCategory": "homeloan"
+    }
+  ]
+}

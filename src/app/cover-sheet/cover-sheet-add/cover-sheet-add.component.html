@@ -17,10 +17,16 @@
           </div>
         </div>
         <app-pick-list
-          [sourceLabel]="'Availale Client(s)'"
+          [sourceLabel]="'Available Client(s)'"
           [targetLabel]="'Selected Client(s)'"
           [source]="clients"
           (selectedValues)="selectedClients($event)"
+        ></app-pick-list>
+        <app-pick-list
+          [sourceLabel]="'Available Products(s)'"
+          [targetLabel]="'Selected Products(s)'"
+          [source]="products"
+          (selectedValues)="selectedProducts($event)"
         ></app-pick-list>
       </div>
       <div class="card-footer">
