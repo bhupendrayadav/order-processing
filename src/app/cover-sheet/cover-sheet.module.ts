@@ -5,6 +5,7 @@ import { CoverSheetComponent } from "./cover-sheet.component";
 import { CoverSheetEditComponent } from "./cover-sheet-edit/cover-sheet-edit.component";
 import { CoverSheetAddComponent } from "./cover-sheet-add/cover-sheet-add.component";
 import { PickListModule } from "../pick-list/pick-list.module";
+import { CoreModule } from "../core/core.module";
 
 const routes: Routes = [
   {
@@ -27,7 +28,7 @@ const routes: Routes = [
     CoverSheetEditComponent,
     CoverSheetAddComponent
   ],
-  imports: [CommonModule, PickListModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, CoreModule, PickListModule, RouterModule.forChild(routes)],
   exports: [CoverSheetComponent]
 })
 export class CoverSheetModule {}

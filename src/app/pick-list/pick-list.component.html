@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-5">
     <div class="form-group">
       <label for="pick-list-source">{{sourceLabel}}</label>
       <select
@@ -7,7 +7,9 @@
         class="custom-select"
         multiple
         size="8"
+        name="sel"
         [(ngModel)]="selectedSource"
+        (ngModelChange)="onSelectChange($event)"
       >
         <option *ngFor="let item of updatedSource" [ngValue]="item?.id"
           >{{item.label}}</option
@@ -15,7 +17,7 @@
       </select>
     </div>
   </div>
-  <div class="col-md-4 my-auto">
+  <div class="col-md-2 my-auto">
     <button
       type="button"
       class="btn btn-primary btn-lg btn-block btn-sm"
@@ -45,7 +47,7 @@
       <
     </button>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-5">
     <div class="form-group">
       <label for="pick-list-target">{{targetLabel}}</label>
       <select

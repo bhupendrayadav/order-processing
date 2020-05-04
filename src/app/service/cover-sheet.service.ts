@@ -6,7 +6,7 @@ import { throwError } from "rxjs";
 @Injectable({
   providedIn: "root"
 })
-export class CoverSheetSerivce {
+export class CoverSheetService {
   constructor(private http: HttpClient) {}
 
   getCoverSheets(): any[] {
@@ -35,6 +35,12 @@ export class CoverSheetSerivce {
       .get<any>(
         "https://servicelinkclientserviceapi.azurewebsites.net/api/ServiceLink/ClientService/ClientService"
       )
+      .pipe(catchError(this.handleError));
+  }
+
+  getProducts() {
+    return this.http
+      .get<any>("../../json-api/product-list.json")
       .pipe(catchError(this.handleError));
   }
 

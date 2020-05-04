@@ -16,12 +16,103 @@
             </select>
           </div>
         </div>
-        <app-pick-list
-          [sourceLabel]="'Availale Client(s)'"
-          [targetLabel]="'Selected Client(s)'"
-          [source]="clients"
-          (selectedValues)="selectedClients($event)"
-        ></app-pick-list>
+        <div class="row">
+          <div class="col-md-5">
+            <multi-select-box
+              [name]="'SourceClients'"
+              [options]="itemsSourceClients"
+              [selectBoxLabel]="'Available Client(s)'"
+              (afterSelections)="handleSelection($event)"
+            ></multi-select-box>
+          </div>
+
+          <div class="col-md-2 my-auto">
+            <button
+              type="button"
+              class="btn btn-primary btn-lg btn-block btn-sm"
+              (click)="moveSelected('SourceClients', 'TargetClients')"
+            >
+              >
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary btn-lg btn-block btn-sm"
+              (click)="moveAll('SourceClients', 'TargetClients', 'clients')"
+            >
+              >>
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary btn-lg btn-block btn-sm"
+              (click)="moveAll('TargetClients', 'SourceClients', 'clients')"
+            >
+              <<
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary btn-lg btn-block btn-sm"
+              (click)="moveSelected('TargetClients', 'SourceClients')"
+            >
+              <
+            </button>
+          </div>
+          <div class="col-md-5">
+            <multi-select-box
+              [name]="'TargetClients'"
+              [options]="itemsTargetClients"
+              [selectBoxLabel]="'Selected Client(s)'"
+              (afterSelections)="handleSelection($event)"
+            ></multi-select-box>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">
+            <multi-select-box
+              [name]="'SourceProducts'"
+              [options]="itemsSourceProducts"
+              [selectBoxLabel]="'Available Product(s)'"
+              (afterSelections)="handleSelection($event)"
+            ></multi-select-box>
+          </div>
+          <div class="col-md-2 my-auto">
+            <button
+              type="button"
+              class="btn btn-primary btn-lg btn-block btn-sm"
+              (click)="moveSelected('SourceProducts', 'TargetProducts')"
+            >
+              >
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary btn-lg btn-block btn-sm"
+              (click)="moveAll('SourceProducts', 'TargetProducts', 'products')"
+            >
+              >>
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary btn-lg btn-block btn-sm"
+              (click)="moveAll('TargetProducts', 'SourceProducts', 'products')"
+            >
+              <<
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary btn-lg btn-block btn-sm"
+              (click)="moveSelected('TargetProducts', 'SourceProducts')"
+            >
+              <
+            </button>
+          </div>
+          <div class="col-md-5">
+            <multi-select-box
+              [name]="'TargetProducts'"
+              [options]="itemsTargetProducts"
+              [selectBoxLabel]="'Selected Product(s)'"
+              (afterSelections)="handleSelection($event)"
+            ></multi-select-box>
+          </div>
+        </div>
       </div>
       <div class="card-footer">
         <div class="float-right">

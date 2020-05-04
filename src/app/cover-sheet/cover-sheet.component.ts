@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { CoverSheetSerivce } from "../service/cover-sheet.service";
+import { CoverSheetService } from "../service/cover-sheet.service";
 
 @Component({
   selector: "app-cover-sheet",
@@ -8,7 +8,7 @@ import { CoverSheetSerivce } from "../service/cover-sheet.service";
 })
 export class CoverSheetComponent implements OnInit {
   private records: any[];
-  constructor(private coverSheetService: CoverSheetSerivce) {}
+  constructor(private coverSheetService: CoverSheetService) {}
 
   ngOnInit() {
     this.records = this.coverSheetService.getCoverSheets();

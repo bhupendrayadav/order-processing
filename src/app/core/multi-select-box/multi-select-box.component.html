@@ -1,0 +1,15 @@
+<div class="form-group">
+  <label for="itemsFor-{{ name }}">{{ selectBoxLabel }}</label>
+  <select
+    id="itemsFor-{{ name }}"
+    class="custom-select"
+    [(ngModel)]="selectedSource"
+    (ngModelChange)="handleSelection($event)"
+    size="{{ size }}"
+    multiple
+  >
+    <option *ngFor="let item of options" [ngValue]="item?.id">
+      {{ item.label }}
+    </option>
+  </select>
+</div>

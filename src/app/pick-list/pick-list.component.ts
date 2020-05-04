@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { map } from "rxjs/operators";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: "app-pick-list",

@@ -18,6 +18,7 @@ import { LoginLogoutButtonComponent } from "./login-logout-button.component";
 import { BingMapComponent } from "./bing-map/bing-map.component";
 import { HttpInterceptorService } from "./utils/http-interceptor.service";
 import { CoverSheetModule } from "./cover-sheet/cover-sheet.module";
+import { CoreModule } from "./core/core.module";
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { CoverSheetModule } from "./cover-sheet/cover-sheet.module";
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    CoreModule,
     NgbModule.forRoot(),
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),

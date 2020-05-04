@@ -1,6 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { CoverSheetSerivce } from "src/app/service/cover-sheet.service";
-import { OrderService } from "src/app/service/order.service";
+import { CoverSheetService } from "src/app/service/cover-sheet.service";
+
+export enum Types {
+  SourceClients = "SourceClients",
+  SourceProducts = "SourceProducts",
+  TargetClients = "TargetClients",
+  TargetProducts = "TargetProducts"
+}
 
 @Component({
   selector: "app-cover-sheet-add",
@@ -9,24 +15,54 @@ import { OrderService } from "src/app/service/order.service";
 })
 export class CoverSheetAddComponent implements OnInit {
   private clients: any[];
-  constructor(
-    private coverSheetService: CoverSheetSerivce,
-    private orderService: OrderService
-  ) {}
-  setPickListData(data) {
-    this.clients = data.map(({ id, clientName }, index) => {
-      return {
-        id,
-        label: clientName
-      };
-    });
+  private products: any[];
+  private selectedSourceClients: any[] = [];
+  private selectedTargetClients: any[] = [];
+  private selectedSourceProducts: any[] = [];
+  private selectedTargetProducts: any[] = [];
+  public itemsSourceClients: any[] = [];
+  public itemsTargetClients: any[] = [];
+  public itemsSourceProducts: any[] = [];
+  public itemsTargetProducts: any[] = [];
+
+  constructor(private coverSheetService: CoverSheetService) { }
+
+  handleSelection(emitSelection) {
+    this[`selected${emitSelection.type}`] = emitSelection.selectedValues;
   }
-  selectedClients(clients) {
-    console.log("clients>>", clients);
+
+  moveSelected(from: Types, to: Types) {
+    const items = this[`items${from}`].filter((item: any) => this[`selected${from}`].includes(item.id));
+
+    this[`items${from}`] = this[`items${from}`].filter((item: any) => !this[`selected${from}`].includes(item.id))
+    this[`items${to}`] = this[`items${to}`].concat(items);
+    this[`selected${from}`] = [];
+    this[`selected${to}`] = [];
   }
+
+  moveAll(from: Types, to: Types, sourceName: string) {
+    this[`items${from}`] = [];
+    this[`items${to}`] = this[`${sourceName}`];
+    this[`selected${from}`] = [];
+    this[`selected${to}`] = [];
+  }
+
   ngOnInit() {
     this.coverSheetService.getClients().subscribe(data => {
-      this.setPickListData(data);
+      this.itemsSourceClients = this.clients = data.map(({ id, clientName }) => {
+        return {
+          id,
+          label: clientName
+        };
+      });
+    });
+    this.coverSheetService.getProducts().subscribe(data => {
+      this.itemsSourceProducts = this.products = data.map((product: any) => {
+        return {
+          id: product.id,
+          label: product.productName
+        }
+      })
     });
   }
 }
