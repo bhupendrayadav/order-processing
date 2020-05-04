@@ -6,7 +6,9 @@ export enum ActionTypes {
   FETCH_ORDERS_FAILURE = "[OrderProcessing] Fetch Orders Failure",
 }
 
-export const fetchOrders = createAction(ActionTypes.FETCH_ORDERS);
+export const fetchOrders = createAction(ActionTypes.FETCH_ORDERS,
+  props<{orderId: number}>()
+  );
 
 export const fetchOrdersSuccess = createAction(
   ActionTypes.FETCH_ORDERS_SUCCESS,
