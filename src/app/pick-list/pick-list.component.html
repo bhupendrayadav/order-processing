@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col-md-5">
+    <div class="form-group">
+      <label for="pick-list-source">{{sourceLabel}}</label>
+      <select
+        id="pick-list-source"
+        class="custom-select"
+        multiple
+        size="8"
+        [(ngModel)]="selectedSource"
+      >
+        <option *ngFor="let item of updatedSource" [ngValue]="item?.id"
+          >{{item.label}}</option
+        >
+      </select>
+    </div>
+  </div>
+  <div class="col-md-2 my-auto">
+    <button
+      type="button"
+      class="btn btn-primary btn-lg btn-block btn-sm"
+      (click)="add()"
+    >
+      >
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary btn-lg btn-block btn-sm"
+      (click)="addAll()"
+    >
+      >>
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary btn-lg btn-block btn-sm"
+      (click)="removeAll()"
+    >
+      <<
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary btn-lg btn-block btn-sm"
+      (click)="remove()"
+    >
+      <
+    </button>
+  </div>
+  <div class="col-md-5">
+    <div class="form-group">
+      <label for="pick-list-target">{{targetLabel}}</label>
+      <select
+        id="pick-list-target"
+        class="custom-select"
+        multiple
+        size="8"
+        [(ngModel)]="selectedTarget"
+      >
+        <option *ngFor="let item of target" [ngValue]="item?.id"
+          >{{item.label}}</option
+        >
+      </select>
+    </div>
+  </div>
+</div>

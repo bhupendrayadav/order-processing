@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="col-md-12 mt-2">
+    <div class="card">
+      <div class="card-header bg-primary text-white">COVERSHEET</div>
+      <div class="card-body">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            INCLUDE COVER SHEET
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead class="bg-primary text-white">
+                  <tr>
+                    <th scope="col">Client Name</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Report Type</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of records">
+                    <td scope="col">{{item.clientName}}</td>
+                    <td scope="col">{{item.productName}}</td>
+                    <td scope="col">{{item.reportType}}</td>
+                    <td scope="col">
+                      <a
+                        [routerLink]="['/cover-sheet/edit/', item.coversheetID]"
+                        ><i class="fa fa-edit" aria-hidden="true"></i
+                      ></a>
+                    </td>
+                    <td scope="col">
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="float-right">
+              <a class="btn btn-primary" [routerLink]="['/cover-sheet/add']"
+                >Add Coversheet</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
