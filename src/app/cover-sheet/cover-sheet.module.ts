@@ -4,6 +4,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { CoverSheetComponent } from "./cover-sheet.component";
 import { CoverSheetEditComponent } from "./cover-sheet-edit/cover-sheet-edit.component";
 import { CoverSheetAddComponent } from "./cover-sheet-add/cover-sheet-add.component";
+import { SpinnerComponent } from '../spinner/spinner.component';
 import { PickListModule } from "../pick-list/pick-list.module";
 
 const routes: Routes = [
@@ -25,9 +26,10 @@ const routes: Routes = [
   declarations: [
     CoverSheetComponent,
     CoverSheetEditComponent,
-    CoverSheetAddComponent
+    CoverSheetAddComponent,
+    SpinnerComponent
   ],
   imports: [CommonModule, PickListModule, RouterModule.forChild(routes)],
-  exports: [CoverSheetComponent]
+  exports: [CoverSheetComponent, SpinnerComponent]
 })
 export class CoverSheetModule {}
