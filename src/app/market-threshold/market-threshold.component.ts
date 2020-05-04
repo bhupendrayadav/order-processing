@@ -119,7 +119,7 @@ export class MarketThresholdComponent implements OnInit {
     this.isFormSubmitted = false;
     this.submitButtonLabel = 'Save';
     this.mvtForm = this.fb.group({
-      mkt_Val_From: [null, [Validators.required, Validators.min(1), Validators.pattern(/^[0-9]*$/)]],
+      mkt_Val_From: [null, [Validators.required, Validators.min(0), Validators.pattern(/^[0-9]*$/)]],
       mkt_Val_To: [null, [Validators.required, Validators.min(1), Validators.pattern(/^[0-9]*$/)]],
       var_Threshold: [null, [Validators.required, Validators.min(1), Validators.pattern(/^[0-9]*$/)]],
     },
@@ -157,7 +157,9 @@ export class MarketThresholdComponent implements OnInit {
             this.selectedRecord = null;
             this.toastr.success('Threshold Updated Successfully.', 'Success');
           },
-          error: error => this.toastr.error('Server Error', 'Error')
+          error: error => {
+            this.toastr.error(error ? error.error : 'Server Error', 'Error');
+          }
         });
       } else {
         this.marketThresholdService.addThreshold(this.mvtForm.value).subscribe({
@@ -166,7 +168,9 @@ export class MarketThresholdComponent implements OnInit {
             this.getMarketThresholds();
             this.toastr.success('Threshold Added Successfully.', 'Success');
           },
-          error: error => this.toastr.error('Server Error', 'Error')
+          error: error => {
+            this.toastr.error(error ? error.error : 'Server Error', 'Error');
+          }
         });
       }
     }
