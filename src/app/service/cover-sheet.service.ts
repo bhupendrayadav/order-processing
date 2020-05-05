@@ -66,9 +66,10 @@ export class CoverSheetService {
       "Access-Control-Allow-Origin": "*",
     };
     const body = data;
+    console.log("body", body);
     return this.http
       .put(this.coverSheetEndPoint, body, {
-        headers: headers,
+        headers: {},
         responseType: "text",
       })
       .pipe(catchError(this.handleError));

@@ -26,7 +26,7 @@
                     <td scope="col">{{ item.reportType }}</td>
                     <td scope="col">
                       <a
-                        [queryParams]="{productIds: item.productID, BobId: item.coversheetID}"
+                        [queryParams]="{productIds: item.productID, BobId: item.coversheetID, id: item.id}"
                         [routerLink]="[
                           '/cover-sheet/edit/',
                           item.clientID
