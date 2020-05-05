@@ -1,13 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-header mb-2">
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -41,7 +34,7 @@
         <a class="nav-link" [routerLink]="['/configurations']">Configuration</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['/user']">User Dashboard</a>
+        <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
       </li>
     </ul>
     <ul class="navbar-nav">
@@ -55,7 +48,9 @@
         <a class="nav-link"><i class="fa fa-sign-out"></i></a>
       </li>
       <li>
-        <a class="nav-link"><app-login-logout></app-login-logout></a>
+        <a class="nav-link">
+          <app-login-logout></app-login-logout>
+        </a>
       </li>
     </ul>
   </div>

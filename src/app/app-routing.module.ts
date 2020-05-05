@@ -38,6 +38,10 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: () => import('./user-dashboard/user-dashboard.module').then(m => m.UserDashboardModule)
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   }
 ];
 
