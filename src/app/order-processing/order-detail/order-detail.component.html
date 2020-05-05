@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="orderDetails">
   <div class="row">
     <div class="col-md-3">
       <div class="row">
@@ -38,104 +38,103 @@
           <div class="row">
             <div class="col-md-6">
               <strong class="text-secondary">ORDER#</strong>
-              <h4>550004399</h4>
-              <div class="small">Created: 12/14/2019</div>
-              <div class="small">Completed: 12/14/2019</div>
-              <div class="small">Close Date: Null</div>
+              <h4>{{orderDetails.orderNumber}}</h4>
+              <div class="small">Created : {{orderDetails.orderCreationDate | date: 'dd/MM/yyyy'}}</div>
+              <div class="small">Completed : {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+              <div class="small">Close Date : {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
             </div>
             <div class="col-md-6">
               <strong class="text-secondary">LOAN#</strong>
-              <h4>5500078784399</h4>
+              <h4>{{orderDetails.loanNumber}}</h4>
             </div>
           </div>
           <div class="row mt-3">
             <div class="col-md-12">
               <strong class="text-secondary">LENDER</strong>
-              <div>50093 Bank Of America HE Parent Shell</div>
+              <div>{{orderDetails.lender}}</div>
             </div>
           </div>
           <div class="row mt-3">
             <div class="col-md-12">
               <strong class="text-secondary">BORROWER</strong>
-              <div>Haleh Stamatiadi</div>
-              <div>Williams Crites</div>
+              <div>{{orderDetails.borrower}}</div>
             </div>
           </div>
           <div class="row mt-3">
             <div class="col-md-12">
               <strong class="text-secondary">Address</strong>
               <address>
-                <div>42 E 20th St,</div>
-                <div>Newyork</div>
+                <div>{{orderDetails.address}}, {{orderDetails.state}}</div>
+                <div>{{orderDetails.country}}</div>
               </address>
             </div>
           </div>
           <div class="row mt-2 small pb-3 text-center">
             <div class="col-md-4">
               <h4 class="small">LOAN PURPOSE</h4>
-              <p>Hel</p>
+              <p>{{orderDetails.loanPurpose}}</p>
             </div>
             <div class="col-md-4">
               <h4 class="small">LOAN TYPE</h4>
-              <p>Conventional</p>
+              <p>{{orderDetails.loanType}}</p>
             </div>
             <div class="col-md-4">
               <h4 class="small">FHA CASES#</h4>
-              <p>N/A</p>
+              <p>{{orderDetails.fhaCase}}</p>
             </div>
           </div>
         </div>
         <div class="col-md-6 col-sm-12">
           <div class="row">
             <div class="col-md-6">
-              <strong class="text-secondary">INITIAL UW</strong>
-              <h4>550004399</h4>
-              <div class="small">Created: 12/14/2019</div>
-              <div class="small">Completed: 12/14/2019</div>
-              <div class="small">Close Date: Null</div>
+              <strong class="text-secondary text-uppercase">{{productDetails.status}}</strong>
+              <h4>{{orderDetails.orderNumber}}</h4>
+              <div class="small">Created: {{orderDetails.orderCreationDate | date: 'dd/MM/yyyy'}}</div>
+              <div class="small">Completed: {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+              <div class="small">Close Date: {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
             </div>
           </div>
           <div class="row mt-3">
             <div class="col-md-6">
               <strong class="text-secondary">MARKET VALUE</strong>
-              <div class="text-dark font-weight-bold">Current: $0</div>
+              <div class="text-dark font-weight-bold">{{productDetails.marketValue}}</div>
             </div>
             <div class="col-md-6">
               <strong class="text-secondary">AVM STATUS</strong>
-              <div class="text-dark font-weight-bold">No Hit</div>
+              <div class="text-dark font-weight-bold">{{productDetails.avmStatus}}</div>
             </div>
           </div>
           <div class="row mt-3">
             <div class="col-md-6">
               <strong class="text-secondary">PRODUCT</strong>
-              <div class="text-dark font-weight-bold">BoFA PCR - Exterior</div>
+              <div class="text-dark font-weight-bold">{{productDetails.product}}</div>
             </div>
             <div class="col-md-6">
               <strong class="text-secondary">CORRECTION PRODUCT</strong>
               <div class="text-dark font-weight-bold">
-                Corrections - Eval Post Delivery
+                {{productDetails.product}}
               </div>
             </div>
           </div>
           <div class="row mt-3">
             <div class="col-md-12">
               <strong class="text-secondary">VENDOR</strong>
-              <div class="text-dark font-weight-bold">BPO TestProvider</div>
-              <div class="text-dark font-weight-bold">QC Score: 0</div>
+              <div class="text-dark font-weight-bold">{{productDetails.vendor}}</div>
+              <div class="text-dark font-weight-bold">QC Score: {{productDetails.qcScore}}</div>
             </div>
           </div>
           <div class="row mt-2 small pb-3 text-center text-danger">
             <div class="col-md-4">
               <h4 class="small font-weight-bold">COMMENTS</h4>
-              <p>1</p>
+              <p>{{productDetails.comments}}</p>
             </div>
             <div class="col-md-4">
               <h4 class="small font-weight-bold">PRIOR HISTORY</h4>
-              <p>2</p>
+              <p>{{productDetails.priorHistory}}</p>
             </div>
             <div class="col-md-4">
               <h4 class="small font-weight-bold">TIMES REJECTED</h4>
-              <p>0</p>
+              <p>{{productDetails.timesRejected}}</p>
             </div>
           </div>
         </div>
