@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { catchError } from "rxjs/operators";
+import { Guid } from "guid-typescript";
+import { catchError, map } from "rxjs/operators";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { throwError } from "rxjs";
 
@@ -40,15 +41,38 @@ export class CoverSheetService {
 
   getProducts() {
     return this.http
-      .get<any>("assets/cover-sheet-product.json")
+      .get<any>(
+        "https://tph-productsservice.azurewebsites.net/api/products/productgroups"
+      )
       .pipe(catchError(this.handleError));
+  }
+
+  createCoverSheet(data: any) {
+    const headers = {
+      Created: `${new Date()}`,
+      BodId: `${Guid.create()}`,
+      "Access-Control-Allow-Origin": "*",
+      // "Content-Type": "text/plain; charset=utf-8",
+    };
+    const body = data;
+    return this.http
+      .post(
+        "https://servicelinkcoversheetserviceapi.azurewebsites.net/api/ServiceLink/CoverSheet/CoverSheetService",
+        body,
+        { headers: headers, responseType: "text" }
+        // { responseType: "text" }
+      )
+      .pipe(
+        // map((item) => item.text()),
+        catchError(this.handleError)
+      );
   }
 
   private handleError(err: HttpErrorResponse) {
     let errorMessgae = "";
     if (err.error instanceof ErrorEvent) {
       //A client-side or network error occured
-      errorMessgae = `An error occured: ${err.error.message}`;
+      errorMessgae = `An error occurred: ${err.error.message}`;
     } else {
       //The backend return an unsuccessful response code.
       errorMessgae = `Server returned code: ${err.status}, error message is ${err.message}`;
