@@ -21,17 +21,22 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let item of records">
-                    <td scope="col">{{item.clientName}}</td>
-                    <td scope="col">{{item.productName}}</td>
-                    <td scope="col">{{item.reportType}}</td>
+                    <td scope="col">{{ item.clientName }}</td>
+                    <td scope="col">{{ item.productName }}</td>
+                    <td scope="col">{{ item.reportType }}</td>
                     <td scope="col">
                       <a
-                        [routerLink]="['/cover-sheet/edit/', item.coversheetID]"
+                        [routerLink]="['/cover-sheet/edit/', item.id]"
                         ><i class="fa fa-edit" aria-hidden="true"></i
                       ></a>
                     </td>
                     <td scope="col">
-                      <i class="fa fa-trash" aria-hidden="true"></i>
+                      <span
+                          (click)="deleteCoverSheet(item.id)"
+                          title="Delete"
+                          class="btn-link"
+                      ><i class="fa fa-trash" aria-hidden="true"></i
+                      ></span>
                     </td>
                   </tr>
                 </tbody>
@@ -40,9 +45,9 @@
           </div>
           <div class="card-footer">
             <div class="float-right">
-              <a class="btn btn-primary" [routerLink]="['/cover-sheet/add']"
-                >Add Coversheet</a
-              >
+              <a class="btn btn-primary" [routerLink]="['/cover-sheet/add']">
+                Add Coversheet
+              </a>
             </div>
           </div>
         </div>

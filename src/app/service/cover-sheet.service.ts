@@ -8,27 +8,21 @@ import { throwError } from "rxjs";
   providedIn: "root",
 })
 export class CoverSheetService {
+  private coverSheetEndPoint =
+    "https://servicelinkcoversheetserviceapi.azurewebsites.net/api/ServiceLink/CoverSheet/CoverSheetService";
+
   constructor(private http: HttpClient) {}
 
-  getCoverSheets(): any[] {
-    return [
-      {
-        coversheetID: "62684dae-5ec4-499a-8187-6b8edf639f99",
-        clientID: "2322",
-        clientName: "Wells fargo bank, N.A. - 138028",
-        reportType: "Piechart",
-        productID: "245",
-        productName: "abc products",
-      },
-      {
-        coversheetID: "82684rae-5ec4-4999-8187-6b8ed4e4r39f22",
-        clientID: "2322",
-        clientName: "Wells fargo bank, N.A. - 138035",
-        reportType: "OC coversheet CU",
-        productID: "245",
-        productName: "1004 Corrections",
-      },
-    ];
+  getCoverSheets() {
+    return this.http
+      .get<any[]>(this.coverSheetEndPoint)
+      .pipe(catchError(this.handleError));
+  }
+
+  deleteCoverSheet(id: string) {
+    return this.http
+      .delete<any>(this.coverSheetEndPoint)
+      .pipe(catchError(this.handleError));
   }
 
   getClients() {
@@ -56,29 +50,24 @@ export class CoverSheetService {
     };
     const body = data;
     return this.http
-      .post(
-        "https://servicelinkcoversheetserviceapi.azurewebsites.net/api/ServiceLink/CoverSheet/CoverSheetService",
-        body,
-        { headers: headers, responseType: "text" }
-        // { responseType: "text" }
-      )
-      .pipe(
-        // map((item) => item.text()),
-        catchError(this.handleError)
-      );
+      .post(this.coverSheetEndPoint, body, {
+        headers: headers,
+        responseType: "text",
+      })
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(err: HttpErrorResponse) {
-    let errorMessgae = "";
+    let errorMessage: string = "";
     if (err.error instanceof ErrorEvent) {
       //A client-side or network error occured
-      errorMessgae = `An error occurred: ${err.error.message}`;
+      errorMessage = `An error occured: ${err.error.message}`;
     } else {
       //The backend return an unsuccessful response code.
-      errorMessgae = `Server returned code: ${err.status}, error message is ${err.message}`;
+      errorMessage = `Server returned code: ${err.status}, error message is ${err.message}`;
     }
 
-    console.error(errorMessgae);
-    return throwError(errorMessgae);
+    console.error(errorMessage);
+    return throwError(errorMessage);
   }
 }

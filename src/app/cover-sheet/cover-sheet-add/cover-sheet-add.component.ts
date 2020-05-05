@@ -67,7 +67,7 @@ export class CoverSheetAddComponent implements OnInit {
         .map((item) => item.groupName)
         .toString(),
       reportType: "Piechart",
-      coversheetID: this.BobId.value,
+      coversheetID: `${this.BobId}`,
     };
     this.coverSheetService.createCoverSheet(data).subscribe((value) => {
       this.router.navigateByUrl("/cover-sheet");
