@@ -14,7 +14,9 @@ export class PickListComponent implements OnInit {
   @Input() sourceLabel: string;
   @Input() targetLabel: string;
 
-  target: any[] = [];
+  @Input() target: any[] = [];
+  @Input() isDisable: boolean = false;
+
   @Output() selectedValues = new EventEmitter<any[]>();
 
   private _source = new BehaviorSubject<any[]>([]);

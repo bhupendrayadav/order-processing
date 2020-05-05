@@ -7,6 +7,7 @@
         class="custom-select"
         multiple
         size="8"
+        [disabled]="isDisable"
         [(ngModel)]="selectedSource"
       >
         <option *ngFor="let item of updatedSource" [ngValue]="item?.id"
@@ -53,6 +54,7 @@
         class="custom-select"
         multiple
         size="8"
+        [disabled]="isDisable"
         [(ngModel)]="selectedTarget"
       >
         <option *ngFor="let item of target" [ngValue]="item?.id"

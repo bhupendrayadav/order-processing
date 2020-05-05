@@ -18,6 +18,7 @@ export class CoverSheetComponent implements OnInit {
   getAllCoverSheets() {
     this.coverSheetService.getCoverSheets().subscribe((data) => {
       this.records = data;
+      console.log(this.records, ' this.records')
     });
   }
   deleteCoverSheet(id: string) {
