@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { catchError } from "rxjs/operators";
+import { Guid } from "guid-typescript";
+import { catchError, map } from "rxjs/operators";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { throwError } from "rxjs";
 
@@ -20,8 +21,8 @@ export class CoverSheetService {
 
   deleteCoverSheet(id: string) {
     return this.http
-    .delete<any>(this.coverSheetEndPoint)
-    .pipe(catchError(this.handleError));
+      .delete<any>(this.coverSheetEndPoint)
+      .pipe(catchError(this.handleError));
   }
 
   getClients() {
@@ -34,7 +35,25 @@ export class CoverSheetService {
 
   getProducts() {
     return this.http
-      .get<any>("assets/cover-sheet-product.json")
+      .get<any>(
+        "https://tph-productsservice.azurewebsites.net/api/products/productgroups"
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  createCoverSheet(data: any) {
+    const headers = {
+      Created: `${new Date()}`,
+      BodId: `${Guid.create()}`,
+      "Access-Control-Allow-Origin": "*",
+      // "Content-Type": "text/plain; charset=utf-8",
+    };
+    const body = data;
+    return this.http
+      .post(this.coverSheetEndPoint, body, {
+        headers: headers,
+        responseType: "text",
+      })
       .pipe(catchError(this.handleError));
   }
 
