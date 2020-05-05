@@ -14,6 +14,7 @@ import { _provideForRootGuard } from "@ngrx/store/src/store_module";
   styleUrls: ["./cover-sheet-add.component.css"],
 })
 export class CoverSheetAddComponent implements OnInit {
+  private isCoverSheetEdit: boolean = false;
   private clientData: any[];
   private productData: any[];
   private clients: any[];
