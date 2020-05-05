@@ -50,4 +50,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [{ provide: OKTA_CONFIG, useValue: config.oidc }]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
