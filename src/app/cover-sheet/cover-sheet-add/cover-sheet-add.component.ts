@@ -70,7 +70,10 @@ export class CoverSheetAddComponent implements OnInit {
       coversheetID: `${this.BobId}`,
     };
     this.coverSheetService.createCoverSheet(data).subscribe((value) => {
-      this.router.navigateByUrl("/cover-sheet");
+      var _confirm = confirm("Cover Sheet added successfully");
+      if (_confirm) {
+        this.router.navigateByUrl("/cover-sheet");
+      }
     });
   }
 

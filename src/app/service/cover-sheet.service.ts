@@ -19,9 +19,12 @@ export class CoverSheetService {
       .pipe(catchError(this.handleError));
   }
 
-  deleteCoverSheet(id: string) {
+  deleteCoverSheet(record: any) {
     return this.http
-      .delete<any>(this.coverSheetEndPoint)
+      .request("delete", this.coverSheetEndPoint, {
+        body: record,
+        responseType: "text",
+      })
       .pipe(catchError(this.handleError));
   }
 
@@ -46,7 +49,6 @@ export class CoverSheetService {
       Created: `${new Date()}`,
       BodId: `${Guid.create()}`,
       "Access-Control-Allow-Origin": "*",
-      // "Content-Type": "text/plain; charset=utf-8",
     };
     const body = data;
     return this.http

@@ -25,17 +25,17 @@
                     <td scope="col">{{ item.productName }}</td>
                     <td scope="col">{{ item.reportType }}</td>
                     <td scope="col">
-                      <a
-                        [routerLink]="['/cover-sheet/edit/', item.id]"
+                      <a [routerLink]="['/cover-sheet/edit/', item.id]"
                         ><i class="fa fa-edit" aria-hidden="true"></i
                       ></a>
                     </td>
                     <td scope="col">
                       <span
-                          (click)="deleteCoverSheet(item.id)"
-                          title="Delete"
-                          class="btn-link"
-                      ><i class="fa fa-trash" aria-hidden="true"></i
+                        (click)="deleteCoverSheet(item.id)"
+                        title="Delete"
+                        class="btn-link"
+                        style="cursor: pointer;"
+                        ><i class="fa fa-trash" aria-hidden="true"></i
                       ></span>
                     </td>
                   </tr>
@@ -46,7 +46,7 @@
           <div class="card-footer">
             <div class="float-right">
               <a class="btn btn-primary" [routerLink]="['/cover-sheet/add']">
-                Add Coversheet
+                Add Cover Sheet
               </a>
             </div>
           </div>
