@@ -21,9 +21,9 @@ export class CoverSheetComponent implements OnInit {
     });
   }
 
-  storeCoverSheet(coverSheetObject: any) {
-    this.coverSheetService.storeCoverSheet(coverSheetObject);
-  }
+  // storeCoverSheet(coverSheetObject: any) {
+  //   this.coverSheetService.storeCoverSheet(coverSheetObject);
+  // }
 
   deleteCoverSheet(id: string) {
     const _record = this.records.find((item) => item.id === id);

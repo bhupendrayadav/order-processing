@@ -11,7 +11,7 @@ export class CoverSheetService {
   private coverSheetEndPoint =
     "https://servicelinkcoversheetserviceapi.azurewebsites.net/api/ServiceLink/CoverSheet/CoverSheetService";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getCoverSheets() {
     return this.http
@@ -53,12 +53,11 @@ export class CoverSheetService {
     const body = data;
     return this.http
       .post(this.coverSheetEndPoint, body, {
-        headers: headers,
+        headers: {},
         responseType: "text",
       })
       .pipe(catchError(this.handleError));
   }
-
 
   editCoverSheet(data: any) {
     const headers = {
