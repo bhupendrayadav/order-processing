@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Guid } from "guid-typescript";
 import { catchError, map } from "rxjs/operators";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { throwError } from "rxjs";
+import { throwError, Subject, Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -11,7 +11,7 @@ export class CoverSheetService {
   private coverSheetEndPoint =
     "https://servicelinkcoversheetserviceapi.azurewebsites.net/api/ServiceLink/CoverSheet/CoverSheetService";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getCoverSheets() {
     return this.http
@@ -53,6 +53,22 @@ export class CoverSheetService {
     const body = data;
     return this.http
       .post(this.coverSheetEndPoint, body, {
+        headers: headers,
+        responseType: "text",
+      })
+      .pipe(catchError(this.handleError));
+  }
+
+
+  editCoverSheet(data: any) {
+    const headers = {
+      Created: `${new Date()}`,
+      BodId: `${data.coversheetID}`,
+      "Access-Control-Allow-Origin": "*",
+    };
+    const body = data;
+    return this.http
+      .put(this.coverSheetEndPoint, body, {
         headers: headers,
         responseType: "text",
       })
