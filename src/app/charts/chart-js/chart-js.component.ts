@@ -18,6 +18,20 @@ export class ChartJsComponent implements OnInit, OnChanges, AfterContentInit {
   constructor() { }
 
   ngOnInit() {
+    let divId = Math.random().toString(36).substr(2, 5);
+    var divElement = document.createElement("div");
+    divElement.setAttribute('id', divId);
+
+    var canv = document.createElement("canvas");
+    canv.setAttribute('width', '50px');
+    canv.setAttribute('height', '50px');
+    let aStr = Math.random().toString(36).substr(2, 5);
+    canv.setAttribute('id', aStr);
+    this.createChartObject(canv);
+
+    document.getElementById('chartId').appendChild(canv)
+    // document.body.appendChild(divElement).appendChild(canv);
+
     // Code to Load static Chart
     // this.createChart();
   }
@@ -41,8 +55,10 @@ export class ChartJsComponent implements OnInit, OnChanges, AfterContentInit {
     // }
     // document.body.appendChild(divElement);
     // this.addHtmlForChart();
-    let context = document.getElementsByTagName('canvas');
-    this.createChartObject(context);
+
+
+    /* let context = document.getElementsByTagName('canvas');
+    this.createChartObject(context); */
   }
 
   ngAfterContentInit() {
@@ -91,7 +107,7 @@ export class ChartJsComponent implements OnInit, OnChanges, AfterContentInit {
     // if (domElement) {
     console.log('domElement', domElement);
     if (domElement) {
-      var myChart = new Chart(domElement, {
+      return new Chart(domElement, {
         type: this.chartType,
         data: {
           labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -117,7 +133,8 @@ export class ChartJsComponent implements OnInit, OnChanges, AfterContentInit {
                 'rgba(255, 159, 64, 1)'
               ],
               borderWidth: 1
-            }]
+            }
+          ]
         },
         options: {
           scales: {
@@ -141,7 +158,7 @@ export class ChartJsComponent implements OnInit, OnChanges, AfterContentInit {
     // var domElement_1 = document.querySelector('.abcd');
     // console.log('domElement_1', domElement_1);
     if (domElement) {
-      var myChart = new Chart(domElement, {
+     /*  var myChart = new Chart(domElement, {
         type: this.chartType,
         data: {
           labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -178,7 +195,7 @@ export class ChartJsComponent implements OnInit, OnChanges, AfterContentInit {
             }]
           }
         }
-      });
+      }); */
     }
 
   }
