@@ -44,15 +44,19 @@
   </div>
 </div>
 <div class="form-group row mt-3">
-  <label class="col-md-3 " for="order">Filter By Order number:</label>
-  <div class="col-md-3">
-    <input class="form-control" id="order" type="text" placeholder="Enter order number" [(ngModel)]="searchTermByOrderNumber">
+  <div class="col-md-6 d-flex align-items-center">
+    <label class="col-md-6 m-0" for="order">Filter By Order number:</label>
+    <div class="col-md-6">
+      <input class="form-control" id="order" type="text" placeholder="Enter order number"
+        [(ngModel)]="searchTermByOrderNumber">
+    </div>
   </div>
-</div>
-<div class="form-group row mt-3">
-  <label class="col-md-3 " for="loan">Filter By Loan number:</label>
-  <div class="col-md-3">
-    <input class="form-control" id="loan" type="text" placeholder="Enter loan number" [(ngModel)]="searchTermByLoanNumber">
+  <div class="col-md-6 d-flex align-items-center">
+    <label class="col-md-6 m-0" for="loan">Filter By Loan number:</label>
+    <div class="col-md-6">
+      <input class="form-control" id="loan" type="text" placeholder="Enter loan number"
+        [(ngModel)]="searchTermByLoanNumber">
+    </div>
   </div>
 </div>
 <div class="card mb-4 mt-2">
