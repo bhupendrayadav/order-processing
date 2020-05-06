@@ -26,7 +26,7 @@ import { CoverSheetModule } from "./cover-sheet/cover-sheet.module";
     AppComponent,
     HeaderComponent,
     LoginLogoutButtonComponent,
-    BingMapComponent
+    BingMapComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,12 +49,12 @@ import { CoverSheetModule } from "./cover-sheet/cover-sheet.module";
   ],
   providers: [
     // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: HttpInterceptorService,
-    //   multi: true
-    // }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

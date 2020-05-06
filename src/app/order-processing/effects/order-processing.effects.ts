@@ -11,8 +11,8 @@ export class OrderProcessingEffects {
   loadOrderProcessings$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrderProcessingActions.fetchOrders),
-      concatMap(() =>
-        this.orderService.getOrderList().pipe(
+      concatMap((action) =>
+        this.orderService.getOrderList(action.orderId).pipe(
           map((data) => OrderProcessingActions.fetchOrdersSuccess({ data })),
           catchError((error) =>
             of(OrderProcessingActions.fetchOrdersFailure({ error }))

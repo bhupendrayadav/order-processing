@@ -1,8 +1,10 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse,HttpHeaders } from "@angular/common/http";
 import { of, Observable, throwError, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { OktaAuthService } from "@okta/okta-angular";
+import { Guid } from 'guid-typescript';
+import { environment } from './../../environments/environment';
 
 async function getOktaToken(auth: any) {
   return await auth.getAccessToken();
@@ -13,6 +15,8 @@ async function getOktaToken(auth: any) {
 })
 export class OrderService {
   private subject = new Subject<any>();
+  public currentDate :any = Date();
+  public id: any;
 
   searchResult: any = [
     [
@@ -44,34 +48,17 @@ export class OrderService {
     return this.subject.asObservable();
   }
 
-  orderSearch() {
-    return this.http
-      .get<any>("../../json-api/order-list.json")
-      .pipe(catchError(this.handleError));
+ 
+  getOrderList(orderId: number): Observable<any> {
+    return this.http.get(environment.baseURL+'OrderProcessing/Orders/GetOrderSearchByID/'+orderId);
   }
 
-  getAllTodo() {
-    //https://jsonplaceholder.typicode.com/todos
-    return this.http
-      .get<any>("https://jsonplaceholder.typicode.com/todos")
-      .pipe(catchError(this.handleError));
-  }
-
-  getOrderList(): Observable<any> {
-    //this.oktaAuth.getAccessToken().then(value => console.log("value>>", value));
-    return this.http
-      .get<any>("../../json-api/order-list.json")
-      .pipe(catchError(this.handleError));
-  }
-
-  orderDetail(orderId: number) {
-    return this.http
-      .get<any>(`../../json-api/order-detail.json?orderId=${orderId}`)
-      .pipe(catchError(this.handleError));
+  getOrderDetails(orderId: number) {
+    return this.http.get(environment.baseURL+'OrderProcessing/Orders?OrderNumber='+orderId);
   }
 
   private handleError(err: HttpErrorResponse) {
-    let errorMessgae = "";
+    let errorMessgae = '';
     if (err.error instanceof ErrorEvent) {
       //A client-side or network error occured
       errorMessgae = `An error occured: ${err.error.message}`;

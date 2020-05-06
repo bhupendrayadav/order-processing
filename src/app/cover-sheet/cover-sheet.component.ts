@@ -12,14 +12,20 @@ export class CoverSheetComponent implements OnInit {
   constructor(private coverSheetService: CoverSheetService) {}
 
   ngOnInit() {
-    this.coverSheetService.getCoverSheets().subscribe(data => {
-      this.records = data
+    this.getAllCoverSheets();
+  }
+
+  getAllCoverSheets() {
+    this.coverSheetService.getCoverSheets().subscribe((data) => {
+      this.records = data;
     });
   }
 
   deleteCoverSheet(id: string) {
-    this.coverSheetService.deleteCoverSheet(id).subscribe(data => {
-      console.log(data, ' delete api response')
+    const _record = this.records.find((item) => item.id === id);
+    this.coverSheetService.deleteCoverSheet(_record).subscribe((data) => {
+      alert("Cover Sheet deleted successfully!");
+      this.getAllCoverSheets();
     });
   }
 }
