@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/service/users.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
-interface users{
-  userId:number;
-  userName:string;
+interface users {
+  userId: number;
+  userName: string;
 }
 @Component({
   selector: 'app-user',
@@ -13,14 +13,14 @@ interface users{
 })
 
 export class UserComponent implements OnInit {
-  
-  userList1:users[]=[];
-  userForm:FormGroup;
-  search : FormControl = new FormControl();
-  userName:string;
+
+  userList1: users[] = [];
+  userForm: FormGroup;
+  search: FormControl = new FormControl();
+  userName: string;
   private _searchTerm: string;
   filteredTaskDetails: any[];
-  isTextBoxVisible:boolean=false;
+  isTextBoxVisible: boolean = false;
   get searchTerm(): string {
     return this._searchTerm;
   }
@@ -44,200 +44,190 @@ export class UserComponent implements OnInit {
     this._searchTermByLoanNumber = value;
     this.filteredTaskDetails = this.filterByLoanNumber(value);
   }
-  taskDetails:any[]=[
-      {
-        taskName: "Desktop Fulfillment",
-        orderNumber: "98000296",
-        loanNumber: "338345254",
-        transactionType: "Refiance",
-        lenderName: "USAA BULK-PARENT",
-        submitted:"",
-        age:"25",
-        clientduedate:"02/15/2019",
-        borrower:"",
-        address:"",
-        country:"",
-        state:"",
-        loanPurpose:""   ,
-        status:"",
-        dueDate:"",
-      },
-      {
-        taskName: "Desktop Fulfillment",
-        orderNumber: "98000297",
-        loanNumber: "438345254",
-        transactionType: "Refiance",
-        lenderName: "USAA BULK-PARENT",
-        submitted:"",
-        age:"30",
-        clientduedate:"02/15/2019",
-        borrower:"",
-        address:"",
-        country:"",
-        state:"",
-        loanPurpose:""   ,
-        status:"",
-        dueDate:"",
-      },   
-      {
-        taskName: "Fulfillment",
-        orderNumber: "98000298",
-        loanNumber: "238345254",
-        transactionType: "Refiance",
-        lenderName: "USAA BULK-PARENT",
-        submitted:"",
-        age:"20",
-        clientduedate:"02/15/2019",
-        borrower:"",
-        address:"",
-        country:"",
-        state:"",
-        loanPurpose:""   ,
-        status:"",
-        dueDate:"",
-      },   
-      {
-        taskName: "Desktop Fulfillment",
-        orderNumber: "98000296",
-        loanNumber: "338345254",
-        transactionType: "Refiance",
-        lenderName: "USAA BULK-PARENT",
-        submitted:"",
-        age:"25",
-        clientduedate:"02/15/2019",
-        borrower:"",
-        address:"",
-        country:"",
-        state:"",
-        loanPurpose:""   ,
-        status:"",
-        dueDate:"",
-      },
-      {
-        taskName: "Desktop Fulfillment",
-        orderNumber: "98000296",
-        loanNumber: "338345254",
-        transactionType: "Refiance",
-        lenderName: "USAA BULK-PARENT",
-        submitted:"",
-        age:"25",
-        clientduedate:"02/15/2019",
-        borrower:"",
-        address:"",
-        country:"",
-        state:"",
-        loanPurpose:""   ,
-        status:"",
-        dueDate:"",
-      },
-      {
-        taskName: "Desktop Fulfillment",
-        orderNumber: "98000296",
-        loanNumber: "338345254",
-        transactionType: "Refiance",
-        lenderName: "USAA BULK-PARENT",
-        submitted:"",
-        age:"25",
-        clientduedate:"02/15/2019",
-        borrower:"",
-        address:"",
-        country:"",
-        state:"",
-        loanPurpose:""   ,
-        status:"",
-        dueDate:"",
-      },
-      {
-        taskName: "Desktop Fulfillment",
-        orderNumber: "98000296",
-        loanNumber: "338345254",
-        transactionType: "Refiance",
-        lenderName: "USAA BULK-PARENT",
-        submitted:"",
-        age:"25",
-        clientduedate:"02/15/2019",
-        borrower:"",
-        address:"",
-        country:"",
-        state:"",
-        loanPurpose:""   ,
-        status:"",
-        dueDate:"",
-      },
-      {
-        taskName: "Desktop Fulfillment",
-        orderNumber: "98000296",
-        loanNumber: "338345254",
-        transactionType: "Refiance",
-        lenderName: "USAA BULK-PARENT",
-        submitted:"",
-        age:"25",
-        clientduedate:"02/15/2019",
-        borrower:"",
-        address:"",
-        country:"",
-        state:"",
-        loanPurpose:""   ,
-        status:"",
-        dueDate:"",
-      },
-      {
-        taskName: "Desktop Fulfillment",
-        orderNumber: "98000296",
-        loanNumber: "338345254",
-        transactionType: "Refiance",
-        lenderName: "USAA BULK-PARENT",
-        submitted:"",
-        age:"25",
-        clientduedate:"02/15/2019",
-        borrower:"",
-        address:"",
-        country:"",
-        state:"",
-        loanPurpose:""   ,
-        status:"",
-        dueDate:"",
-      },
-      {
-        taskName: "Desktop Fulfillment",
-        orderNumber: "98000296",
-        loanNumber: "338345254",
-        transactionType: "Refiance",
-        lenderName: "USAA BULK-PARENT",
-        submitted:"",
-        age:"25",
-        clientduedate:"02/15/2019",
-        borrower:"",
-        address:"",
-        country:"",
-        state:"",
-        loanPurpose:""   ,
-        status:"",
-        dueDate:"",
-      },
+  taskDetails: any[] = [
+    {
+      taskName: "Desktop Fulfillment",
+      orderNumber: "98000296",
+      loanNumber: "338345254",
+      transactionType: "Refiance",
+      lenderName: "USAA BULK-PARENT",
+      submitted: "",
+      age: "25",
+      clientduedate: "02/15/2019",
+      borrower: "",
+      address: "",
+      country: "",
+      state: "",
+      loanPurpose: "",
+      status: "",
+      dueDate: "",
+    },
+    {
+      taskName: "Desktop Fulfillment",
+      orderNumber: "98000297",
+      loanNumber: "438345254",
+      transactionType: "Refiance",
+      lenderName: "USAA BULK-PARENT",
+      submitted: "",
+      age: "30",
+      clientduedate: "02/15/2019",
+      borrower: "",
+      address: "",
+      country: "",
+      state: "",
+      loanPurpose: "",
+      status: "",
+      dueDate: "",
+    },
+    {
+      taskName: "Fulfillment",
+      orderNumber: "98000298",
+      loanNumber: "238345254",
+      transactionType: "Refiance",
+      lenderName: "USAA BULK-PARENT",
+      submitted: "",
+      age: "20",
+      clientduedate: "02/15/2019",
+      borrower: "",
+      address: "",
+      country: "",
+      state: "",
+      loanPurpose: "",
+      status: "",
+      dueDate: "",
+    },
+    {
+      taskName: "Desktop Fulfillment",
+      orderNumber: "98000296",
+      loanNumber: "338345254",
+      transactionType: "Refiance",
+      lenderName: "USAA BULK-PARENT",
+      submitted: "",
+      age: "25",
+      clientduedate: "02/15/2019",
+      borrower: "",
+      address: "",
+      country: "",
+      state: "",
+      loanPurpose: "",
+      status: "",
+      dueDate: "",
+    },
+    {
+      taskName: "Desktop Fulfillment",
+      orderNumber: "98000296",
+      loanNumber: "338345254",
+      transactionType: "Refiance",
+      lenderName: "USAA BULK-PARENT",
+      submitted: "",
+      age: "25",
+      clientduedate: "02/15/2019",
+      borrower: "",
+      address: "",
+      country: "",
+      state: "",
+      loanPurpose: "",
+      status: "",
+      dueDate: "",
+    },
+    {
+      taskName: "Desktop Fulfillment",
+      orderNumber: "98000296",
+      loanNumber: "338345254",
+      transactionType: "Refiance",
+      lenderName: "USAA BULK-PARENT",
+      submitted: "",
+      age: "25",
+      clientduedate: "02/15/2019",
+      borrower: "",
+      address: "",
+      country: "",
+      state: "",
+      loanPurpose: "",
+      status: "",
+      dueDate: "",
+    },
+    {
+      taskName: "Desktop Fulfillment",
+      orderNumber: "98000296",
+      loanNumber: "338345254",
+      transactionType: "Refiance",
+      lenderName: "USAA BULK-PARENT",
+      submitted: "",
+      age: "25",
+      clientduedate: "02/15/2019",
+      borrower: "",
+      address: "",
+      country: "",
+      state: "",
+      loanPurpose: "",
+      status: "",
+      dueDate: "",
+    },
+    {
+      taskName: "Desktop Fulfillment",
+      orderNumber: "98000296",
+      loanNumber: "338345254",
+      transactionType: "Refiance",
+      lenderName: "USAA BULK-PARENT",
+      submitted: "",
+      age: "25",
+      clientduedate: "02/15/2019",
+      borrower: "",
+      address: "",
+      country: "",
+      state: "",
+      loanPurpose: "",
+      status: "",
+      dueDate: "",
+    },
+    {
+      taskName: "Desktop Fulfillment",
+      orderNumber: "98000296",
+      loanNumber: "338345254",
+      transactionType: "Refiance",
+      lenderName: "USAA BULK-PARENT",
+      submitted: "",
+      age: "25",
+      clientduedate: "02/15/2019",
+      borrower: "",
+      address: "",
+      country: "",
+      state: "",
+      loanPurpose: "",
+      status: "",
+      dueDate: "",
+    },
+    {
+      taskName: "Desktop Fulfillment",
+      orderNumber: "98000296",
+      loanNumber: "338345254",
+      transactionType: "Refiance",
+      lenderName: "USAA BULK-PARENT",
+      submitted: "",
+      age: "25",
+      clientduedate: "02/15/2019",
+      borrower: "",
+      address: "",
+      country: "",
+      state: "",
+      loanPurpose: "",
+      status: "",
+      dueDate: "",
+    },
   ];
-  
+
   pieChart: object = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    labels: ['Yesterday', 'Week', 'Month'],
     datasets: [
       {
         label: '# of Votes',
-        data: [10, 7, 3, 5, 2, 3],
+        data: [10, 0, 0],
         backgroundColor: [
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
+          'rgba(124,181,236,1)'
         ],
         borderColor: [
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 99, 132, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
+          'rgba(124,181,236,1)'
         ],
         borderWidth: 1
       }
@@ -245,24 +235,17 @@ export class UserComponent implements OnInit {
   };
 
   doughnutChart: object = {
-    labels: [ 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    labels: ['Yesterday', 'Week', 'Month'],
     datasets: [
       {
         label: '# of Votes',
-        data: [5, 9, 15, 7, 3],
+        data: [10, 0, 0],
+
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
+          'rgba(255,255,0,0.7)'
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
+          'rgba(255,255,0,0.7)'
         ],
         borderWidth: 1
       }
@@ -289,18 +272,28 @@ export class UserComponent implements OnInit {
     ]
   };
 
-  toggle(){
-   this.isTextBoxVisible=!this.isTextBoxVisible;
+  highchartPie: object = {
+    title: 'Review Decision',
+    // subTitle: '<b>Request Decision</b>'
+    // title: 'Review Decision <b>Request Decision</b>'
   }
-  filterByTaskName(searchString: string):any[] {
+
+  highchartDounut: object = {
+    title: 'My Completed Goal'
+  }
+
+  toggle() {
+    this.isTextBoxVisible = !this.isTextBoxVisible;
+  }
+  filterByTaskName(searchString: string): any[] {
     return this.taskDetails.filter(taskDetail =>
       taskDetail.taskName.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
   }
-  filterByOrderNumber(searchString: string):any[] {
+  filterByOrderNumber(searchString: string): any[] {
     return this.taskDetails.filter(taskDetail =>
       taskDetail.orderNumber.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
   }
-  filterByLoanNumber(searchString: string):any[] {
+  filterByLoanNumber(searchString: string): any[] {
     return this.taskDetails.filter(taskDetail =>
       taskDetail.loanNumber.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
   }
@@ -317,20 +310,21 @@ export class UserComponent implements OnInit {
     }
     }*/
 
-  constructor(private userList:UsersService) { }
+  constructor(private userList: UsersService) { }
 
   ngOnInit() {
     this.filteredTaskDetails = this.taskDetails;
     this.userForm = new FormGroup({
       searchTerm: new FormControl()
-   });
+    });
     this.search.valueChanges.subscribe(
       term => {
-        if (term.length>3) {
-          this.userList.getUsersList(term).subscribe(data=>{
-            this.userList1=data.items;
+        if (term.length > 3) {
+          this.userList.getUsersList(term).subscribe(data => {
+            this.userList1 = data.items;
             console.log(this.userList1);
+          })
+        }
       })
-    }})
-}
+  }
 }

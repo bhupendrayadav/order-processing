@@ -1,32 +1,43 @@
-  <form class="container" [formGroup]="userForm">
-  <input type="text" placeholder="Search Users ..." [formControl]="search" list="user" class="form-control"> 
-  <datalist id="user"> 
-    <option *ngFor="let item of userList1" [value]="item.userName" >{{item.userName}}</option>
+<form class="container" [formGroup]="userForm">
+  <input type="text" placeholder="Search Users ..." [formControl]="search" list="user" class="form-control">
+  <datalist id="user">
+    <option *ngFor="let item of userList1" [value]="item.userName">{{item.userName}}</option>
   </datalist>
-  </form>
+</form>
 
-<h3>Charts.JS</h3>
+<!-- <h3>Charts.JS</h3>
 <div class="d-flex mb-2">
-  <div class="col-md-3 card">
-    <!-- <app-chart-js [chartType]="'pie'" [data]="pieChart"></app-chart-js> -->
-    <app-pie-chart [data]="pieChart"></app-pie-chart>
-  </div>
   <div class="col-md-3 card ml-2">
-    <!-- <app-chart-js [chartType]="'doughnut'" [data]="doughnutChart"></app-chart-js> -->
     <app-doughnut-chart [data]="doughnutChart"></app-doughnut-chart>
   </div>
+  <div class="col-md-3 card">
+    <app-pie-chart [data]="pieChart"></app-pie-chart>
+  </div>
   <div class="col-md-6 card ml-2">
-    <!-- <app-chart-js [chartType]="'doughnut'" [data]="doughnutChart"></app-chart-js> -->
+    <app-line-chart [data]="lineChart"></app-line-chart>
+  </div>
+</div> -->
+
+<!-- Uncomment This Code For Single Component Reuse -->
+<!-- <div class="d-flex mb-2">
+  <div class="col-md-4 card ml-2">
+    <app-chart-js [chartType]="'pie'" [data]="pieChart"></app-chart-js>
+  </div>
+  <div class="col-md-4 card">
+    <app-chart-js [chartType]="'doughnut'" [data]="doughnutChart"></app-chart-js>
+  </div>
+  <div class="col-md-4 card ml-2">
     <app-line-chart [data]="lineChart"></app-line-chart>
   </div>
 </div>
-<h3>Highcharts</h3>
-<div class="d-flex mt-1 mb-3">
+ -->
+<!-- <h3>Highcharts</h3> -->
+<div class="d-flex mt-1 mb-3 mt-2">
   <div class="col-md-4 card">
-    <app-highcharts [type]="'donut'"></app-highcharts>
+    <app-highcharts [type]="'donut'" [chartObject]="highchartDounut"></app-highcharts>
   </div>
   <div class="col-md-4 card ml-2">
-    <app-highcharts></app-highcharts>
+    <app-highcharts [chartObject]="highchartPie"></app-highcharts>
   </div>
   <div class="col-md-4 card ml-2">
     <app-highcharts [type]="'line'"></app-highcharts>
@@ -35,62 +46,60 @@
 <div class="form-group row mt-3">
   <label class="col-md-3 " for="order">Filter By Order number:</label>
   <div class="col-md-3">
-      <input class="form-control" id="order" type="text" placeholder="Enter order number"
-      [(ngModel)]="searchTermByOrderNumber">
+    <input class="form-control" id="order" type="text" placeholder="Enter order number" [(ngModel)]="searchTermByOrderNumber">
   </div>
-</div>   
+</div>
 <div class="form-group row mt-3">
   <label class="col-md-3 " for="loan">Filter By Loan number:</label>
   <div class="col-md-3">
-      <input class="form-control" id="loan" type="text" placeholder="Enter loan number"
-      [(ngModel)]="searchTermByLoanNumber">
+    <input class="form-control" id="loan" type="text" placeholder="Enter loan number" [(ngModel)]="searchTermByLoanNumber">
   </div>
 </div>
 <div class="card mb-4 mt-2">
   <div class="card-header bg-primary text-white">
-      Drag a column header and drop it hear to group by that column
+    Drag a column header and drop it hear to group by that column
   </div>
   <table class="table table-bordered table-responsive">
-      <div class="text-nowrap"> 
+    <div class="text-nowrap">
       <thead class="bg-primary text-white">
-          <tr>
-              <th scope="col" >Task Name <i class="fa fa-filter"></i></th>
-              <th scope="col">Order Number <i class="fa fa-filter" ></i></th>
-              <th scope="col">Loan Number <i class="fa fa-filter" ></i></th>
-              <th scope="col">Transaction type <i class="fa fa-filter"></i></th>
-              <th scope="col">Lender Name <i class="fa fa-filter"></i></th>
-              <th scope="col">Submitted </th>
-              <th scope="col">Age <i class="fa fa-filter"></i></th>
-              <th scope="col">Client due date <i class="fa fa-filter"></i></th>
-              <th scope="col">Borrower</th>
-              <th scope="col">Address</th>
-              <th scope="col">Country</th>
-              <th scope="col">State</th>
-              <th scope="col">Loan Purpose</th>
-              <th scope="col">Status</th>
-              <th scope="col">Due Date</th>
-          </tr>
+        <tr>
+          <th scope="col">Task Name <i class="fa fa-filter"></i></th>
+          <th scope="col">Order Number <i class="fa fa-filter"></i></th>
+          <th scope="col">Loan Number <i class="fa fa-filter"></i></th>
+          <th scope="col">Transaction type <i class="fa fa-filter"></i></th>
+          <th scope="col">Lender Name <i class="fa fa-filter"></i></th>
+          <th scope="col">Submitted </th>
+          <th scope="col">Age <i class="fa fa-filter"></i></th>
+          <th scope="col">Client due date <i class="fa fa-filter"></i></th>
+          <th scope="col">Borrower</th>
+          <th scope="col">Address</th>
+          <th scope="col">Country</th>
+          <th scope="col">State</th>
+          <th scope="col">Loan Purpose</th>
+          <th scope="col">Status</th>
+          <th scope="col">Due Date</th>
+        </tr>
       </thead>
       <tbody>
-          <td *ngIf="!filteredTaskDetails.length" style="text-align:center" colspan="15">No records found</td>
-          <tr *ngFor="let dashboardTasks of filteredTaskDetails" >
-              <td scope="col" >{{ dashboardTasks.taskName }}</td>
-              <td scope="col">{{ dashboardTasks.orderNumber}}</td>
-              <td scope="col">{{ dashboardTasks.loanNumber }} </td>   
-              <td scope="col">{{ dashboardTasks.transactionType }} </td> 
-              <td scope="col">{{ dashboardTasks.lenderName }} </td> 
-              <td scope="col">{{ dashboardTasks.submitted }} </td> 
-              <td scope="col">{{ dashboardTasks.age }} </td> 
-              <td scope="col">{{ dashboardTasks.clientduedate }} </td>
-              <td scope="col">{{ dashboardTasks.borrower }} </td>   
-              <td scope="col">{{ dashboardTasks.address }} </td> 
-              <td scope="col">{{ dashboardTasks.country }} </td> 
-              <td scope="col">{{ dashboardTasks.state }} </td> 
-              <td scope="col">{{ dashboardTasks.loanPurpose }} </td> 
-              <td scope="col">{{ dashboardTasks.status }} </td> 
-              <td scope="col">{{ dashboardTasks.dueDate }} </td>
-          </tr>     
+        <td *ngIf="!filteredTaskDetails.length" style="text-align:center" colspan="15">No records found</td>
+        <tr *ngFor="let dashboardTasks of filteredTaskDetails">
+          <td scope="col">{{ dashboardTasks.taskName }}</td>
+          <td scope="col">{{ dashboardTasks.orderNumber}}</td>
+          <td scope="col">{{ dashboardTasks.loanNumber }} </td>
+          <td scope="col">{{ dashboardTasks.transactionType }} </td>
+          <td scope="col">{{ dashboardTasks.lenderName }} </td>
+          <td scope="col">{{ dashboardTasks.submitted }} </td>
+          <td scope="col">{{ dashboardTasks.age }} </td>
+          <td scope="col">{{ dashboardTasks.clientduedate }} </td>
+          <td scope="col">{{ dashboardTasks.borrower }} </td>
+          <td scope="col">{{ dashboardTasks.address }} </td>
+          <td scope="col">{{ dashboardTasks.country }} </td>
+          <td scope="col">{{ dashboardTasks.state }} </td>
+          <td scope="col">{{ dashboardTasks.loanPurpose }} </td>
+          <td scope="col">{{ dashboardTasks.status }} </td>
+          <td scope="col">{{ dashboardTasks.dueDate }} </td>
+        </tr>
       </tbody>
-  </div>
+    </div>
   </table>
 </div>
