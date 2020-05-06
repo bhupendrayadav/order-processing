@@ -10,7 +10,6 @@ import config from "./app.config";
 import { OrderDetailComponent } from "./order-processing/order-detail/order-detail.component";
 import { OrderListComponent } from "./order-processing/order-list/order-list.component";
 import { BingMapComponent } from "./bing-map/bing-map.component";
-import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 
 const routes: Routes = [
   {

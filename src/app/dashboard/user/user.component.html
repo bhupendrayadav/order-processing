@@ -10,11 +10,17 @@
 
 <h3>Charts.JS</h3>
 <div class="d-flex mb-2">
-  <div class="col-md-4 card">
-    <app-chart-js [chartType]="'pie'"></app-chart-js>
+  <div class="col-md-3 card">
+    <!-- <app-chart-js [chartType]="'pie'" [data]="pieChart"></app-chart-js> -->
+    <app-pie-chart [data]="pieChart"></app-pie-chart>
   </div>
-  <div class="col-md-4 card ml-2">
-    <app-chart-js [chartType]="'doughnut'"></app-chart-js>
+  <div class="col-md-3 card ml-2">
+    <!-- <app-chart-js [chartType]="'doughnut'" [data]="doughnutChart"></app-chart-js> -->
+    <app-doughnut-chart [data]="doughnutChart"></app-doughnut-chart>
+  </div>
+  <div class="col-md-6 card ml-2">
+    <!-- <app-chart-js [chartType]="'doughnut'" [data]="doughnutChart"></app-chart-js> -->
+    <app-line-chart [data]="lineChart"></app-line-chart>
   </div>
 </div>
 <h3>Highcharts</h3>
