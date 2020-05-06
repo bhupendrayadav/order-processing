@@ -15,6 +15,7 @@ export class HttpInterceptorService {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     // const accessToken = this.auth.getAccessToken();
+
     request = request.clone({
       setHeaders: {
         // Authorization: `Bearer ${accessToken}`,
