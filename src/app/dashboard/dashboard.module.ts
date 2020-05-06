@@ -8,6 +8,8 @@ import { ManagerComponent } from './manager/manager.component';
 import { DashboardComponent } from './dashboard.component';
 import { UserComponent } from './user/user.component';
 import { ChartsModule } from '../charts/charts.module';
+import {  HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,6 +19,8 @@ import { ChartsModule } from '../charts/charts.module';
     DashboardRoutingModule,
     NgbModule,
     ChartsModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ]
 })
 export class DashboardModule { }

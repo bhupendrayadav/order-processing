@@ -1,3 +1,10 @@
+  <form class="container" [formGroup]="userForm">
+  <input type="text" placeholder="Search Users ..." [formControl]="searchTerm" list="user"> 
+  <datalist id="user"> 
+    <option *ngFor="let item of userList1" [value]="item.userName" >{{item.userName}}</option>
+  </datalist>
+  </form>
+
 <h3>Charts.JS</h3>
 <div class="d-flex mb-2">
   <div class="col-md-4 card">
