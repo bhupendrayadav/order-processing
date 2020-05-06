@@ -1,6 +1,7 @@
-  <form class="container" [formGroup]="userForm">
-  <input type="text" placeholder="Search Users ..." [formControl]="search" list="user" class="form-control"> 
-  <datalist id="user"> 
+  <form class="container form-group" [formGroup]="userForm" >
+  <input type="text" placeholder="Search Users ..." [formControl]="search" list="user" class="form-control"
+  style="width: 200px"> 
+  <datalist id="user" > 
     <option *ngFor="let item of userList1" [value]="item.userName" >{{item.userName}}</option>
   </datalist>
   </form>
