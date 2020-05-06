@@ -10,7 +10,7 @@ import { UserComponent } from './user/user.component';
 import { ChartsModule } from '../charts/charts.module';
 import {  HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [DashboardComponent, UserComponent, ManagerComponent],
@@ -20,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgbModule,
     ChartsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class DashboardModule { }
