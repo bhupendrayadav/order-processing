@@ -1,1 +1,15 @@
-<p>manager works!</p>
+<div class="d-flex justify-content-end align-items-center mb-3">
+  <label class='m-0'>Select User</label>
+  <div class="col-md-4 pr-0">
+    <input type="text" placeholder="Search Users ..." [formControl]="search" list="user" class="form-control">
+    <datalist id="user">
+      <option *ngFor="let item of usersList" [value]="item.userName">{{item.userName}}</option>
+    </datalist>
+  </div>
+</div>
+
+<div class="card mb-4 mt-2">
+  <div class="card-header bg-primary text-white">
+    Drag a column header and drop it hear to group by that column
+  </div>
+</div>
