@@ -111,23 +111,23 @@
     </div>
 
     <div class="card mb-3 mt-2">
-      <table class="table table-bordered table-responsive">
+      <table class="table table-bordered table-responsive mb-0 table-height">
         <div class="text-nowrap">
           <thead class="bg-primary text-white">
             <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Daily Goal</th>
-              <th scope="col">Daily Schedule</th>
-              <th scope="col">Exceptions</th>
+              <th scope="col" class='col-md-3'>Name</th>
+              <th scope="col" class='col-md-3'>Daily Goal</th>
+              <th scope="col" class='col-md-3'>Daily Schedule</th>
+              <th scope="col" class='col-md-3'>Exceptions</th>
             </tr>
           </thead>
           <tbody>
             <td *ngIf="!filteredTaskDetails.length" style="text-align:center" colspan="15">No records found</td>
             <tr *ngFor="let dashboardTasks of filteredTaskDetails">
-              <td scope="col">{{ dashboardTasks.taskName }}</td>
-              <td scope="col">{{ dashboardTasks.orderNumber}}</td>
-              <td scope="col">{{ dashboardTasks.loanNumber }} </td>
-              <td scope="col">{{ dashboardTasks.transactionType }} </td>
+              <td scope="col" class='col-md-3'>{{ dashboardTasks.taskName }}</td>
+              <td scope="col" class='col-md-3'>{{ dashboardTasks.orderNumber}}</td>
+              <td scope="col" class='col-md-3'>{{ dashboardTasks.loanNumber }} </td>
+              <td scope="col" class='col-md-3'>{{ dashboardTasks.transactionType }} </td>
             </tr>
           </tbody>
         </div>

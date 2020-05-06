@@ -1,3 +1,38 @@
 input[type="checkbox"] {
   position: static;
 }
+
+* {
+  font-size: 12px;
+}
+.card-header {
+  background-color: rgba(0, 123, 255);
+  color: white;
+}
+
+.table-height {
+  max-height: 300px;
+}
+
+th {
+  color: white;
+}
+.modal-header {
+  background-color: rgba(0, 123, 255);
+}
+.modal-title {
+  color: white;
+}
+.modal-backdrop {
+  background-color: transparent !important;
+}
+
+.no-record {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #575b5f;
+  position: relative;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
