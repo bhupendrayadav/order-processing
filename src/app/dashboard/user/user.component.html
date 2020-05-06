@@ -1,9 +1,14 @@
-<form class="container" [formGroup]="userForm">
-  <input type="text" placeholder="Search Users ..." [formControl]="search" list="user" class="form-control">
-  <datalist id="user">
-    <option *ngFor="let item of userList1" [value]="item.userName">{{item.userName}}</option>
-  </datalist>
-</form>
+<div class="d-flex justify-content-end align-items-center">
+  <label class='m-0'>Select User</label>
+  <div class="col-md-4 pr-0">
+    <form [formGroup]="userForm">
+      <input type="text" placeholder="Search Users ..." [formControl]="search" list="user" class="form-control">
+      <datalist id="user">
+        <option *ngFor="let item of userList1" [value]="item.userName">{{item.userName}}</option>
+      </datalist>
+    </form>
+  </div>
+</div>
 
 <!-- <h3>Charts.JS</h3>
 <div class="d-flex mb-2">
@@ -43,6 +48,13 @@
     <app-highcharts [type]="'line'"></app-highcharts>
   </div>
 </div>
+
+<hr />
+<div class="row justify-content-center">
+  <button type="button" class="btn-sm btn btn-primary">Get Next</button>
+</div>
+<hr />
+
 <div class="form-group row mt-3">
   <div class="col-md-6 d-flex align-items-center">
     <label class="col-md-6 m-0" for="order">Filter By Order number:</label>
