@@ -15,12 +15,12 @@ export class HttpInterceptorService {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     // const accessToken = this.auth.getAccessToken();
+
     request = request.clone({
-      /*  setHeaders: {
-        BodId: `${Guid.create()}`,
-        Created: `${new Date()}`,
-      }, */
-      setHeaders: {},
+      setHeaders: {
+        // Authorization: `Bearer ${accessToken}`,
+        // 'Access-Control-Allow-Origin': '*'
+      }
     });
 
     return next.handle(request).pipe(

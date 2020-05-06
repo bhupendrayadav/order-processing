@@ -16,6 +16,8 @@ import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header/header.component";
 import { LoginLogoutButtonComponent } from "./login-logout-button.component";
 import { BingMapComponent } from "./bing-map/bing-map.component";
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpInterceptorService } from "./utils/http-interceptor.service";
 import { CoverSheetModule } from "./cover-sheet/cover-sheet.module";
 
@@ -28,6 +30,7 @@ import { CoverSheetModule } from "./cover-sheet/cover-sheet.module";
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     OktaAuthModule,
     AppRoutingModule,
     FormsModule,
@@ -37,7 +40,12 @@ import { CoverSheetModule } from "./cover-sheet/cover-sheet.module";
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
     OrderProcessingModule,
-    CoverSheetModule,
+    ToastrModule.forRoot({
+      timeOut: 4000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true
+    }),
+    CoverSheetModule
   ],
   providers: [
     // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
