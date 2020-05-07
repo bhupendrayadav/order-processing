@@ -277,4 +277,12 @@ export class ManagerComponent implements OnInit {
   onAssign() {
 
   }
+
+  onScroll() {
+    console.log('on Scroll');
+  }
+
+  onScrollUp() {
+    console.log('on scroll up');
+  }
 }

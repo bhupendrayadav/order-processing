@@ -31,7 +31,8 @@
           <thead class="bg-primary text-white">
             <tr>
               <th scope="col">
-                <input #checkall type="checkbox" [checked]="isCheckedAll" class="form-check-input m-0" value="" (click)="checkAll(filteredTaskDetails,checkall)">
+                <input #checkall type="checkbox" [checked]="isCheckedAll" class="form-check-input m-0" value=""
+                  (click)="checkAll(filteredTaskDetails,checkall)">
               </th>
               <th scope="col"></th>
               <th scope="col">Task Name <i class="fa fa-filter"></i></th>
@@ -55,7 +56,8 @@
             <td *ngIf="!filteredTaskDetails.length" style="text-align:center" colspan="15">No records found</td>
             <tr *ngFor="let dashboardTasks of filteredTaskDetails;let i=index">
               <td scope="col">
-                <input #check type="checkbox" class="form-check-input m-0" value="" [checked]="checked[dashboardTasks.orderNumber]" (click)="checkedItem(dashboardTasks,check,i)">
+                <input #check type="checkbox" class="form-check-input m-0" value=""
+                  [checked]="checked[dashboardTasks.orderNumber]" (click)="checkedItem(dashboardTasks,check,i)">
               </td>
               <td scope="col"><i class="fa fa-lock"></i></td>
               <td scope="col">{{ dashboardTasks.taskName }}</td>
@@ -111,7 +113,8 @@
     </div>
 
     <div class="card mb-3 mt-2">
-      <table class="table table-bordered table-responsive mb-0 table-height">
+      <table class="table table-bordered table-responsive mb-0 table-height" infiniteScroll [infiniteScrollDistance]="3"
+        [infiniteScrollUpDistance]="1.5" (scrolled)="onScroll()" (scrolledUp)="onScrollUp()" [scrollWindow]="false">
         <div class="text-nowrap">
           <thead class="bg-primary text-white">
             <tr>
