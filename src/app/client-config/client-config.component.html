@@ -49,14 +49,16 @@
                 name="status"
                 formControlName="status"
               >
-                <option>Active</option>
-                <option>Inactive</option>
+                <option value=""></option>
+                <option value="Active">Active</option>
+                <option value="inactive">inactive</option>
               </select>
             </div>
             <p class="text-danger">{{errorMessage}}</p>
             <button type="reset" class="btn btn-secondary">
               Cancel
             </button>
+            &nbsp;
             <button type="submit" class="btn btn-primary">
               Search
             </button>
@@ -79,7 +81,8 @@
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">CLIENT</th>
+                <th scope="col">CLIENT ID</th>
+                <th scope="col">CLIENT NAME</th>
                 <th scope="col">BRANCH</th>
                 <th scope="col">LEGACY NUMBER</th>
                 <th scope="col">STATUS</th>
@@ -87,6 +90,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of records">
+                <th>{{item.clientId}}</th>
                 <th>{{item.clientName}}</th>
                 <td>{{item.branch}}</td>
                 <td>{{item.legacyNumber}}</td>

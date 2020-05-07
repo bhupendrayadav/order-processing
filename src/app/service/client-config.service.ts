@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { catchError } from "rxjs/operators";
-import { throwError } from "rxjs";
+import { throwError, Observable } from "rxjs";
 
 function covertToQueryString(obj: Object): string {
   return Object.keys(obj)
@@ -18,8 +18,8 @@ export class ClientConfigService {
     "https://servicelinkclientserviceapi.azurewebsites.net/api/ServiceLink/ClientService/ClientService";
 
   constructor(private http: HttpClient) {}
-  searchClient(data: Object) {
-    const query = covertToQueryString(data);
+  searchClient(data: Object): Observable<any> {
+    const query: string = covertToQueryString(data);
     const endPoint = `${this.clientConfigEndPoint}/ClientSearch?${query}`;
 
     return this.http

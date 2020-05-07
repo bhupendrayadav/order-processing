@@ -26,7 +26,7 @@ export class ClientConfigComponent implements OnInit {
     legacyNumber: new FormControl(""),
     status: new FormControl(""),
   });
-  records: clientModel[] = [];
+  records: Array<clientModel> = [];
   constructor(private clientConfigService: ClientConfigService) {}
   toggleAddModal(flag: boolean): void {
     this.isAddModalVisible = flag;
@@ -38,7 +38,9 @@ export class ClientConfigComponent implements OnInit {
     this.errorMessage = "";
     this.clientConfigService
       .searchClient(this.searchForm.value)
-      .subscribe((value) => console.log("value", value));
+      .subscribe((value) => {
+        this.records = value;
+      });
   }
   ngOnInit() {}
 }
