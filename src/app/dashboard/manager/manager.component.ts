@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UsersService } from 'src/app/service/users.service';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -227,9 +227,24 @@ export class ManagerComponent implements OnInit {
       }
     });
   }
-  checkedItems:any[]=[];
+  checkedItems:selected[]=[];
+  isChecked:boolean=false;
+  checkAll(selectedItem:selected[],check:HTMLInputElement)
+  {
+    if(check.checked==true){
+      this.isChecked=true;
+      Object.assign(this.checkedItems,selectedItem);
+      console.log(this.checkedItems);
+      }
+      else if(check.checked==false)
+    { 
+      this.isChecked=false;
+      this.checkedItems.splice(0,this.checkedItems.length);
+      this.filteredTaskDetails = this.taskDetails;
+      console.log(this.checkedItems);
+    }
 
-
+  }
   checkedItem(selectedItem:selected,check:HTMLInputElement,i)
   { 
     if(check.checked==true){
@@ -256,4 +271,5 @@ export class ManagerComponent implements OnInit {
   onAssign() {
 
   }
+  
 }

@@ -31,7 +31,7 @@
           <thead class="bg-primary text-white">
             <tr>
               <th scope="col">
-                <input type="checkbox" class="form-check-input m-0" value="">
+                <input #checkall type="checkbox" class="form-check-input m-0" value="" (click)="checkAll(filteredTaskDetails,checkall)">
               </th>
               <th scope="col"></th>
               <th scope="col">Task Name <i class="fa fa-filter"></i></th>
@@ -55,7 +55,7 @@
             <td *ngIf="!filteredTaskDetails.length" style="text-align:center" colspan="15">No records found</td>
             <tr *ngFor="let dashboardTasks of filteredTaskDetails;let i=index">
               <td scope="col">
-                <input #check type="checkbox" class="form-check-input m-0" value="" (click)="checkedItem(dashboardTasks,check,i)">
+                <input #check type="checkbox" class="form-check-input m-0" value="" [checked]="isChecked" (click)="checkedItem(dashboardTasks,check,i)">
               </td>
               <td scope="col"><i class="fa fa-lock"></i></td>
               <td scope="col">{{ dashboardTasks.taskName }}</td>
