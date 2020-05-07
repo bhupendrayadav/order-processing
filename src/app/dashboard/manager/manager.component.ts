@@ -232,16 +232,19 @@ export class ManagerComponent implements OnInit {
   isCheckedAll:boolean;
   checkAll(selectedItem:selected[],check:HTMLInputElement)
   {
-    if(check.checked==true){
-      this.isChecked=true;
+    if(check.checked==true)
+    {
+      
       Object.assign(this.checkedItems,selectedItem);
+      this.isChecked=true;
       console.log(this.checkedItems);
-      }
+    }
       else if(check.checked==false)
     { 
-      this.isChecked=false;
+      
       this.checkedItems.splice(0,this.checkedItems.length);
-      this.filteredTaskDetails = this.taskDetails;
+      this.isChecked=false;
+      //this.filteredTaskDetails = this.taskDetails;
       console.log(this.checkedItems);
     }
 
@@ -258,7 +261,7 @@ export class ManagerComponent implements OnInit {
     else if(check.checked==false)
     { 
       this.isCheckedAll=false;
-     let pos:number;
+      let pos:number;
       pos= this.checkedItems.findIndex(x => x.orderNumber ==selectedItem.orderNumber);
       this.checkedItems.splice(pos,1);
     }
