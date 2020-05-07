@@ -40,9 +40,8 @@ export class ClientConfigService {
   }
 
   addNewConfigClient(data: Object) {
-    const query = covertToQueryString(data);
     return this.http
-      .post(`${this.clientBaseUrl}/AddClientConfig?${query}`,{body:data},{ headers: {} })
+      .post(`${this.clientBaseUrl}/AddClientConfig`,{body:data},{ headers: {} })
       .pipe(catchError(this.handleError));
   }
 

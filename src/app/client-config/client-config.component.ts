@@ -61,7 +61,10 @@ export class ClientConfigComponent implements OnInit {
 
   addNewClient() {
     this.modalService.dismissAll();
-    this.clientConfigService.addNewConfigClient(this.addNewForm.getRawValue()).subscribe((data)=>{
+    let obj = this.addNewForm.getRawValue();
+    console.log('obj',obj);
+    const newObject = {clientId:+obj.clientId ,  clientName:obj.clientName , legacyNumber:+obj.legacyNumber , branch:obj.branch , status:obj.status } 
+    this.clientConfigService.addNewConfigClient(newObject).subscribe((data)=>{
       console.log('data',data)
     })
    }
