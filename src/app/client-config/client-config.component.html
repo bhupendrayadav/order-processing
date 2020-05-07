@@ -1,0 +1,101 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">Client Search</div>
+        <div class="card-body">
+          <form
+            [formGroup]="searchForm"
+            (ngSubmit)="onSearch()"
+            ngNativeValidate
+          >
+            <div class="form-group">
+              <label for="client-id-input">Client id or Sub Client id</label>
+              <input
+                type="text"
+                class="form-control"
+                id="clientId-id-input"
+                name="clientId"
+                formControlName="clientId"
+                placeholder="Client id or Sub Client id"
+              />
+            </div>
+            <div class="form-group">
+              <label for="client-id-input">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="clientName-input"
+                formControlName="clientName"
+                placeholder="Name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="client-id-input">Legacy Number</label>
+              <input
+                type="text"
+                class="form-control"
+                id="legacy-number-input"
+                placeholder="Legacy Number"
+                name="LegacyNumber"
+                formControlName="legacyNumber"
+              />
+            </div>
+            <div class="form-group">
+              <label for="inputState">Status</label>
+              <select
+                id="inputState"
+                class="form-control"
+                name="status"
+                formControlName="status"
+              >
+                <option>Active</option>
+                <option>Inactive</option>
+              </select>
+            </div>
+            <p class="text-danger">{{errorMessage}}</p>
+            <button type="reset" class="btn btn-secondary">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          Client List
+          <span
+            class="float-right text-primary"
+            (click)="toggleAddModal(true)"
+            style="cursor: pointer;"
+            >+ ADD A CLIENT</span
+          >
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">CLIENT</th>
+                <th scope="col">BRANCH</th>
+                <th scope="col">LEGACY NUMBER</th>
+                <th scope="col">STATUS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of records">
+                <th>{{item.clientName}}</th>
+                <td>{{item.branch}}</td>
+                <td>{{item.legacyNumber}}</td>
+                <td>{{item.status}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
