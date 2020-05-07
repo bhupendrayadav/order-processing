@@ -14,7 +14,11 @@ interface users {
 
 export class UserComponent implements OnInit {
 
-  userList1: users[] = [];
+  userSearch: string = '';
+  selectedUser: object;
+
+  userListTotal: users[] = [];
+  userList: users[] = [];
   userForm: FormGroup;
   search: FormControl = new FormControl();
   userName: string;
@@ -305,12 +309,12 @@ export class UserComponent implements OnInit {
     if (userName.length > 3) {
       console.log(userName.length);
         this.userList.getUsersList(userName).subscribe(data=>{
-          this.userList1=data.items;
+          this.userList=data.items;
       });
     }
     }*/
 
-  constructor(private userList: UsersService) { }
+  constructor(private _userService: UsersService) { }
 
   ngOnInit() {
     this.filteredTaskDetails = this.taskDetails;
@@ -320,11 +324,45 @@ export class UserComponent implements OnInit {
     this.search.valueChanges.subscribe(
       term => {
         if (term.length > 3) {
-          this.userList.getUsersList(term).subscribe(data => {
-            this.userList1 = data.items;
-            console.log(this.userList1);
+          console.log('term', term);
+          this._userService.getUsersList(term).subscribe(data => {
+            this.userList = data.items;
+            console.log(this.userList);
           })
         }
       })
   }
+
+  getUsersList(value) {
+    console.log('value', value);
+    let _obj;
+    if (this.userList.length) {
+      this.selectedUser = this.userList.find(f => f.userName === value);
+      console.log('selectedUser', this.selectedUser);
+    }
+
+    // let userId = (<HTMLInputElement>document.getElementById('user')).value;
+    // console.log('userId', userId);
+    this.userList = [];
+    if (value.length > 3) {
+      this._userService.getUsersList(value).subscribe(data => {
+        this.userList = data.items;
+        // this.userListTotal = data.items;
+        // console.log('getUsersList Result', this.userListTotal.length);
+        // this.getNextSearchedRecord();
+      })
+    }
+  }
+
+  getNextSearchedRecord() {
+    let presentRecord = this.userList.length;
+    const startIndex = (this.userList.length === 0) ? 0 : (this.userList.length - 1);
+    const endIndex = startIndex + 15;
+    // console.log('startIndex - endIndex', startIndex, endIndex);
+    this.userListTotal.slice(startIndex, endIndex).map((item, i) => {
+      this.userList.push(item);
+    });
+
+  }
+
 }
