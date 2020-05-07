@@ -26,11 +26,12 @@
                     <td scope="col">{{ item.reportType }}</td>
                     <td scope="col">
                       <a
-                        [queryParams]="{productIds: item.productID, BobId: item.coversheetID, id: item.id}"
-                        [routerLink]="[
-                          '/cover-sheet/edit/',
-                          item.clientID
-                        ]"
+                        [queryParams]="{
+                          productIds: item.productID,
+                          BobId: item.coversheetID,
+                          id: item.id
+                        }"
+                        [routerLink]="['/cover-sheet/edit/', item.clientID]"
                         ><i class="fa fa-edit" aria-hidden="true"></i
                       ></a>
                     </td>
@@ -46,6 +47,36 @@
                   </tr>
                 </tbody>
               </table>
+            </div>
+
+            <div class="d-flex p-2 pagination justify-content-between">
+              <div class="d-flex">
+                <ngb-pagination
+                  [collectionSize]="totalRecords"
+                  [maxSize]="5"
+                  [ellipses]="false"
+                  (pageChange)="onPageChange($event)"
+                  [rotate]="true"
+                  [(page)]="page"
+                  [pageSize]="pageSize"
+                  [boundaryLinks]="true"
+                >
+                </ngb-pagination>
+
+                <div class="d-flex align-items-center ml-3 mb-3">
+                  <select
+                    class="custom-select"
+                    style="width: auto;"
+                    [(ngModel)]="pageSize"
+                  >
+                    <option [ngValue]="5">5</option>
+                    <option [ngValue]="10">10</option>
+                    <option [ngValue]="20">20</option>
+                    <option [ngValue]="50">50</option>
+                  </select>
+                  <div class="ml-2">Items per page</div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="card-footer">
