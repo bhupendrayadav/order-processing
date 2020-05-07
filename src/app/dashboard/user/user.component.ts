@@ -14,8 +14,14 @@ interface users {
 
 export class UserComponent implements OnInit {
 
-  userSearch: string = '';
+  page = 1;
+  pageSize = 5;
+  totalRecords: number;
   selectedUser: object;
+
+  isLoading = false;
+
+  userSearch: string = '';
 
   userListTotal: users[] = [];
   userList: users[] = [];
@@ -68,7 +74,7 @@ export class UserComponent implements OnInit {
     },
     {
       taskName: "Desktop Fulfillment",
-      orderNumber: "98000297",
+      orderNumber: "",
       loanNumber: "438345254",
       transactionType: "Refiance",
       lenderName: "USAA BULK-PARENT",
@@ -333,28 +339,51 @@ export class UserComponent implements OnInit {
       })
   }
 
+  /**
+   * @description Method to get Searched User List
+   * @author Krunal Shriram Sakharkar
+   * @date 2020-05-07
+   * @param {*} value
+   * @memberof UserComponent
+   */
   getUsersList(value) {
-    console.log('value', value);
-    let _obj;
     if (this.userList.length) {
       this.selectedUser = this.userList.find(f => f.userName === value);
-      console.log('selectedUser', this.selectedUser);
+      this.getTasksList();
     }
+    console.log('1 ', this.selectedUser);
+    if (!this.selectedUser) {
+      console.log('2 ', this.selectedUser);
+      this.userList = [];
+      if (value.length > 3) {
+        this._userService.getUsersList(value).subscribe(data => {
+          this.userList = data.items;
+          // this.getNextSearchedRecord();
+        })
+      }
+    }
+  }
 
-    // let userId = (<HTMLInputElement>document.getElementById('user')).value;
-    // console.log('userId', userId);
-    this.userList = [];
-    if (value.length > 3) {
-      this._userService.getUsersList(value).subscribe(data => {
-        this.userList = data.items;
-        // this.userListTotal = data.items;
-        // console.log('getUsersList Result', this.userListTotal.length);
-        // this.getNextSearchedRecord();
+  getTasksList() {
+    // userId=104&page=1&pageSize=5
+
+    if (this.selectedUser && this.selectedUser['userID']) {
+      this.isLoading = true;
+      const payload = `userId=${this.selectedUser['userID']}&page=${this.page}&pageSize=${this.pageSize}`;
+      this._userService.getTasksList(payload).subscribe({
+        next: result => {
+          console.log('result', result);
+          this.filteredTaskDetails = result['items'];
+          this.totalRecords = result['totalrows'];
+          // this.getTableTotalRecords();
+          this.isLoading = false;
+        },
+        error: error => console.error('error', error)
       })
     }
   }
 
-  getNextSearchedRecord() {
+  /* getNextSearchedRecord() {
     let presentRecord = this.userList.length;
     const startIndex = (this.userList.length === 0) ? 0 : (this.userList.length - 1);
     const endIndex = startIndex + 15;
@@ -362,7 +391,14 @@ export class UserComponent implements OnInit {
     this.userListTotal.slice(startIndex, endIndex).map((item, i) => {
       this.userList.push(item);
     });
+  } */
 
+  onScroll() {
+    console.log('on Scroll');
+  }
+
+  onScrollUp() {
+    console.log('on scroll up');
   }
 
 }
