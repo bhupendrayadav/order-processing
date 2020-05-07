@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/service/users.service';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -15,8 +16,8 @@ interface users {
 export class UserComponent implements OnInit {
 
   page = 1;
-  pageSize = 5;
-  totalRecords: number;
+  pageSize = 10;
+  totalRecords: number = 0;
   selectedUser: object;
 
   isLoading = false;
@@ -29,14 +30,14 @@ export class UserComponent implements OnInit {
   search: FormControl = new FormControl();
   userName: string;
   private _searchTerm: string;
-  filteredTaskDetails: any[];
+  tasksList: any[];
   isTextBoxVisible: boolean = false;
   get searchTerm(): string {
     return this._searchTerm;
   }
   set searchTerm(value: string) {
     this._searchTerm = value;
-    this.filteredTaskDetails = this.filterByTaskName(value);
+    this.tasksList = this.filterByTaskName(value);
   }
   private _searchTermByOrderNumber: string;
   get searchTermByOrderNumber(): string {
@@ -44,7 +45,7 @@ export class UserComponent implements OnInit {
   }
   set searchTermByOrderNumber(value: string) {
     this._searchTermByOrderNumber = value;
-    this.filteredTaskDetails = this.filterByOrderNumber(value);
+    this.tasksList = this.filterByOrderNumber(value);
   }
   private _searchTermByLoanNumber: string;
   get searchTermByLoanNumber(): string {
@@ -52,10 +53,10 @@ export class UserComponent implements OnInit {
   }
   set searchTermByLoanNumber(value: string) {
     this._searchTermByLoanNumber = value;
-    this.filteredTaskDetails = this.filterByLoanNumber(value);
+    this.tasksList = this.filterByLoanNumber(value);
   }
   taskDetails: any[] = [
-    {
+    /* {
       taskName: "Desktop Fulfillment",
       orderNumber: "98000296",
       loanNumber: "338345254",
@@ -224,7 +225,7 @@ export class UserComponent implements OnInit {
       loanPurpose: "",
       status: "",
       dueDate: "",
-    },
+    } */
   ];
 
   pieChart: object = {
@@ -320,14 +321,14 @@ export class UserComponent implements OnInit {
     }
     }*/
 
-  constructor(private _userService: UsersService) { }
+  constructor(private _userService: UsersService, private toastr: ToastrService) { }
 
   ngOnInit() {
-    this.filteredTaskDetails = this.taskDetails;
-    this.userForm = new FormGroup({
+    this.tasksList = this.taskDetails;
+    /* this.userForm = new FormGroup({
       searchTerm: new FormControl()
-    });
-    this.search.valueChanges.subscribe(
+    }); */
+    /* this.search.valueChanges.subscribe(
       term => {
         if (term.length > 3) {
           console.log('term', term);
@@ -336,7 +337,11 @@ export class UserComponent implements OnInit {
             console.log(this.userList);
           })
         }
-      })
+      }); */
+
+        this.selectedUser = {};
+        this.selectedUser['userID'] = 104;
+        this.getTasksList();
   }
 
   /**
@@ -349,52 +354,78 @@ export class UserComponent implements OnInit {
   getUsersList(value) {
     if (this.userList.length) {
       this.selectedUser = this.userList.find(f => f.userName === value);
+      this.resetList();
       this.getTasksList();
     }
-    console.log('1 ', this.selectedUser);
     if (!this.selectedUser) {
-      console.log('2 ', this.selectedUser);
       this.userList = [];
       if (value.length > 3) {
         this._userService.getUsersList(value).subscribe(data => {
           this.userList = data.items;
-          // this.getNextSearchedRecord();
-        })
+        });
       }
     }
   }
 
+  /**
+   * @description Metho to Get Tasks
+   * @author Krunal
+   * @date 2020-05-07
+   * @memberof UserComponent
+   */
   getTasksList() {
-    // userId=104&page=1&pageSize=5
-
     if (this.selectedUser && this.selectedUser['userID']) {
       this.isLoading = true;
       const payload = `userId=${this.selectedUser['userID']}&page=${this.page}&pageSize=${this.pageSize}`;
       this._userService.getTasksList(payload).subscribe({
         next: result => {
-          console.log('result', result);
-          this.filteredTaskDetails = result['items'];
-          this.totalRecords = result['totalrows'];
-          // this.getTableTotalRecords();
-          this.isLoading = false;
+          // console.log('result', result);
+          if (result['items'] && result['items'].length) {
+            this.addTasksToTasksList(result['items']);
+            this.totalRecords = result['totalrows'];
+          } else {
+            this.isLoading = false;
+          }
         },
-        error: error => console.error('error', error)
-      })
+        error: error => this.toastr.error('Server Error', 'Error')
+      });
     }
   }
 
-  /* getNextSearchedRecord() {
-    let presentRecord = this.userList.length;
-    const startIndex = (this.userList.length === 0) ? 0 : (this.userList.length - 1);
-    const endIndex = startIndex + 15;
-    // console.log('startIndex - endIndex', startIndex, endIndex);
-    this.userListTotal.slice(startIndex, endIndex).map((item, i) => {
-      this.userList.push(item);
+  /**
+   * @description Method to a Tasks in Table Task List
+   * @author Krunal
+   * @date 2020-05-07
+   * @param {*} data
+   * @memberof UserComponent
+   */
+  addTasksToTasksList(data) {
+    data.forEach((item, index) => {
+      this.tasksList.push(item);
+      if (index === (data.length - 1)) {
+        this.isLoading = false;
+        // console.log('Length', this.tasksList.length);
+      }
     });
-  } */
+  }
 
+  /**
+   * @description Metho to get Next Tasks On scroll
+   * @author Krunal
+   * @date 2020-05-07
+   * @memberof UserComponent
+   */
   onScroll() {
+    this.page++;
+    this.getTasksList();
     console.log('on Scroll');
+  }
+
+  resetList() {
+    this.page = 1;
+    this.pageSize = 10;
+    this.totalRecords = 0;
+    this.tasksList = [];
   }
 
   onScrollUp() {

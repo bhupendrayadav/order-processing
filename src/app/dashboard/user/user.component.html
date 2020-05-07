@@ -1,7 +1,8 @@
 <div class="d-flex justify-content-end align-items-center">
   <label class='m-0'>Select User</label>
   <div class="col-md-4 pr-0">
-    <input type="text" placeholder="Search User Here" (keyup)="getUsersList(userSearch)" name="userSearch" [(ngModel)]="userSearch" list="user" class="form-control">
+    <input type="text" placeholder="Search User Here" (keyup)="getUsersList(userSearch)" name="userSearch"
+      [(ngModel)]="userSearch" list="user" class="form-control">
     <datalist id="user">
       <option *ngFor="let item of userList" [value]="item.userName">{{item.userName}}</option>
     </datalist>
@@ -82,7 +83,8 @@
   <div class="card-header bg-primary text-white">
     Drag a column header and drop it hear to group by that column
   </div>
-  <table class="table table-bordered table-responsive mb-0 table-height" infiniteScroll [infiniteScrollDistance]="3" [infiniteScrollUpDistance]="1.5" (scrolled)="onScroll()" (scrolledUp)="onScrollUp()" [scrollWindow]="false">
+  <table class="table table-bordered table-responsive mb-0 table-height" infiniteScroll [infiniteScrollDistance]="3"
+    [infiniteScrollUpDistance]="1.5" (scrolled)="onScroll()" (scrolledUp)="onScrollUp()" [scrollWindow]="false">
     <div class="text-nowrap">
       <thead class="bg-primary text-white">
         <tr>
@@ -103,30 +105,31 @@
           <th scope="col">Due Date</th>
         </tr>
       </thead>
-      <tbody>
-        <td *ngIf="!filteredTaskDetails.length" style="text-align:center" colspan="15">No records found</td>
-        <tr *ngFor="let task of filteredTaskDetails">
-          <td scope="col" *ngIf="task.taskName; else dash">{{ task.taskName }}</td>
-          <td scope="col" *ngIf="task.orderNumber; else dash">{{ task.orderNumber}}</td>
-          <td scope="col" *ngIf="task.loanNumber; else dash">{{ task.loanNumber }} </td>
-          <td scope="col" *ngIf="task.transactionType; else dash">{{ task.transactionType }} </td>
-          <td scope="col" *ngIf="task.lenderName; else dash">{{ task.lenderName }} </td>
-          <td scope="col" *ngIf="task.submitted; else dash">{{ task.submitted }} </td>
-          <td scope="col" *ngIf="task.age; else dash">{{ task.age }} </td>
-          <td scope="col" *ngIf="task.clientduedate; else dash">{{ task.clientduedate }} </td>
-          <td scope="col" *ngIf="task.borrower; else dash">{{ task.borrower }} </td>
-          <td scope="col" *ngIf="task.address; else dash">{{ task.address }} </td>
-          <td scope="col" *ngIf="task.country; else dash">{{ task.country }} </td>
-          <td scope="col" *ngIf="task.state; else dash">{{ task.state }} </td>
-          <td scope="col" *ngIf="task.loanPurpose; else dash">{{ task.loanPurpose }} </td>
-          <td scope="col" *ngIf="task.status; else dash">{{ task.status }} </td>
-          <td scope="col" *ngIf="task.dueDate; else dash">{{ task.dueDate }} </td>
+      <tbody >
+        <!-- <td *ngIf="!tasksList.length" style="text-align:center" colspan="15">No records found</td> -->
+        <tr *ngFor="let task of tasksList">
+          <td scope="col"><span *ngIf="task.taskName; else dash" title="{{task.taskName}}">{{ task.taskName }}</span>
+          </td>
+          <td scope="col"><span *ngIf="task.orderNumber; else dash">{{ task.orderNumber }}</span></td>
+          <td scope="col"><span *ngIf="task.loanNumber; else dash">{{ task.loanNumber }}</span></td>
+          <td scope="col"><span *ngIf="task.transactionType; else dash">{{ task.transactionType }}</span></td>
+          <td scope="col"><span *ngIf="task.lender; else dash">{{ task.lender }}</span></td>
+          <td scope="col"><span *ngIf="task.submitted; else dash">{{ task.submitted }}</span></td>
+          <td scope="col"><span *ngIf="task.age; else dash">{{ task.age }}</span></td>
+          <td scope="col"><span *ngIf="task.clientduedate; else dash">{{ task.clientduedate }}</span></td>
+          <td scope="col"><span *ngIf="task.borrower; else dash">{{ task.borrower }}</span></td>
+          <td scope="col"><span *ngIf="task.address; else dash">{{ task.address }}</span></td>
+          <td scope="col"><span *ngIf="task.country; else dash">{{ task.country }}</span></td>
+          <td scope="col"><span *ngIf="task.state; else dash">{{ task.state }}</span></td>
+          <td scope="col"><span *ngIf="task.loanPurpose; else dash">{{ task.loanPurpose }}</span></td>
+          <td scope="col"><span *ngIf="task.status; else dash">{{ task.status }}</span></td>
+          <td scope="col"><span *ngIf="task.dueDate; else dash">{{ task.dueDate }}</span></td>
         </tr>
         <tr *ngIf="!isLoading && totalRecords===0">
-          <td colspan="5" class="no-record">No records found</td>
+          <td colspan="10" class="no-record">No records found</td>
         </tr>
         <tr *ngIf="isLoading">
-          <td colspan="5" class="no-record">Loading . . .</td>
+          <td colspan="10" class="no-record">Loading . . .</td>
         </tr>
       </tbody>
     </div>

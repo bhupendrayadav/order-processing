@@ -1,6 +1,6 @@
 table {
   overflow-y: scroll;
-  height: 500px;
+  height: 300px;
 }
 
 .no-record {
@@ -11,4 +11,18 @@ table {
   position: relative;
   padding-top: 20px;
   padding-bottom: 20px;
+}
+
+.ellipsis {
+  /* max-width: 100px; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+th {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
