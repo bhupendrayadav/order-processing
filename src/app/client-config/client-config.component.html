@@ -10,14 +10,14 @@
             ngNativeValidate
           >
             <div class="form-group">
-              <label for="client-id-input">Client id or Sub Client id</label>
+              <label for="client-id-input">Client id </label>
               <input
                 type="text"
                 class="form-control"
                 id="clientId-id-input"
                 name="clientId"
                 formControlName="clientId"
-                placeholder="Client id or Sub Client id"
+                placeholder="Client id"
               />
             </div>
             <div class="form-group">
@@ -55,11 +55,10 @@
               </select>
             </div>
             <p class="text-danger">{{errorMessage}}</p>
-            <button type="reset" class="btn btn-secondary">
-              Cancel
+            <button type="reset" class="btn btn-secondary m-1">
+              Reset
             </button>
-            &nbsp;
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary m-1">
               Search
             </button>
           </form>
@@ -72,7 +71,7 @@
           Client List
           <span
             class="float-right text-primary"
-            (click)="toggleAddModal(true)"
+            (click)="open(content)"
             style="cursor: pointer;"
             >+ ADD A CLIENT</span
           >
@@ -103,3 +102,92 @@
     </div>
   </div>
 </div>
+
+<!-- Open new model -->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header bg-primary">
+    <h5 class="modal-title text-white cursor-default" id="modal-basic-title"> Add New client</h5>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form
+    [formGroup]="addNewForm"
+    (ngSubmit)="addNewClient()"
+    ngNativeValidate
+  >
+  <div class="modal-body">
+    
+      <div class="form-group row">
+        <label for="clientId-id" class="col-sm-4 col-form-label">Enter Client ID </label>
+        <div class="col-sm-8">
+          <input
+                type="text"
+                class="form-control"
+                id="clientId-id"
+                name="clientId"
+                formControlName="clientId"
+                placeholder="Client id"
+              />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="clientName-input" class="col-sm-4 col-form-label">Enter Client Name</label>
+        <div class="col-sm-8">
+          <input
+                type="text"
+                class="form-control"
+                id="clientName-input"
+                name="clientName"
+                formControlName="clientName"
+                placeholder="Name"
+              />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="legacy-number-input" class="col-sm-4 col-form-label">Enter Legacy No.</label>
+        <div class="col-sm-8">
+          <input
+                type="text"
+                class="form-control"
+                id="legacy-number-input"
+                placeholder="Legacy Number"
+                name="legacyNumber"
+                formControlName="legacyNumber"
+              />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="branch-input" class="col-sm-4 col-form-label">Enter Branch</label>
+        <div class="col-sm-8">
+          <input
+                type="text"
+                class="form-control"
+                id="branch-input"
+                placeholder="Branch"
+                name="branch"
+                formControlName="branch"
+              />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputState" class="col-sm-4 col-form-label">Select Status</label>
+        <div class="col-sm-8">
+          <select
+                id="inputState"
+                class="form-control"
+                name="status"
+                formControlName="status"
+              >
+                <option>Active</option>
+                <option>Inactive</option>
+              </select>
+        </div>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <button type="reset" class="btn btn-info">Reset</button>
+    <button type="submit" class="btn btn-success">Save</button>
+  </div>
+</form>
+</ng-template>

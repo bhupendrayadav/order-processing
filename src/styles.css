@@ -2,3 +2,11 @@
 .bg-header {
   background-color: #4e92da !important;
 }
+button:focus{
+  outline: none !important;
+}
+.modal-header{
+       padding: 0.8rem 1rem !important; 
+}
+.cursor-pointer{cursor: default;}
+.form-control:focus{box-shadow: none!important;}
