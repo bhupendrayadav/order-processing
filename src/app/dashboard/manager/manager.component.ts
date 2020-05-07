@@ -229,6 +229,7 @@ export class ManagerComponent implements OnInit {
   }
   checkedItems:selected[]=[];
   isChecked:boolean=false;
+  isCheckedAll:boolean;
   checkAll(selectedItem:selected[],check:HTMLInputElement)
   {
     if(check.checked==true){
@@ -249,10 +250,14 @@ export class ManagerComponent implements OnInit {
   { 
     if(check.checked==true){
     this.checkedItems.push(selectedItem);
+     if(this.checkedItems.length==this.filteredTaskDetails.length)
+     {
+       this.isCheckedAll=true;
+     }
     }
     else if(check.checked==false)
     { 
-
+      this.isCheckedAll=false;
      let pos:number;
       pos= this.checkedItems.findIndex(x => x.orderNumber ==selectedItem.orderNumber);
       this.checkedItems.splice(pos,1);

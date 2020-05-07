@@ -31,7 +31,7 @@
           <thead class="bg-primary text-white">
             <tr>
               <th scope="col">
-                <input #checkall type="checkbox" class="form-check-input m-0" value="" (click)="checkAll(filteredTaskDetails,checkall)">
+                <input #checkall type="checkbox" [checked]="isCheckedAll" class="form-check-input m-0" value="" (click)="checkAll(filteredTaskDetails,checkall)">
               </th>
               <th scope="col"></th>
               <th scope="col">Task Name <i class="fa fa-filter"></i></th>
