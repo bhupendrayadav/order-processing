@@ -13,9 +13,9 @@ export class CoverSheetService {
 
   constructor(private http: HttpClient) {}
 
-  getCoverSheets() {
+  getCoverSheets(pageIndex: number, pageSize: number, pageCount: number) {
     return this.http
-      .get<any[]>(this.coverSheetEndPoint)
+      .get<any[]>(`${this.coverSheetEndPoint}?pageIndex=${pageIndex}&pageSize=${pageSize}&pageCount=${pageCount}`)
       .pipe(catchError(this.handleError));
   }
 
