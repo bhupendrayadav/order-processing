@@ -14,18 +14,14 @@ function covertToQueryString(obj: Object): string {
   providedIn: "root",
 })
 export class ClientConfigService {
-  private clientConfigEndPoint =
-    "https://servicelinkclientserviceapi.azurewebsites.net/api/ServiceLink/ClientService/ClientService";
+  private clientBaseUrl =
+    'https://servicelinkclientserviceapi.azurewebsites.net/api/ServiceLink/ClientService/ClientService';
 
   constructor(private http: HttpClient) {}
   searchClient(data: Object) {
     const query = covertToQueryString(data);
-    const endPoint = `${this.clientConfigEndPoint}/ClientSearch?${query}`;
-
     return this.http
-      .get(endPoint, {
-        headers: {},
-      })
+      .get(`${this.clientBaseUrl}/ClientSearch?${query}`, { headers: {} })
       .pipe(catchError(this.handleError));
   }
 
@@ -42,4 +38,12 @@ export class ClientConfigService {
     console.error(errorMessage);
     return throwError(errorMessage);
   }
+
+  addNewConfigClient(data: Object) {
+    const query = covertToQueryString(data);
+    return this.http
+      .post(`${this.clientBaseUrl}/AddClientConfig?${query}`,{body:data},{ headers: {} })
+      .pipe(catchError(this.handleError));
+  }
+
 }

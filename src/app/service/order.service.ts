@@ -50,11 +50,11 @@ export class OrderService {
 
  
   getOrderList(orderId: number): Observable<any> {
-    return this.http.get(environment.baseURL+'OrderProcessing/Orders/GetOrderSearchByID/'+orderId);
+    return this.http.get(environment.baseURL+'OrderProcessing/Orders/GetOrderSearchByID/'+ orderId);
   }
 
-  getOrderDetails(orderId: number) {
-    return this.http.get(environment.baseURL+'OrderProcessing/Orders?OrderNumber='+orderId);
+  getOrderDetails(orderNo: number) {
+    return this.http.get(environment.baseURL+'OrderProcessing/Orders?OrderNumber='+ orderNo);
   }
 
   private handleError(err: HttpErrorResponse) {
