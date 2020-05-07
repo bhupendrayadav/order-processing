@@ -8,7 +8,7 @@ interface users {
   userName: string;
 }
 interface selected {
-  taskName:string
+  taskName: string
   orderNumber: string;
   loanNumber: string;
   transactionType: string;
@@ -20,9 +20,9 @@ interface selected {
   address: string;
   country: string;
   state: string;
-  loanPurpose:string;
-  status:string;
-  dueData:string;
+  loanPurpose: string;
+  status: string;
+  dueData: string;
 }
 
 @Component({
@@ -227,47 +227,45 @@ export class ManagerComponent implements OnInit {
       }
     });
   }
-  checkedItems:selected[]=[];
-  isChecked:boolean=false;
-  isCheckedAll:boolean;
-  checkAll(selectedItem:selected[],check:HTMLInputElement)
-  {
-    if(check.checked==true)
-    {
-      
-      Object.assign(this.checkedItems,selectedItem);
-      this.isChecked=true;
-      console.log(this.checkedItems);
-    }
-      else if(check.checked==false)
-    { 
-      
-      this.checkedItems.splice(0,this.checkedItems.length);
-      this.isChecked=false;
-      //this.filteredTaskDetails = this.taskDetails;
-      console.log(this.checkedItems);
-    }
 
-  }
-  checkedItem(selectedItem:selected,check:HTMLInputElement,i)
-  { 
-    if(check.checked==true){
-    this.checkedItems.push(selectedItem);
-     if(this.checkedItems.length==this.filteredTaskDetails.length)
-     {
-       this.isCheckedAll=true;
-     }
-    }
-    else if(check.checked==false)
-    { 
-      this.isCheckedAll=false;
-      let pos:number;
-      pos= this.checkedItems.findIndex(x => x.orderNumber ==selectedItem.orderNumber);
-      this.checkedItems.splice(pos,1);
-    }
+  checked: any = {};
+  isCheckedAll: boolean;
+  isAssignButton: boolean = false;
 
-    console.log(this.checkedItems);
+  checkAll(selectedItem: selected[], check: HTMLInputElement) {
+    this.checked = {};
+    this.isAssignButton = false;
+
+    if (check.checked == true) {
+      this.isAssignButton = true;
+      selectedItem.forEach(item => this.checked[item.orderNumber] = true);
+    }
   }
+
+  checkedItem(selectedItem: selected, check: HTMLInputElement, i) {
+    this.isAssignButton = false;
+
+    if (check.checked == true) {
+      this.checked[selectedItem.orderNumber] = true;
+      this.isAssignButton = true;
+
+      let count = 0;
+      for (let key of Object.keys(this.checked)) {
+        if (this.checked[key]) {
+          count++;
+        }
+      }
+      if (count == this.filteredTaskDetails.length) {
+        this.isCheckedAll = true;
+      }
+    }
+    else if (check.checked == false) {
+      this.isCheckedAll = false;
+      this.checked[selectedItem.orderNumber] = false;
+    }
+    console.log(this.checked);
+  }
+
   openAssignModel(model) {
     this.assignModalReference = this.modalService.open(model, { ariaLabelledBy: 'modal-basic-title' });
   }
@@ -279,5 +277,4 @@ export class ManagerComponent implements OnInit {
   onAssign() {
 
   }
-  
 }

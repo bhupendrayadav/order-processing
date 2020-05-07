@@ -18,7 +18,7 @@
         </div>
         <div>
           <button type="button" class="btn-sm btn btn-primary pl-3 pr-3 pb-2 pt-2"
-            (click)="openAssignModel(assignModal)" [disabled]="!checkedItems.length">Assign</button>
+            (click)="openAssignModel(assignModal)" [disabled]="!isAssignButton">Assign</button>
         </div>
       </div>
     </div>
@@ -55,7 +55,7 @@
             <td *ngIf="!filteredTaskDetails.length" style="text-align:center" colspan="15">No records found</td>
             <tr *ngFor="let dashboardTasks of filteredTaskDetails;let i=index">
               <td scope="col">
-                <input #check type="checkbox" class="form-check-input m-0" value="" [checked]="isChecked" (click)="checkedItem(dashboardTasks,check,i)">
+                <input #check type="checkbox" class="form-check-input m-0" value="" [checked]="checked[dashboardTasks.orderNumber]" (click)="checkedItem(dashboardTasks,check,i)">
               </td>
               <td scope="col"><i class="fa fa-lock"></i></td>
               <td scope="col">{{ dashboardTasks.taskName }}</td>
