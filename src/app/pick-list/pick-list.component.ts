@@ -34,21 +34,25 @@ export class PickListComponent implements OnInit {
   add() {
     if (this.selectedSource.length) {
       this.selectedSource.forEach(record => {
-        this.target.push(this.source.find(item => record === item.id));
+        const removedFromSource = this.updatedSource.filter(item => item.id === record);
+
+        this.target = removedFromSource.concat(this.target);
+
+        //this.target.push(this.source.find(item => record === item.id));
       });
-      this.updatedSource = this.source.filter(itemFromSource => {
-        return !this.target.find(itemfromTarget => {
-          return itemFromSource.id === itemfromTarget.id;
-        });
+
+      this.updatedSource = this.updatedSource.filter(itemFromSource => {
+          return !this.selectedSource.includes(itemFromSource.id)
       });
       this.selectedSource = [];
+      this.selectedTarget = [];
       this.selectedValues.emit(this.target);
     }
   }
 
   addAll() {
     if (this.updatedSource.length) {
-      this.target = this.source;
+      this.target = this.target.concat(this.updatedSource);
       this.updatedSource = [];
       this.selectedValues.emit(this.target);
     }
@@ -56,8 +60,8 @@ export class PickListComponent implements OnInit {
 
   removeAll() {
     if (this.target.length) {
+      this.updatedSource = this.updatedSource.concat(this.target);
       this.target = [];
-      this.updatedSource = this.source;
       this.selectedValues.emit(this.target);
     }
   }
@@ -65,13 +69,17 @@ export class PickListComponent implements OnInit {
   remove() {
     if (this.selectedTarget.length) {
       this.selectedTarget.forEach(ids => {
-        this.updatedSource.push(this.source.find(item => ids === item.id));
+        const removedFromTarget = this.target.filter(item => item.id === ids);
+
+        this.updatedSource = removedFromTarget.concat(this.updatedSource);
+        //this.updatedSource.push(this.source.find(item => ids === item.id));
       });
 
       this.target = this.target.filter(
         item => !this.selectedTarget.includes(item.id)
       );
       this.selectedTarget = [];
+      this.selectedSource = [];
       this.selectedValues.emit(this.target);
     }
   }
