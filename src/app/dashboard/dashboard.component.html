@@ -1,10 +1,10 @@
 <div class="row">
-  <form class="col-md-4">
-    <select class="form-control select2 mb-1 mt-2" (change)="onChange($event.target.value)">
+  <div class="col-md-4">
+    <select class="form-control mb-1 mt-2" (change)="onChange($event.target.value)">
       <option value="user">USER</option>
       <option value='manager'>MANAGER</option>
     </select>
-  </form>
+  </div>
 </div>
-<hr/>
+<hr />
 <router-outlet></router-outlet>

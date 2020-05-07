@@ -1,1 +1,142 @@
-<p>manager works!</p>
+<div class="container-fluid">
+  <div class="container">
+    <div class="d-flex justify-content-end align-items-center mb-3">
+      <label class='m-0'>Select User</label>
+      <div class="col-md-4 pr-0">
+        <input type="text" placeholder="Search Users ..." [formControl]="search" list="user" class="form-control">
+        <datalist id="user">
+          <option *ngFor="let item of usersList" [value]="item.userName">{{item.userName}}</option>
+        </datalist>
+      </div>
+    </div>
+
+    <div class="card mb-4 mt-2">
+      <div class="card-header bg-primary d-flex justify-content-between p-0">
+        <div>
+          <button type="button" class="btn-sm btn btn-dark pl-3 pr-3 pb-2 pt-2">Reset</button>
+          <button type="button" class="btn-sm btn btn-primary pl-3 pr-3 pb-2 pt-2">Layout</button>
+        </div>
+        <div>
+          <button type="button" class="btn-sm btn btn-primary pl-3 pr-3 pb-2 pt-2"
+            (click)="openAssignModel(assignModal)" [disabled]="!checkedItems.length">Assign</button>
+        </div>
+      </div>
+    </div>
+    <div class="card mb-3 mt-2">
+      <div class="card-header bg-primary text-white">
+        Drag a column header and drop it hear to group by that column
+      </div>
+      <table class="table table-bordered table-responsive">
+        <div class="text-nowrap">
+          <thead class="bg-primary text-white">
+            <tr>
+              <th scope="col">
+                <input #checkall type="checkbox" [checked]="isCheckedAll" class="form-check-input m-0" value="" (click)="checkAll(filteredTaskDetails,checkall)">
+              </th>
+              <th scope="col"></th>
+              <th scope="col">Task Name <i class="fa fa-filter"></i></th>
+              <th scope="col">Order Number <i class="fa fa-filter"></i></th>
+              <th scope="col">Loan Number <i class="fa fa-filter"></i></th>
+              <th scope="col">Transaction type <i class="fa fa-filter"></i></th>
+              <th scope="col">Lender Name <i class="fa fa-filter"></i></th>
+              <th scope="col">Current Submission </th>
+              <th scope="col">Original Submission <i class="fa fa-filter"></i></th>
+              <th scope="col">Close date <i class="fa fa-filter"></i></th>
+              <th scope="col">Borrower</th>
+              <th scope="col">Address</th>
+              <th scope="col">Country</th>
+              <th scope="col">State</th>
+              <th scope="col">Loan Purpose</th>
+              <th scope="col">Status</th>
+              <th scope="col">Due Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <td *ngIf="!filteredTaskDetails.length" style="text-align:center" colspan="15">No records found</td>
+            <tr *ngFor="let dashboardTasks of filteredTaskDetails;let i=index">
+              <td scope="col">
+                <input #check type="checkbox" class="form-check-input m-0" value="" [checked]="isChecked" (click)="checkedItem(dashboardTasks,check,i)">
+              </td>
+              <td scope="col"><i class="fa fa-lock"></i></td>
+              <td scope="col">{{ dashboardTasks.taskName }}</td>
+              <td scope="col">{{ dashboardTasks.orderNumber}}</td>
+              <td scope="col">{{ dashboardTasks.loanNumber }} </td>
+              <td scope="col">{{ dashboardTasks.transactionType }} </td>
+              <td scope="col">{{ dashboardTasks.lenderName }} </td>
+              <td scope="col">{{ dashboardTasks.submitted }} </td>
+              <td scope="col">{{ dashboardTasks.age }} </td>
+              <td scope="col">{{ dashboardTasks.clientduedate }} </td>
+              <td scope="col">{{ dashboardTasks.borrower }} </td>
+              <td scope="col">{{ dashboardTasks.address }} </td>
+              <td scope="col">{{ dashboardTasks.country }} </td>
+              <td scope="col">{{ dashboardTasks.state }} </td>
+              <td scope="col">{{ dashboardTasks.loanPurpose }} </td>
+              <td scope="col">{{ dashboardTasks.status }} </td>
+              <td scope="col">{{ dashboardTasks.dueDate }} </td>
+            </tr>
+          </tbody>
+        </div>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Assign Popup -->
+<ng-template #assignModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Assign an User or a Team</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeAssignModel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="d-flex mb-3">
+      <div class="form-check-inline col-md-4">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="assignUserOrTeam">USER
+        </label>
+      </div>
+      <div class="form-check-inline col-md-4">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="assignUserOrTeam">TEAM
+        </label>
+      </div>
+    </div>
+
+    <div class="d-flex mb-3 align-items-center">
+      <label class="m-0 pr-3" for="searchName">NAME:</label>
+      <div class="col-md-8">
+        <input class="form-control" id="searchName" type="text" placeholder="Search Name..." [formControl]='searchUser'>
+      </div>
+    </div>
+
+    <div class="card mb-3 mt-2">
+      <table class="table table-bordered table-responsive mb-0 table-height">
+        <div class="text-nowrap">
+          <thead class="bg-primary text-white">
+            <tr>
+              <th scope="col" class='col-md-3'>Name</th>
+              <th scope="col" class='col-md-3'>Daily Goal</th>
+              <th scope="col" class='col-md-3'>Daily Schedule</th>
+              <th scope="col" class='col-md-3'>Exceptions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <td *ngIf="!filteredTaskDetails.length" style="text-align:center" colspan="15">No records found</td>
+            <tr *ngFor="let dashboardTasks of filteredTaskDetails">
+              <td scope="col" class='col-md-3'>{{ dashboardTasks.taskName }}</td>
+              <td scope="col" class='col-md-3'>{{ dashboardTasks.orderNumber}}</td>
+              <td scope="col" class='col-md-3'>{{ dashboardTasks.loanNumber }} </td>
+              <td scope="col" class='col-md-3'>{{ dashboardTasks.transactionType }} </td>
+            </tr>
+          </tbody>
+        </div>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <button type="button" class="btn-sm btn btn-dark mr-2" (click)='onAssign()'>Assign</button>
+      <button type="button" class="btn-sm btn btn-dark " (click)="closeAssignModel()">Cancel</button>
+    </div>
+  </div>
+</ng-template>
