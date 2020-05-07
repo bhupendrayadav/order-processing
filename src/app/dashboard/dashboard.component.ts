@@ -6,11 +6,23 @@ import { Router } from '@angular/router';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
 
-  constructor(private router: Router) { }
+  users = [
+    {
+      name: 'USER',
+      id: 'user'
+    },
+    {
+      name: 'MANAGER',
+      id: 'manager'
+    }
+  ];
 
-  ngOnInit() {
+  selectedUser: string;
+
+  constructor(private router: Router) {
+    this.selectedUser = this.router.url.split('/')[2];
   }
 
   onChange(value: string) {
