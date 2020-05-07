@@ -168,10 +168,10 @@ export class HighchartsComponent implements OnInit {
         // x: 90,
         // y: 45,
         // layout: 'proximate',
-        itemWidth: 150,
-        labelFormatter: function () {
-          return this.name + ` \n 0%`;
-        }
+        // itemWidth: 75,
+        // labelFormatter: function () {
+        //   // return this.name + ` \n 0%`;
+        // }
       },
       plotOptions: {
         pie: {
@@ -193,6 +193,7 @@ export class HighchartsComponent implements OnInit {
             {
               name: 'Yesterday',
               y: 100,
+              color: 'yellow'
               // sliced: true,
               // selected: true
             },
@@ -234,10 +235,18 @@ export class HighchartsComponent implements OnInit {
         type: 'line'
       },
       title: {
-        text: 'Linechart'
+        text: 'My Productivity Rank              My Quality Rank          <b>My Audit Rank</b>'
+      },
+      subtitle: {
+        text: ''
       },
       credits: {
         enabled: false
+      },
+      xAxis: {
+        gridLineWidth: 0,
+        lineWidth: 2,
+        lineColor: '#ccc',
       },
       yAxis: {
         min: 30,
@@ -245,25 +254,30 @@ export class HighchartsComponent implements OnInit {
         title: {
           text: "vinoth"
         },
-        gridLineWidth: 0,
+        gridLineWidth: 1,
+        lineWidth: 2,
+        lineColor: '#ccc',
         labels: {
           formatter: function () {
             // console.log(this.value);
             return this.value + ' km';
           }
         }
-
       },
       legend: {
-        y: 25,
+        y: 20,
+        // layout: 'vertical',
+        align: 'center',
+        verticalAlign: 'top',
+        floating: true
       },
       series: [{
         type: 'line',
-        name: 'Line 1',
+        name: 'My Rank',
         data: [20, 35, 50, 80]
       }, {
         type: 'line',
-        name: 'Line 2',
+        name: 'Average Peer Rank',
         data: [10, 50, 60, 90]
       }]
     }
