@@ -3,8 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { UserComponent } from './user/user.component';
 import { ManagerComponent } from './manager/manager.component';
 import { DashboardComponent } from './dashboard.component';
-import { InfiniteScrollComponent } from './infinite-scroll/infinite-scroll.component';
-
 
 const routes: Routes = [
 
@@ -24,10 +22,6 @@ const routes: Routes = [
       {
         path: 'manager',
         component: ManagerComponent
-      },
-      {
-        path: 'infinite-scroll',
-        component: InfiniteScrollComponent
       }
     ]
   }

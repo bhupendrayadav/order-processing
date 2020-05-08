@@ -6,17 +6,6 @@
     <datalist id="user">
       <option *ngFor="let item of userList" [value]="item.userName">{{item.userName}}</option>
     </datalist>
-
-    <!-- <select id="cars" (onselect)="onSelect($event)">
-      <option *ngFor="let item of userList" [value]="item.userName">{{item.userName}}</option>
-      <option value="loadMore">Load more . . .</option>
-    </select> -->
-    <!-- <form [formGroup]="userForm">
-      <input type="text" placeholder="Search Users ..." [formControl]="search" list="user" class="form-control">
-      <datalist id="user">
-        <option *ngFor="let item of userList" [value]="item.userName">{{item.userName}}</option>
-      </datalist>
-    </form> -->
   </div>
 </div>
 
