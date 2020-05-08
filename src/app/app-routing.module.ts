@@ -47,6 +47,7 @@ const routes: Routes = [
     path: "client-config",
     component: ClientConfigComponent,
   },
+  { path: '**', redirectTo: 'client-config' }
 ];
 
 @NgModule({

@@ -33,6 +33,7 @@
     "font-awesome": "^4.7.0",
     "guid-typescript": "^1.0.9",
     "highcharts": "^8.0.4",
+    "jquery": "^3.5.1",
     "moment": "2.24.0",
     "ngx-infinite-scroll": "^8.0.2",
     "ngx-toastr": "10.1.0",
