@@ -20,8 +20,6 @@ import { ToastrModule } from "ngx-toastr";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpInterceptorService } from "./utils/http-interceptor.service";
 import { CoverSheetModule } from "./cover-sheet/cover-sheet.module";
-import { CartJsIntegrationComponent } from "./cart-js-integration/cart-js-integration.component";
-import { ReusableChartComponent } from "./cart-js-integration/reusable-chart/reusable-chart.component";
 import { ClientConfigComponent } from "./client-config/client-config.component";
 @NgModule({
   declarations: [
@@ -29,8 +27,6 @@ import { ClientConfigComponent } from "./client-config/client-config.component";
     HeaderComponent,
     LoginLogoutButtonComponent,
     BingMapComponent,
-    CartJsIntegrationComponent,
-    ReusableChartComponent,
     ClientConfigComponent,
   ],
   imports: [
