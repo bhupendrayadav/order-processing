@@ -1,6 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { OktaAuthModule } from "@okta/okta-angular";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
@@ -16,17 +16,18 @@ import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header/header.component";
 import { LoginLogoutButtonComponent } from "./login-logout-button.component";
 import { BingMapComponent } from "./bing-map/bing-map.component";
-import { ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from "ngx-toastr";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpInterceptorService } from "./utils/http-interceptor.service";
 import { CoverSheetModule } from "./cover-sheet/cover-sheet.module";
-
+import { ClientConfigComponent } from "./client-config/client-config.component";
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     LoginLogoutButtonComponent,
     BingMapComponent,
+    ClientConfigComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +35,7 @@ import { CoverSheetModule } from "./cover-sheet/cover-sheet.module";
     OktaAuthModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     NgbModule.forRoot(),
     StoreModule.forRoot({}),
@@ -42,10 +44,10 @@ import { CoverSheetModule } from "./cover-sheet/cover-sheet.module";
     OrderProcessingModule,
     ToastrModule.forRoot({
       timeOut: 4000,
-      positionClass: 'toast-bottom-right',
-      preventDuplicates: true
+      positionClass: "toast-bottom-right",
+      preventDuplicates: true,
     }),
-    CoverSheetModule
+    CoverSheetModule,
   ],
   providers: [
     // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
