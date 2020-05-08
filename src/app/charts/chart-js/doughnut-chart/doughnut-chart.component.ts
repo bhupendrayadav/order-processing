@@ -28,7 +28,24 @@ export class DoughnutChartComponent implements OnInit {
           scales: {
             yAxes: [{
               ticks: {
-                beginAtZero: true
+                beginAtZero: true,
+                display: false //this will remove only the label
+              },
+              gridLines: {
+                color: "rgba(0, 0, 0, 0)",
+                display: false,
+                // drawOnChartArea: false
+              }
+            }],
+            xAxes: [{
+              ticks: {
+                beginAtZero: true,
+                display: false //this will remove only the label
+              },
+              gridLines: {
+                color: "rgba(0, 0, 0, 0)",
+                display: false,
+                // drawOnChartArea: false
               }
             }]
           },
@@ -38,7 +55,13 @@ export class DoughnutChartComponent implements OnInit {
             labels: {
               // fontColor: 'rgb(255, 99, 132)'
             }
-          }
+          },
+          title: {
+            display: true,
+            position: 'top',
+            text: 'My Completed Goal',
+            fontSize: 14
+          },
         }
       });
     }

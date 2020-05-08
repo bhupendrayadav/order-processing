@@ -4,7 +4,6 @@ import { UserComponent } from './user/user.component';
 import { ManagerComponent } from './manager/manager.component';
 import { DashboardComponent } from './dashboard.component';
 
-
 const routes: Routes = [
 
   {

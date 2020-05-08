@@ -1,10 +1,9 @@
 <div class="row">
-  <form class="col-md-4">
-    <select class="form-control mb-1 mt-2" (change)="onChange($event.target.value)">
-      <option value="user">USER</option>
-      <option value='manager'>MANAGER</option>
+  <div class="col-md-4">
+    <select class="form-control mb-1 mt-2" (change)="onChange($event.target.value)" [value]='selectedUser'>
+      <option *ngFor='let user of users' [value]="user.id">{{user.name}}</option>
     </select>
-  </form>
+  </div>
 </div>
-<hr/>
+<hr />
 <router-outlet></router-outlet>
