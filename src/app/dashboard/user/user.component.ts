@@ -339,9 +339,9 @@ export class UserComponent implements OnInit {
         }
       }); */
 
-        this.selectedUser = {};
-        this.selectedUser['userID'] = 104;
-        this.getTasksList();
+        // this.selectedUser = {};
+        // this.selectedUser['userID'] = 104;
+        // this.getTasksList();
   }
 
   /**
