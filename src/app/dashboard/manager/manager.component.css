@@ -11,6 +11,7 @@ input[type="checkbox"] {
 }
 
 .table-height {
+  overflow: scroll;
   max-height: 300px;
 }
 

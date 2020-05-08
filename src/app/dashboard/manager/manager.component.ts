@@ -2,13 +2,15 @@ import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/co
 import { FormControl } from '@angular/forms';
 import { UsersService } from 'src/app/service/users.service';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 
 interface users {
   userId: number;
   userName: string;
 }
 interface selected {
-  taskName: string
+  taskTrackingId: number;
+  taskName: string;
   orderNumber: string;
   loanNumber: string;
   transactionType: string;
@@ -40,185 +42,22 @@ export class ManagerComponent implements OnInit {
   searchUser: FormControl = new FormControl();
 
   // For table
-  filteredTaskDetails: any[];
-  taskDetails: any[] = [
-    {
-      taskName: "Desktop Fulfillment",
-      orderNumber: "98000296",
-      loanNumber: "338345254",
-      transactionType: "Refiance",
-      lenderName: "USAA BULK-PARENT",
-      submitted: "",
-      age: "25",
-      clientduedate: "02/15/2019",
-      borrower: "",
-      address: "",
-      country: "",
-      state: "",
-      loanPurpose: "",
-      status: "",
-      dueDate: "",
-    },
-    {
-      taskName: "Desktop Fulfillment",
-      orderNumber: "98000297",
-      loanNumber: "438345254",
-      transactionType: "Refiance",
-      lenderName: "USAA BULK-PARENT",
-      submitted: "",
-      age: "30",
-      clientduedate: "02/15/2019",
-      borrower: "",
-      address: "",
-      country: "",
-      state: "",
-      loanPurpose: "",
-      status: "",
-      dueDate: "",
-    },
-    {
-      taskName: "Fulfillment",
-      orderNumber: "98000298",
-      loanNumber: "238345254",
-      transactionType: "Refiance",
-      lenderName: "USAA BULK-PARENT",
-      submitted: "",
-      age: "20",
-      clientduedate: "02/15/2019",
-      borrower: "",
-      address: "",
-      country: "",
-      state: "",
-      loanPurpose: "",
-      status: "",
-      dueDate: "",
-    },
-    {
-      taskName: "Desktop Fulfillment",
-      orderNumber: "98000299",
-      loanNumber: "338345254",
-      transactionType: "Refiance",
-      lenderName: "USAA BULK-PARENT",
-      submitted: "",
-      age: "25",
-      clientduedate: "02/15/2019",
-      borrower: "",
-      address: "",
-      country: "",
-      state: "",
-      loanPurpose: "",
-      status: "",
-      dueDate: "",
-    },
-    {
-      taskName: "Desktop Fulfillment",
-      orderNumber: "98000300",
-      loanNumber: "338345254",
-      transactionType: "Refiance",
-      lenderName: "USAA BULK-PARENT",
-      submitted: "",
-      age: "25",
-      clientduedate: "02/15/2019",
-      borrower: "",
-      address: "",
-      country: "",
-      state: "",
-      loanPurpose: "",
-      status: "",
-      dueDate: "",
-    },
-    {
-      taskName: "Desktop Fulfillment",
-      orderNumber: "98000301",
-      loanNumber: "338345254",
-      transactionType: "Refiance",
-      lenderName: "USAA BULK-PARENT",
-      submitted: "",
-      age: "25",
-      clientduedate: "02/15/2019",
-      borrower: "",
-      address: "",
-      country: "",
-      state: "",
-      loanPurpose: "",
-      status: "",
-      dueDate: "",
-    },
-    {
-      taskName: "Desktop Fulfillment",
-      orderNumber: "98000302",
-      loanNumber: "338345254",
-      transactionType: "Refiance",
-      lenderName: "USAA BULK-PARENT",
-      submitted: "",
-      age: "25",
-      clientduedate: "02/15/2019",
-      borrower: "",
-      address: "",
-      country: "",
-      state: "",
-      loanPurpose: "",
-      status: "",
-      dueDate: "",
-    },
-    {
-      taskName: "Desktop Fulfillment",
-      orderNumber: "98000303",
-      loanNumber: "338345254",
-      transactionType: "Refiance",
-      lenderName: "USAA BULK-PARENT",
-      submitted: "",
-      age: "25",
-      clientduedate: "02/15/2019",
-      borrower: "",
-      address: "",
-      country: "",
-      state: "",
-      loanPurpose: "",
-      status: "",
-      dueDate: "",
-    },
-    {
-      taskName: "Desktop Fulfillment",
-      orderNumber: "98000304",
-      loanNumber: "338345254",
-      transactionType: "Refiance",
-      lenderName: "USAA BULK-PARENT",
-      submitted: "",
-      age: "25",
-      clientduedate: "02/15/2019",
-      borrower: "",
-      address: "",
-      country: "",
-      state: "",
-      loanPurpose: "",
-      status: "",
-      dueDate: "",
-    },
-    {
-      taskName: "Desktop Fulfillment",
-      orderNumber: "98000305",
-      loanNumber: "338345254",
-      transactionType: "Refiance",
-      lenderName: "USAA BULK-PARENT",
-      submitted: "",
-      age: "25",
-      clientduedate: "02/15/2019",
-      borrower: "",
-      address: "",
-      country: "",
-      state: "",
-      loanPurpose: "",
-      status: "",
-      dueDate: "",
-    },
-  ];
+  page = 1;
+  pageSize = 10;
+  totalRecords: number = 0;
+  selectedUser: object;
 
-  constructor(private dashboardService: UsersService, private modalService: NgbModal) { }
+  isLoading = false;
+  tasksList: any[] = [];
+
+  // For checkbox
+  checked: any = {};
+  isCheckedAll: boolean;
+  isAssignButton: boolean = false;
+
+  constructor(private dashboardService: UsersService, private modalService: NgbModal, private toastr: ToastrService) { }
 
   ngOnInit() {
-    this.filteredTaskDetails = this.taskDetails;
-
     this.search.valueChanges.subscribe(term => {
       if (term.length > 3) {
         this.dashboardService.getUsersList(term).subscribe(data => {
@@ -228,42 +67,101 @@ export class ManagerComponent implements OnInit {
     });
   }
 
-  checked: any = {};
-  isCheckedAll: boolean;
-  isAssignButton: boolean = false;
-
-  checkAll(selectedItem: selected[], check: HTMLInputElement) {
-    this.checked = {};
-    this.isAssignButton = false;
-
-    if (check.checked == true) {
-      this.isAssignButton = true;
-      selectedItem.forEach(item => this.checked[item.orderNumber] = true);
+  getUsersList(value) {
+    if (this.usersList.length) {
+      this.selectedUser = this.usersList.find(f => f.userName === value);
+      this.resetList();
+      this.getTasksList();
+    }
+    if (!this.selectedUser) {
+      this.usersList = [];
+      if (value.length > 3) {
+        this.dashboardService.getUsersList(value).subscribe(data => {
+          this.usersList = data.items;
+        });
+      }
     }
   }
 
-  checkedItem(selectedItem: selected, check: HTMLInputElement, i) {
-    this.isAssignButton = false;
+  getTasksList() {
+    if (this.selectedUser && this.selectedUser['userID']) {
+      this.isLoading = true;
+      const payload = `userId=${this.selectedUser['userID']}&page=${this.page}&pageSize=${this.pageSize}`;
+      this.dashboardService.getTasksList(payload).subscribe({
+        next: result => {
+          // console.log('result', result);
+          if (result['items'] && result['items'].length) {
+            this.addTasksToTasksList(result['items']);
+            this.totalRecords = result['totalrows'];
+          } else {
+            this.isLoading = false;
+          }
+        },
+        error: error => this.toastr.error('Server Error', 'Error')
+      });
+    }
+  }
+
+  addTasksToTasksList(data) {
+    data.forEach((item, index) => {
+      this.tasksList.push(item);
+      if (index === (data.length - 1)) {
+        this.isLoading = false;
+        // console.log('Length', this.tasksList.length);
+      }
+    });
+
+    this.isCheckedAllRow();
+  }
+
+  onScroll() {
+    this.page++;
+    this.getTasksList();
+    console.log('on Scroll');
+  }
+
+  resetList() {
+    this.page = 1;
+    this.pageSize = 10;
+    this.totalRecords = 0;
+    this.tasksList = [];
+  }
+
+  onScrollUp() {
+    console.log('on scroll up');
+  }
+
+  isCheckedAllRow() {
+    let count = 0;
+
+    for (let key of Object.keys(this.checked)) {
+      if (this.checked[key]) {
+        count++;
+      }
+    }
+
+    this.isCheckedAll = count == this.tasksList.length ? true : false;
+    this.isAssignButton = count > 0 ? true : false;
+  }
+
+  checkAll(selectedItem: selected[], check: HTMLInputElement) {
+    this.checked = {};
 
     if (check.checked == true) {
-      this.checked[selectedItem.orderNumber] = true;
-      this.isAssignButton = true;
+      selectedItem.forEach(item => this.checked[item.taskTrackingId] = true);
+    }
 
-      let count = 0;
-      for (let key of Object.keys(this.checked)) {
-        if (this.checked[key]) {
-          count++;
-        }
-      }
-      if (count == this.filteredTaskDetails.length) {
-        this.isCheckedAll = true;
-      }
+    this.isCheckedAllRow();
+  }
+
+  checkedItem(selectedItem: selected, check: HTMLInputElement, i) {
+    if (check.checked == true) {
+      this.checked[selectedItem.taskTrackingId] = true;
+    } else if (check.checked == false) {
+      this.checked[selectedItem.taskTrackingId] = false;
     }
-    else if (check.checked == false) {
-      this.isCheckedAll = false;
-      this.checked[selectedItem.orderNumber] = false;
-    }
-    console.log(this.checked);
+
+    this.isCheckedAllRow();
   }
 
   openAssignModel(model) {
@@ -276,13 +174,5 @@ export class ManagerComponent implements OnInit {
 
   onAssign() {
 
-  }
-
-  onScroll() {
-    console.log('on Scroll');
-  }
-
-  onScrollUp() {
-    console.log('on scroll up');
   }
 }

@@ -3,7 +3,12 @@
     <div class="d-flex justify-content-end align-items-center mb-3">
       <label class='m-0'>Select User</label>
       <div class="col-md-4 pr-0">
-        <input type="text" placeholder="Search Users ..." [formControl]="search" list="user" class="form-control">
+        <!-- <input type="text" placeholder="Search Users ..." [formControl]="search" list="user" class="form-control">
+        <datalist id="user">
+          <option *ngFor="let item of usersList" [value]="item.userName">{{item.userName}}</option>
+        </datalist> -->
+        <input type="text" placeholder="Search User Here" (keyup)="getUsersList(userSearch)" name="userSearch"
+          [(ngModel)]="userSearch" list="user" class="form-control">
         <datalist id="user">
           <option *ngFor="let item of usersList" [value]="item.userName">{{item.userName}}</option>
         </datalist>
@@ -26,13 +31,14 @@
       <div class="card-header bg-primary text-white">
         Drag a column header and drop it hear to group by that column
       </div>
-      <table class="table table-bordered table-responsive">
+      <table class="table table-bordered table-responsive mb-0 table-height" infiniteScroll [infiniteScrollDistance]="3"
+        [infiniteScrollUpDistance]="1.5" (scrolled)="onScroll()" (scrolledUp)="onScrollUp()" [scrollWindow]="false">
         <div class="text-nowrap">
           <thead class="bg-primary text-white">
             <tr>
               <th scope="col">
                 <input #checkall type="checkbox" [checked]="isCheckedAll" class="form-check-input m-0" value=""
-                  (click)="checkAll(filteredTaskDetails,checkall)">
+                  (click)="checkAll(tasksList, checkall)" [disabled]='!tasksList.length'>
               </th>
               <th scope="col"></th>
               <th scope="col">Task Name <i class="fa fa-filter"></i></th>
@@ -53,11 +59,11 @@
             </tr>
           </thead>
           <tbody>
-            <td *ngIf="!filteredTaskDetails.length" style="text-align:center" colspan="15">No records found</td>
-            <tr *ngFor="let dashboardTasks of filteredTaskDetails;let i=index">
+            <!-- <td *ngIf="!tasksList.length" style="text-align:center" colspan="15">No records found</td> -->
+            <tr *ngFor="let dashboardTasks of tasksList;let i=index">
               <td scope="col">
                 <input #check type="checkbox" class="form-check-input m-0" value=""
-                  [checked]="checked[dashboardTasks.orderNumber]" (click)="checkedItem(dashboardTasks,check,i)">
+                  [checked]="checked[dashboardTasks.taskTrackingId]" (click)="checkedItem(dashboardTasks,check,i)">
               </td>
               <td scope="col"><i class="fa fa-lock"></i></td>
               <td scope="col">{{ dashboardTasks.taskName }}</td>
@@ -75,6 +81,12 @@
               <td scope="col">{{ dashboardTasks.loanPurpose }} </td>
               <td scope="col">{{ dashboardTasks.status }} </td>
               <td scope="col">{{ dashboardTasks.dueDate }} </td>
+            </tr>
+            <tr *ngIf="!isLoading && totalRecords===0">
+              <td colspan="10" class="no-record">No records found</td>
+            </tr>
+            <tr *ngIf="isLoading">
+              <td colspan="10" class="no-record">Loading . . .</td>
             </tr>
           </tbody>
         </div>
@@ -125,12 +137,18 @@
             </tr>
           </thead>
           <tbody>
-            <td *ngIf="!filteredTaskDetails.length" style="text-align:center" colspan="15">No records found</td>
-            <tr *ngFor="let dashboardTasks of filteredTaskDetails">
+            <!-- <td *ngIf="!tasksList.length" style="text-align:center" colspan="15">No records found</td> -->
+            <tr *ngFor="let dashboardTasks of tasksList">
               <td scope="col" class='col-md-3'>{{ dashboardTasks.taskName }}</td>
               <td scope="col" class='col-md-3'>{{ dashboardTasks.orderNumber}}</td>
               <td scope="col" class='col-md-3'>{{ dashboardTasks.loanNumber }} </td>
               <td scope="col" class='col-md-3'>{{ dashboardTasks.transactionType }} </td>
+            </tr>
+            <tr *ngIf="!isLoading && totalRecords===0">
+              <td colspan="10" class="no-record">No records found</td>
+            </tr>
+            <tr *ngIf="isLoading">
+              <td colspan="10" class="no-record">Loading . . .</td>
             </tr>
           </tbody>
         </div>
