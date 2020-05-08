@@ -41,7 +41,7 @@ export class ClientConfigService {
 
   addNewConfigClient(data: Object) {
     return this.http
-      .post(`${this.clientBaseUrl}/AddClientConfig`,{body:data},{ headers: {} })
+      .post(`${this.clientBaseUrl}/AddClientConfig`,data,{ headers: {} })
       .pipe(catchError(this.handleError));
   }
 

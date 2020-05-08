@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit,OnDestroy } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
+import { Subscription } from 'rxjs';
 
 import { ClientConfigService } from "../service/client-config.service";
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -18,7 +19,7 @@ type clientModel = {
   styleUrls: ["./client-config.component.css"],
   providers: [NgbModalConfig, NgbModal]
 })
-export class ClientConfigComponent implements OnInit {
+export class ClientConfigComponent implements OnInit,OnDestroy {
   errorMessage: string = '';
   searchForm = new FormGroup({
     clientId: new FormControl(''),
@@ -33,6 +34,8 @@ export class ClientConfigComponent implements OnInit {
     branch: new FormControl(''),
     status: new FormControl('')
   });
+  private searchSubscription: Subscription;
+  private addSubscription: Subscription;
   records: Array<clientModel> =[];
   constructor(private clientConfigService: ClientConfigService,config: NgbModalConfig, private modalService: NgbModal) {
     //config.backdrop = 'static';
@@ -44,7 +47,7 @@ export class ClientConfigComponent implements OnInit {
       return (this.errorMessage = "Please provide at least one value");
     }
     this.errorMessage = "";
-    this.clientConfigService
+    this.searchSubscription = this.clientConfigService
       .searchClient(this.searchForm.value)
       .subscribe((value:any) =>{
         this.records = value
@@ -62,12 +65,14 @@ export class ClientConfigComponent implements OnInit {
   addNewClient() {
     this.modalService.dismissAll();
     let obj = this.addNewForm.getRawValue();
-    console.log('obj',obj);
-    const newObject = {clientId:+obj.clientId ,  clientName:obj.clientName , legacyNumber:+obj.legacyNumber , branch:obj.branch , status:obj.status } 
-    this.clientConfigService.addNewConfigClient(newObject).subscribe((data)=>{
-      console.log('data',data)
+    const newObject = {ClientId:+obj.clientId ,  ClientName:obj.clientName , LegacyNumber:+obj.legacyNumber , Branch:obj.branch , Status:obj.status }
+    this.addSubscription = this.clientConfigService.addNewConfigClient(newObject).subscribe((data)=>{
+      //console.log('data',data)
     })
    }
   ngOnInit() {}
-
+  ngOnDestroy() {
+    this.searchSubscription.unsubscribe();
+    this.addSubscription.unsubscribe();
+  }
 }
