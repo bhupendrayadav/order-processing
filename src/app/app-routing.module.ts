@@ -19,7 +19,11 @@ const routes: Routes = [
   },
   {
     path: "order-list",
+<<<<<<< Updated upstream
     component: OrderListComponent,
+=======
+    component: OrderListComponent
+>>>>>>> Stashed changes
   },
   {
     path: "order-detail/:id",
