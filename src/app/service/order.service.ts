@@ -1,21 +1,28 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpErrorResponse,HttpHeaders } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from "@angular/common/http";
 import { of, Observable, throwError, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { OktaAuthService } from "@okta/okta-angular";
-import { Guid } from 'guid-typescript';
-import { environment } from './../../environments/environment';
+import { Guid } from "guid-typescript";
+import { environment } from "./../../environments/environment";
+
+const BASE_URL =
+  "https://servicelinkorderprocessing.azurewebsites.net/api/ServiceLink/";
 
 async function getOktaToken(auth: any) {
   return await auth.getAccessToken();
 }
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class OrderService {
   private subject = new Subject<any>();
-  public currentDate :any = Date();
+  public currentDate: any = Date();
   public id: any;
 
   searchResult: any = [
@@ -29,9 +36,9 @@ export class OrderService {
         state: "California",
         country: "US",
         loanNumber: "3654",
-        lastTask: "Completed"
-      }
-    ]
+        lastTask: "Completed",
+      },
+    ],
   ];
 
   constructor(
@@ -48,17 +55,20 @@ export class OrderService {
     return this.subject.asObservable();
   }
 
- 
   getOrderList(orderId: number): Observable<any> {
-    return this.http.get(environment.baseURL+'OrderProcessing/Orders/GetOrderSearchByID/'+ orderId);
+    return this.http.get(
+      BASE_URL + "OrderProcessing/Orders/GetOrderSearchByID/" + orderId
+    );
   }
 
   getOrderDetails(orderNo: number) {
-    return this.http.get(environment.baseURL+'OrderProcessing/Orders?OrderNumber='+ orderNo);
+    return this.http.get(
+      BASE_URL + "OrderProcessing/Orders?OrderNumber=" + orderNo
+    );
   }
 
   private handleError(err: HttpErrorResponse) {
-    let errorMessgae = '';
+    let errorMessgae = "";
     if (err.error instanceof ErrorEvent) {
       //A client-side or network error occured
       errorMessgae = `An error occured: ${err.error.message}`;

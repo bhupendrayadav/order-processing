@@ -20,12 +20,10 @@ const routes: Routes = [
   {
     path: "order-list",
     component: OrderListComponent,
-    canActivate: [OktaAuthGuard],
   },
   {
     path: "order-detail/:id",
     component: OrderDetailComponent,
-    canActivate: [OktaAuthGuard],
   },
   {
     path: "bing-map",
@@ -47,7 +45,6 @@ const routes: Routes = [
     path: "client-config",
     component: ClientConfigComponent,
   },
-  { path: '**', redirectTo: 'client-config' }
 ];
 
 @NgModule({
